@@ -1,0 +1,124 @@
+.pop{
+    width: 610px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 40px 0px #1462FF inset;
+    background-color: #020F24;
+    backdrop-filter: blur(40px);
+    .inp{
+        height: 80px;
+        border-radius: 20px;
+        background-color: #172745;
+        padding: 0 30px;
+    }
+    .popbtn{
+        height: 88px;
+        border-radius: 20px;
+        background-color: $main-color;
+        text-align: center;
+        line-height: 88px;
+    }
+    .popCancel{
+        height: 88px;
+        border-radius: 20px;
+        background-color: #172745;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+// 旋转动画
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotate-animation {
+    animation: rotate 2s linear infinite;
+}
+
+.rotate-slow {
+    animation: rotate 4s linear infinite;
+}
+
+.rotate-fast {
+    animation: rotate 1s linear infinite;
+}
+
+.fullPage{
+    width: 100vw;
+    min-height: calc(100vh - 100px);
+    min-height: calc(100dvh - 100px);
+}
+
+.mainBtn{
+    background: linear-gradient(90deg, #EFB152 0%, #F0CD80 49.4%, #EFB152 100%);
+    height: 74px;
+    border-radius: 37px;
+    color: #000000;
+    font-size: 28px;
+}
+
+.mainButton{
+    border-radius: 40px;
+    background: linear-gradient(#FFFFFF66, #00000000 50%);
+    border: 1px solid $main-color;
+    box-shadow: 0px 4px 10px 0px #00000099 inset, 0px -4px 10px 0px #FFFFFF40 inset;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.mainCard{
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(#FFE5A51F, #FFE5A500);
+    &::before{
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        border-radius: 20px;
+        background: linear-gradient(-160deg, #FFFFFF1A, #EFCD80 ,#FFFFFF1A);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: xor;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        padding: 1px;
+    }
+}
+
+.mainBox{
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to right, #FFE5A50A, #FFE5A51F);
+    &::before{
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        border-radius: 20px;
+        background: linear-gradient(to right, #FFFFFF1A, #FFFFFF00);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: xor;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        padding: 1px;
+    }
+}

@@ -1,0 +1,39 @@
+.main{ color: $main-color; }
+.white{ color: $white; } 
+.black{ color: $black; }
+.gray{ color: $gray; }
+.grey{ color: $grey; }
+.green{ color: $green; }
+.red{ color: $red; }
+.blue{ color: $blue; }
+.yellow{ color: $yellow; }
+
+.bgMain{ background-color: $main-color; }
+.bgWhite{ background-color: $white; }
+.bgBlack{ color: $black; }
+.bgGray{ color: $gray; }
+.bgGrey{ color: $grey; }
+.bgGreen{ color: $green; }
+.bgRed{ color: $red; }
+.bgBlue{ color: $blue; }
+.bgYellow{ color: $yellow; }
+
+body{
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+input{
+    &::placeholder{
+        color: #FFFFFF80;
+    }
+}
+
+.linearTxt{
+    display: inline-block;
+    background: linear-gradient(to right,#EFB152, #EFCD80, #EFB152);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}

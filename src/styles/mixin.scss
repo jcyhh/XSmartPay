@@ -1,0 +1,10 @@
+@mixin linear(
+    $reverse: 0,
+    $direction: right
+) {
+    @if $reverse == 1 {
+        background: linear-gradient(to $direction, #E1CC99, #D5B669);
+    } @else {
+        background: linear-gradient(to $direction, #D5B669, #E1CC99);
+    }
+}

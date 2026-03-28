@@ -1,0 +1,63 @@
+.message{
+    width: 690px;
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom) + 30px);
+    left: 30px;
+    z-index: 10000000;
+    padding: 16px 4px 4px 4px;
+    border-radius: 30px;
+    .messageBox{
+        width: 100%;
+        padding: 24px 26px;
+        border-radius: 26px;
+        background: linear-gradient(#12161A, #0E0F13);
+        position: relative;
+        z-index: 1;
+        .messageClose{
+            width: 24px;
+            height: 24px;
+        }
+    }
+}
+.messageSuccess{
+    background-color: #009C3E;
+}
+.messageGray{
+    background-color: #C7C7C7;
+}
+.messageFail{
+    background-color: #D02052;
+}
+.messageWarning{
+    background-color: #FF8B2D;
+}
+
+.cusToast {
+    z-index: 5000 !important;
+}
+
+.cusMask{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+}
+
+.van-count-down{
+    color: $gray !important;
+}
+
+.van-loading__text{
+    color: $gray !important;
+}
+
+.van-loading{
+    color: $gray !important;
+}
+
+.van-pull-refresh__head{
+    color: $gray !important;
+}
+
+.van-list__finished-text{
+    color: $gray !important;
+}
