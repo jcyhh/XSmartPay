@@ -2,17 +2,17 @@
     <CusNav :title="$t('发帖')"></CusNav>
     <div class="pl30 pr30 pt30 rel">
         
-        <div class="size28 bold6">标题</div>
+        <div class="size28 bold6">{{ $t('标题') }}</div>
         <div class="cell card mb20 flex jb ac mt20">
-            <input type="text" v-model="title" placeholder="请输入标题" class="flex1 size28">
+            <input type="text" v-model="title" :placeholder="$t('请输入标题')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold6 mt30">内容</div>
+        <div class="size28 bold6 mt30">{{ $t('内容') }}</div>
         <div class="cell card mb20 flex jb ac mt20">
-            <textarea v-model="content" placeholder="请输入内容" class="size28 area"></textarea>
+            <textarea v-model="content" :placeholder="$t('请输入内容')" class="size28 area"></textarea>
         </div>
 
-        <div class="size28 bold6 mt30">图片(选填 {{ images.length }}/9)</div>
+        <div class="size28 bold6 mt30">{{ $t('图片(选填 {count}/9)', { count: images.length }) }}</div>
         <div class="grid col3 imgs mt20">
             <img :src="item" class="pic" v-for="(item,index) in images" :key="index" @click="upload(index)">
             <div class="cell pic flex jc ac" @click="upload(-1)">
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div class="mainButton mt80 flex jc ac size28 main bold6 btn" v-scale @click="submit">发布</div>
+        <div class="mainButton mt80 flex jc ac size28 main bold6 btn" v-scale @click="submit">{{ $t('发布') }}</div>
 
     </div>
 
@@ -42,8 +42,11 @@ const content = ref()
 
 const upload = async (index:any) => {
     const res:any = await apiUpload()
-    if(index>=0)images.value = images.value.splice(index, 1, res.url)
-    else images.value.push(res.url)
+    if (index >= 0) {
+        images.value.splice(index, 1, res.url)
+    } else if (images.value.length < 9) {
+        images.value.push(res.url)
+    }
 }
 
 const submit = async () => {

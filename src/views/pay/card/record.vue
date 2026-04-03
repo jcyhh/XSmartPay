@@ -18,11 +18,11 @@
                     <div class="pt20" v-if="item.tracking_company">
                         <div class="line mb20"></div>
                         <div class="size26 flex jb ac">
-                            <div class="opc5">物流</div>
+                            <div class="opc5">{{ $t('物流') }}</div>
                             <div class="opc6">{{ item.tracking_company }}</div>
                         </div>
                         <div class="size26 flex jb ac mt20" v-if="item.tracking_no">
-                            <div class="opc5">快递单号</div>
+                            <div class="opc5">{{ $t('快递单号') }}</div>
                             <div class="flex ac opc6" v-copy="item.tracking_no">
                                 <div>{{ item.tracking_no }}</div>
                                 <img src="@/assets/user/17.png" class="img26 ml10">

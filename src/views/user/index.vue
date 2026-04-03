@@ -8,13 +8,13 @@
                 <div v-if="isH5">
                     <div class="size32 bold mt20" v-init:address="userInfo?.address"></div>
                     <div class="flex mt20" v-if="!userInfo?.email">
-                        <div class="mainButton flex jc ac bindTag" @click="routerPush('/bindEmail')">绑定邮箱</div>
+                        <div class="mainButton flex jc ac bindTag" @click="routerPush('/bindEmail')">{{ $t('绑定邮箱') }}</div>
                     </div>
                 </div>
                 <div v-else>
                     <div class="size32 bold mt20" v-init:address="userInfo?.email"></div>
                     <div class="flex mt20" v-if="!userInfo?.address">
-                        <div class="mainButton flex jc ac bindTag" @click="routerPush('/bindAddress')">绑定钱包</div>
+                        <div class="mainButton flex jc ac bindTag" @click="routerPush('/bindAddress')">{{ $t('绑定钱包') }}</div>
                     </div>
                 </div>
             </div>
@@ -23,9 +23,9 @@
 
         <div class="top mt50" @click="routerPush('/cardbag')">
             <div class="flex jb ac">
-                <div class="size30 bold5">抢购订单</div>
+                <div class="size30 bold5">{{ $t('抢购订单') }}</div>
                 <div class="flex ac size24 opc5">
-                    <div class="mr5">查看全部</div>
+                    <div class="mr5">{{ $t('查看全部') }}</div>
                     <van-icon name="arrow" />
                 </div>
             </div>
@@ -37,9 +37,9 @@
 
         <div class="mainCard mt30" @click="routerPush('/user/asset')">
             <div class="flex jb ac">
-                <div class="size30 bold5 main">资产预览</div>
+                <div class="size30 bold5 main">{{ $t('资产预览') }}</div>
                 <div class="flex ac size24 opc5">
-                    <div class="mr5">查看明细</div>
+                    <div class="mr5">{{ $t('查看明细') }}</div>
                     <van-icon name="arrow" />
                 </div>
             </div>
@@ -73,15 +73,15 @@
         <div class="mt20 flex jb ac size26 main">
             <div class="item flex col jc ac" @click="routerPush('/user/recharge')">
                 <img src="@/assets/user/3.png" class="img40">
-                <div class="mt20">充值</div>
+                <div class="mt20">{{ $t('充值') }}</div>
             </div>
             <div class="item flex col jc ac ml20 mr20" @click="routerPush('/user/withdraw')">
                 <img src="@/assets/user/4.png" class="img40">
-                <div class="mt20">提现</div>
+                <div class="mt20">{{ $t('提现') }}</div>
             </div>
             <div class="item flex col jc ac" @click="routerPush('/user/transfer')">
                 <img src="@/assets/user/5.png" class="img40">
-                <div class="mt20">转账</div>
+                <div class="mt20">{{ $t('转账') }}</div>
             </div>
         </div>
 
@@ -90,7 +90,7 @@
         <div class="cell flex jb ac mt30" @click="routerPush('/community/my')">
             <div class="flex ac">
                 <img src="@/assets/user/7.png" class="img64 mr20">
-                <div class="size28">我的社区</div>
+                <div class="size28">{{ $t('我的社区') }}</div>
             </div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
@@ -98,7 +98,7 @@
         <div class="cell flex jb ac mt20" @click="routerPush('/community')">
             <div class="flex ac">
                 <img src="@/assets/user/8.png" class="img64 mr20">
-                <div class="size28">全网社区</div>
+                <div class="size28">{{ $t('全网社区') }}</div>
             </div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
@@ -106,7 +106,7 @@
         <div class="cell flex jb ac mt20" @click="routerPush('/news/my')">
             <div class="flex ac">
                 <img src="@/assets/user/9.png" class="img64 mr20">
-                <div class="size28">我的发布</div>
+                <div class="size28">{{ $t('我的发布') }}</div>
             </div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
@@ -114,7 +114,7 @@
         <div class="cell flex jb ac mt20" @click="routerPush('/team')">
             <div class="flex ac">
                 <img src="@/assets/user/10.png" class="img64 mr20">
-                <div class="size28">团队</div>
+                <div class="size28">{{ $t('团队') }}</div>
             </div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
@@ -122,7 +122,7 @@
         <div class="cell flex jb ac mt20" @click="routerPush('/user/order')">
             <div class="flex ac">
                 <img src="@/assets/user/11.png" class="img64 mr20">
-                <div class="size28">释放订单</div>
+                <div class="size28">{{ $t('释放订单') }}</div>
             </div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
@@ -130,7 +130,7 @@
         <div class="cell flex jb ac mt20" @click="routerPush('/cardholder')">
             <div class="flex ac">
                 <img src="@/assets/user/12.png" class="img64 mr20">
-                <div class="size28">持卡人管理</div>
+                <div class="size28">{{ $t('持卡人管理') }}</div>
             </div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>

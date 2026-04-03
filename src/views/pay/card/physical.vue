@@ -5,11 +5,11 @@
         <div class="pl30 pr30 pt30 flex">
             <div class="card flex1 flex col ac mr20" @click="routerPush('/physical/apply')">
                 <img src="@/assets/pay/6.png" class="img46">
-                <div class="size28 main mt8">申请实体卡</div>
+                <div class="size28 main mt8">{{ $t('申请实体卡') }}</div>
             </div>
             <div class="card flex1 flex col ac" @click="routerPush('/physical/bind')">
                 <img src="@/assets/pay/5.png" class="img46">
-                <div class="size28 main mt8">绑定实体卡</div>
+                <div class="size28 main mt8">{{ $t('绑定实体卡') }}</div>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
                     <swiper-slide v-for="item in cardList" :key="item.id" class="cardSlide">
                         <div class="cardBlock">
                             <img src="@/assets/card/physicalCard.png" class="cardImg">
-                            <div class="active" v-if="item.card_status == 'PENDING'">点击激活</div>
+                            <div class="active" v-if="item.card_status == 'PENDING'">{{ $t('点击激活') }}</div>
                             <div v-else>
                                 <div class="tag" :class="item.card_status=='ACTIVE'?'':'tagfail'" v-if="item.card_status">{{ item.card_status }}</div>
                             </div>
@@ -66,7 +66,7 @@
                     <img src="@/assets/card/copy.png" class="img32 ml10">
                 </div>
                 <div class="size30 bold6 main" v-else>**** **** **** ****</div>
-                <div class="size24 opc5">卡片金额</div>
+                <div class="size24 opc5">{{ $t('卡片金额') }}</div>
             </div>
 
             <div class="mt20 flex ac">
@@ -79,15 +79,15 @@
             <div class="flex ac mt40 size28 bold6 main">
                 <div class="flex1 mainButton btn flex jc ac" v-scale @click="rechargeRef?.open()">
                     <img src="@/assets/user/3.png" class="img40 mr10">
-                    <div>充值</div>
+                    <div>{{ $t('充值') }}</div>
                 </div>
                 <div class="flex1 mainButton btn flex jc ac ml15 mr15" v-scale @click="transferRef?.open()">
                     <img src="@/assets/pay/3.png" class="img40 mr10">
-                    <div>转账</div>
+                    <div>{{ $t('转账') }}</div>
                 </div>
                 <div class="flex1 mainButton btn flex jc ac" v-scale @click="passwordRef?.open()">
                     <img src="@/assets/pay/4.png" class="img40 mr10">
-                    <div>密码</div>
+                    <div>{{ $t('密码') }}</div>
                 </div>
             </div>
             <div class="gap10"></div>
@@ -96,15 +96,15 @@
         <div class="flex mt40">
             <div class="card flex1 flex col ac mr20" @click="routerPush('/physical/apply')">
                 <img src="@/assets/pay/6.png" class="img46">
-                <div class="size28 main mt8">申请实体卡</div>
+                <div class="size28 main mt8">{{ $t('申请实体卡') }}</div>
             </div>
             <div class="card flex1 flex col ac" @click="routerPush('/physical/bind')">
                 <img src="@/assets/pay/5.png" class="img46">
-                <div class="size28 main mt8">绑定实体卡</div>
+                <div class="size28 main mt8">{{ $t('绑定实体卡') }}</div>
             </div>
         </div>
 
-        <div class="size34 main bold6 mt40 mb24">流水明细</div>
+        <div class="size34 main bold6 mt40 mb24">{{ $t('流水明细') }}</div>
 
         <van-list v-bind="listProps">
             <div class="cell mb12" v-for="(item,index) in list" :key="index">

@@ -6,7 +6,7 @@
         <div class="pl30 pr30 mt80">
             <div class="flex1 mainButton btn flex jc ac" v-scale @click="routerReplace('/home/index')">
                 <img src="@/assets/pay/5.png" class="img40 mr20">
-                <div>开卡</div>
+                <div>{{ $t('开卡') }}</div>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                     <img src="@/assets/card/copy.png" class="img32 ml10">
                 </div>
                 <div class="size30 bold6 main" v-else>**** **** **** ****</div>
-                <div class="size24 opc5">卡片金额</div>
+                <div class="size24 opc5">{{ $t('卡片金额') }}</div>
             </div>
 
             <div class="mt20 flex ac">
@@ -74,17 +74,17 @@
             <div class="flex ac mt40 size28 bold6 main">
                 <div class="flex1 mainButton btn flex jc ac" v-scale @click="rechargeRef?.open()">
                     <img src="@/assets/user/3.png" class="img40 mr10">
-                    <div>充值</div>
+                    <div>{{ $t('充值') }}</div>
                 </div>
                 <div class="flex1 mainButton btn flex jc ac ml15 mr15" v-scale @click="transferRef?.open()">
                     <img src="@/assets/pay/3.png" class="img40 mr10">
-                    <div>转账</div>
+                    <div>{{ $t('转账') }}</div>
                 </div>
             </div>
             <div class="gap10"></div>
         </div>
 
-        <div class="size34 main bold6 mt40 mb24">流水明细</div>
+        <div class="size34 main bold6 mt40 mb24">{{ $t('流水明细') }}</div>
 
         <van-list v-bind="listProps">
             <div class="cell mb12" v-for="(item,index) in list" :key="index">

@@ -8,9 +8,9 @@
                 </div>
 
                 <div class="flex jb ac mt60">
-                    <div class="size28 bold5">选择卡</div>
+                    <div class="size28 bold5">{{ $t('选择卡') }}</div>
                     <div class="size24">
-                        <span class="opc5">可用余额</span>
+                        <span class="opc5">{{ $t('可用余额') }}</span>
                         <span class="bold5 main ml10" v-init="currentPicker?.available_balance"></span>
                         <span class="bold5 main ml5">{{ assetUSD }}</span>
                     </div>
@@ -18,29 +18,29 @@
 
                 <div class="inp flex jb ac mt20 size28" @click="pickerShow=true">
                     <div v-if="currentPicker">{{ currentPicker.card_number }}</div>
-                    <div class="gray" v-else>请选择卡</div>
+                    <div class="gray" v-else>{{ $t('请选择卡') }}</div>
                     <div class="gray">
                         <van-icon name="arrow" />
                     </div>
                 </div>
 
-                <div class="size28 bold5 mt30">转入卡号</div>
+                <div class="size28 bold5 mt30">{{ $t('转入卡号') }}</div>
                 <div class="inp flex jb ac mt20 size28">
-                    <input type="text" v-model="toCardNumber" placeholder="请输入转入卡号" class="flex1">
+                    <input type="text" v-model="toCardNumber" :placeholder="$t('请输入转入卡号')" class="flex1">
                     <div class="line"></div>
                     <img src="@/assets/common/usdt.png" class="img36 ml20">
                     <div class="size20 ml6">{{ assetUSDT }}</div>
                 </div>
 
-                <div class="size28 bold5 mt30">转出金额</div>
+                <div class="size28 bold5 mt30">{{ $t('转出金额') }}</div>
                 <div class="inp flex jb ac mt20 size28">
-                    <input type="number" v-model="inputAmount" placeholder="请输入充值金额" class="flex1">
+                    <input type="number" v-model="inputAmount" :placeholder="$t('请输入转入金额')" class="flex1">
                     <div class="line"></div>
                     <img src="@/assets/common/usdt.png" class="img36 ml20">
                     <div class="size20 ml6">{{ assetUSDT }}</div>
                 </div>
 
-                <div class="size28 bold5 mt30">到账金额</div>
+                <div class="size28 bold5 mt30">{{ $t('到账金额') }}</div>
                 <div class="inp flex jb ac mt20 size28">
                     <div class="flex1" v-init="inputAmount"></div>
                     <div class="line"></div>
@@ -48,7 +48,7 @@
                     <div class="size20 ml6">{{ assetUSD }}</div>
                 </div>
 
-                <div class="mainBtn mt100 flex jc ac size28 main bold6 btn" @click="submit">确认</div>
+                <div class="mainBtn mt100 flex jc ac size28 main bold6 btn" @click="submit">{{ $t('确认') }}</div>
 
                 <div class="safeArea"></div>
             </div>

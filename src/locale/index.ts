@@ -14,6 +14,7 @@ import thCommon from './common/th.json';
 import ruCommon from './common/ru.json';
 import frCommon from './common/fr.json';
 import maCommon from './common/ma.json';
+import hiCommon from './common/hi.json';
 
 import en from './modules/en.json';
 import ko from './modules/ko.json';
@@ -28,6 +29,7 @@ import th from './modules/th.json';
 import ru from './modules/ru.json';
 import fr from './modules/fr.json';
 import ma from './modules/ma.json';
+import hi from './modules/hi.json';
 
 const messages = {
     en: {...en, ...enCommon},
@@ -42,7 +44,8 @@ const messages = {
     th: {...th, ...thCommon},
     ru: {...ru, ...ruCommon},
     fr: {...fr, ...frCommon},
-    ma: {...ma, ...maCommon}
+    ma: {...ma, ...maCommon},
+    hi: {...hi, ...hiCommon}
 }
 
 
@@ -57,11 +60,12 @@ export const langs = [
     { name: '한국어', lang: 'ko', value: 'ko' }, // 韩语
     { name: '日本語', lang: 'ja', value: 'ja' }, // 日语
     { name: 'Русский', lang: 'ru', value: 'ru' }, // 俄语
-    // { name:'malaysia', lang: 'ma', value:'ma'},// 马来语
+    { name: 'हिन्दी', lang: 'hi', value: 'hi' }, // 印地语
+    { name:'malaysia', lang: 'ma', value:'ms'},// 马来语
     // { name: 'Español', lang: 'es', value: 'es' }, // 西班牙语
-    // { name: 'Indonesian', lang: 'id', value: 'id' }, // 印尼语
+    { name: 'Indonesian', lang: 'id', value: 'id' }, // 印尼语
     // { name: 'Türkçe', lang: 'tr', value: 'tr' }, // 土耳其语
-    // { name: 'Tiếng Việt', lang: 'vi', value: 'vi' }, // 越南
+    { name: 'Tiếng Việt', lang: 'vi', value: 'vi' }, // 越南
     // { name: 'ภาษาไทย', lang: 'th', value: 'th' } // 泰国
     { name: '繁体中文', lang: 'hk', value: 'zh-Hant' }, // 繁体中文
     { name: '简体中文', lang: 'zh', value: 'zh-Hans' }, // 简体中文

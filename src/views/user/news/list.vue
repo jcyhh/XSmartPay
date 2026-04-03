@@ -12,15 +12,15 @@
                         <img :src="item?.images[0]" class="img130 cover flex0" v-if="item?.images && item.images.length>0">
                         <div class="img130 flex0" v-else></div>
                     </div>
-                    <div class="size24 mt6">来自 {{ item.email || item.address }}</div>
+                    <div class="size24 mt6">{{ $t('来自') }} {{ item.email || item.address }}</div>
                     <div class="flex jb ac mt10">
                         <div class="flex ac">
                             <img src="@/assets/user/20.png" class="img34 mr6">
                             <div class="size20 opc5 mr10">{{ item.community_name }}</div>
-                            <div class="size20 main">NO.{{ item.community_rank }}</div>
+                            <div class="size20 main">{{ $t('NO.') }}{{ item.community_rank }}</div>
                         </div>
                         <div class="flex ac">
-                            <div class="size22 opc5">{{ item.comment_count }}人评论</div>
+                            <div class="size22 opc5">{{ $t('{count}人评论', { count: item.comment_count }) }}</div>
                             <div class="line ml16 mr16"></div>
                             <img src="@/assets/user/36.png" class="img24">
                         </div>

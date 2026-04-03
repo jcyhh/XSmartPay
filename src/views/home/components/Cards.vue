@@ -5,7 +5,8 @@
             :slides-per-view="'auto'"
             :space-between="space"
             :centered-slides="true"
-            :loop="cardList.length > 1"
+            :initial-slide="defaultIndex"
+            @swiper="onSwiper"
             @slide-change="onSlideChange"
         >
             <swiper-slide v-for="item in cardList" :key="item.id" class="cardSlide">
@@ -22,7 +23,7 @@
     <div class="flex jb ac size24 mt30">
         <div>{{ currentCard?.name }}</div>
         <div class="opc5">
-            <span class="mr10">库存</span>
+            <span class="mr10">{{ $t('库存') }}</span>
             <span>{{ currentCard?.stock }}</span>
         </div>
     </div>
@@ -37,9 +38,9 @@
     <div class="flex ac mt30">
         <div class="update mainButton flex jc ac animate__animated animate__fadeInLeft ani3 mr20" v-scale @click="openUpgrade" v-if="diff > 0">
             <img src="@/assets/home/3.png" class="img40 mr10">
-            <div class="size32 main">升级</div>
+            <div class="size32 main">{{ $t('升级') }}</div>
         </div>
-        <div class="mainBtn flex1 flex jc ac size32 bold5" @click="openCard">立即开卡</div>
+        <div class="mainBtn flex1 flex jc ac size32 bold5" @click="openCard">{{ $t('立即开卡') }}</div>
     </div>
 
     <OpenCard @success="loadData()" ref="openCardRef"></OpenCard>
@@ -55,7 +56,7 @@ import 'swiper/css';
 import { assetUSDT } from '@/config';
 import OpenCard from './OpenCard.vue';
 import OpenUpgrade from './OpenUpgrade.vue';
-import { computed, onMounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
 import { apiProduct } from '@/api/home';
 import { useCardIcon } from '@/hooks/useCardIcon';
 import { useUserStore } from '@/store';
@@ -68,10 +69,15 @@ const { getCardIcon } = useCardIcon()
 
 const openCardRef = ref()
 const openUpgradeRef = ref()
+const mySwiper = ref()
 
 const cardList = ref<any[]>([])
 const currentIndex = ref(0)
+const defaultIndex = ref(0)
 const currentCard = computed(() => cardList.value[currentIndex.value] || null)
+const onSwiper = (swiper: any) => {
+    mySwiper.value = swiper
+}
 const onSlideChange = (swiper: any) => {
     currentIndex.value = Number(swiper?.realIndex ?? swiper?.activeIndex ?? 0)
 }
@@ -91,7 +97,10 @@ const loadData = async () => {
             }
         }
     })
-    currentIndex.value = 0
+    defaultIndex.value = cardList.value.length > 1 ? 1 : 0
+    currentIndex.value = defaultIndex.value
+    await nextTick()
+    mySwiper.value?.slideTo(defaultIndex.value, 0)
 }
 
 const diff = computed(()=>{

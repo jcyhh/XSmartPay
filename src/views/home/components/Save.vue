@@ -8,9 +8,9 @@
                 </div>
 
                 <div class="flex jb ac mt60">
-                    <div class="size28 bold5">选择资产</div>
+                    <div class="size28 bold5">{{ $t('选择资产') }}</div>
                     <div class="size24">
-                        <span class="opc5">可用余额</span>
+                        <span class="opc5">{{ $t('可用余额') }}</span>
                         <span class="main mr5 ml10">
                             <span v-if="pickerCurrent==0" v-init="userInfo?.balance_usdt"></span>
                             <span v-else-if="pickerCurrent==1" v-init="userInfo?.balance_aix"></span>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
 
-                <div class="size28 bold5 mt30">存取方式</div>
+                <div class="size28 bold5 mt30">{{ $t('存取方式') }}</div>
                 <div class="inp flex jb ac mt20 size28" @click="pickerShowPlan=true">
                     <div class="mr10">{{ currentPickerPlan?.name }}</div>
                     <div class="opc5">
@@ -38,12 +38,12 @@
                     </div>
                 </div>
 
-                <div class="size28 bold5 mt30">存入金额</div>
+                <div class="size28 bold5 mt30">{{ $t('存入金额') }}</div>
                 <div class="inp flex jb ac mt20 size28">
-                    <input type="number" v-model="inputAmount" placeholder="请输入存入金额" class="flex1">
+                    <input type="number" v-model="inputAmount" :placeholder="$t('请输入存入金额')" class="flex1">
                 </div>
 
-                <div class="flex mainBtn jc ac size28 bold6 mt80" @click="submit">确认</div>
+                <div class="flex mainBtn jc ac size28 bold6 mt80" @click="submit">{{ $t('确认') }}</div>
                 <div class="safeArea"></div>
             </div>
         </div>

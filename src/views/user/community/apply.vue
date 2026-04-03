@@ -12,11 +12,11 @@
                         <div class="size24 mt10 opc5">{{ item.created_at  }}</div>
                     </div>
                     <div class="flex size28 bold6" v-if="current==0">
-                        <div class="mainButton mainButtonDel flex jc ac main btn flex1 mr12" v-scale @click="audit(2, item.id)">拒绝</div>
-                        <div class="mainButton flex jc ac main btn flex1" v-scale @click="audit(1, item.id)">通过</div>
+                        <div class="mainButton mainButtonDel flex jc ac main btn flex1 mr12" v-scale @click="audit(2, item.id)">{{ $t('拒绝') }}</div>
+                        <div class="mainButton flex jc ac main btn flex1" v-scale @click="audit(1, item.id)">{{ $t('通过') }}</div>
                     </div>
-                    <div class="size28 bold6 green" v-else-if="current==1">已通过</div>
-                    <div class="size28 bold6 opc5" v-else>已拒绝</div>
+                    <div class="size28 bold6 green" v-else-if="current==1">{{ $t('已通过') }}</div>
+                    <div class="size28 bold6 opc5" v-else>{{ $t('已拒绝') }}</div>
                 </div>
 
                 <CusEmpty v-if="list?.length==0"></CusEmpty>
@@ -41,15 +41,15 @@ const current = ref(0)
 
 const tabs = computed(()=>([
     {
-        name: '待审核',
+        name: t('待审核'),
         value: 0
     },
     {
-        name: '已同意',
+        name: t('已同意'),
         value: 1
     },
     {
-        name: '已拒绝',
+        name: t('已拒绝'),
         value: 2
     }
 ]))

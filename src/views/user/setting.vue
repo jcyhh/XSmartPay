@@ -3,30 +3,30 @@
     <div class="pl30 pr30 pt30">
         
         <div class="cell card flex jb ac" @click="routerPush('/edit')">
-            <div class="size28">修改密码</div>
+            <div class="size28">{{ $t('修改密码') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
         <div class="cell card flex jb ac mt20" @click="routerPush('/editPay')">
-            <div class="size28">修改支付密码</div>
+            <div class="size28">{{ $t('修改支付密码') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
         <div class="cell card flex jb ac mt20" @click="routerPush('/helps')">
-            <div class="size28">帮助中心</div>
+            <div class="size28">{{ $t('帮助中心') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
         <div class="cell card flex jb ac mt20" @click="routerPush('/account')" v-if="!isH5">
-            <div class="size28">切换账号</div>
+            <div class="size28">{{ $t('切换账号') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
-        <div class="mainButton mainButtonDel flex jc ac main btn flex1 mt100" v-scale @click="show=true" v-if="!isH5">退出登录</div>
+        <div class="mainButton mainButtonDel flex jc ac main btn flex1 mt100" v-scale @click="show=true" v-if="!isH5">{{ $t('退出登录') }}</div>
 
     </div>
 
-    <CusAsk v-model:show="show" @submit="logout">确定要退出登录吗？</CusAsk>
+    <CusAsk v-model:show="show" @submit="logout">{{ $t('确定要退出登录吗？') }}</CusAsk>
 </template>
 
 <script setup lang="ts">

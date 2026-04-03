@@ -3,12 +3,12 @@
 
     <div class="rule rule1 flex ac animate__animated animate__slideInRight" @click="routerPush('/draw/rule')">
         <img src="@/assets/draw/6.png" class="img30 mr6">
-        <div class="size24">规则</div>
+        <div class="size24">{{ $t('规则') }}</div>
     </div>
 
     <div class="rule rule2 flex ac animate__animated animate__slideInRight" @click="routerPush('/draw/record')">
         <img src="@/assets/draw/7.png" class="img30 mr6">
-        <div class="size24">记录</div>
+        <div class="size24">{{ $t('记录') }}</div>
     </div>
 
     <div class="pl30 pr30 pt50 rel">

@@ -1,6 +1,6 @@
 <template>
     <div class="flex jc ac mb60" v-if="saleCountdown.phase === 'before'">
-        <div class="size24 mr20">今日抢购开始</div>
+        <div class="size24 mr20">{{ $t('今日抢购开始') }}</div>
         <van-count-down :key="`before-${saleCountdown.ms}`" :time="saleCountdown.ms" @finish="refreshSaleCountdown">
             <template #default="timeData">
                 <div class="flex ac size26 bold6">
@@ -14,7 +14,7 @@
         </van-count-down>
     </div>
     <div class="flex jc ac mb60" v-else-if="saleCountdown.phase === 'during'">
-        <div class="size24 mr20">今日抢购结束</div>
+        <div class="size24 mr20">{{ $t('今日抢购结束') }}</div>
         <van-count-down :key="`during-${saleCountdown.ms}`" :time="saleCountdown.ms" @finish="refreshSaleCountdown">
             <template #default="timeData">
                 <div class="flex ac size26 bold6">
@@ -28,7 +28,7 @@
         </van-count-down>
     </div>
     <div class="flex jc ac mb60" v-else>
-        <div class="size24 mr20">今日抢购已结束</div>
+        <div class="size24 mr20">{{ $t('今日抢购已结束') }}</div>
     </div>
     <div class="flex jc">
         <div class="draw">
@@ -76,12 +76,12 @@
     </div>
 
     <div class="tc mt30 size24 bold6">
-        <span>消耗</span>
+        <span>{{ $t('消耗') }}</span>
         <span class="green ml5">{{ assetAIX }}≈</span>
         <span class="green" v-init="drawPrice"></span>
         <span class="green">{{ assetUSDT }}</span>
-        <span class="ml5 mr10">抽一次</span>
-        <span>抽卡次数</span>
+        <span class="ml5 mr10">{{ $t('抽一次') }}</span>
+        <span>{{ $t('抽卡次数') }}</span>
         <span class="red">{{ Number(userInfo?.balance_lottery) }}</span>
     </div>
 

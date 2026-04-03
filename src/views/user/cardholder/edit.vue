@@ -2,51 +2,51 @@
     <CusNav :title="$t('持卡人信息')" :show-bg="false"></CusNav>
     <div class="pl30 pr30 pt30">
         
-        <div class="size28 bold5">持卡人名字</div>
+        <div class="size28 bold5">{{ $t('持卡人名字') }}</div>
         <div class="cell flex ac mt20">
             <input type="text" v-model="form.first_name" :placeholder="$t('请输入大写字母')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold5 mt30">持卡人姓氏</div>
+        <div class="size28 bold5 mt30">{{ $t('持卡人姓氏') }}</div>
         <div class="cell flex ac mt20">
             <input type="text" v-model="form.last_name" :placeholder="$t('请输入大写字母')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold5 mt30">电话号码</div>
+        <div class="size28 bold5 mt30">{{ $t('电话号码') }}</div>
         <div class="cell flex ac mt20">
             <input type="text" v-model="form.phone" :placeholder="$t('请输入电话号码')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold5 mt30">邮箱</div>
+        <div class="size28 bold5 mt30">{{ $t('邮箱') }}</div>
         <div class="cell flex ac mt20">
             <input type="text" v-model="form.email" :placeholder="$t('请输入邮箱')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold5 mt30">邮编</div>
+        <div class="size28 bold5 mt30">{{ $t('邮编') }}</div>
         <div class="cell flex ac mt20">
             <input type="text" v-model="form.postal_code" :placeholder="$t('请输入邮编')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold5 mt30">国家</div>
+        <div class="size28 bold5 mt30">{{ $t('国家') }}</div>
         <div class="cell flex jb ac mt20 size28" @click="pickerShow=true">
             <div v-if="currentCountry">{{ currentCountry.name }}({{ currentCountry.country_code }})</div>
-            <div class="gray" v-else>请选择国家</div>
+            <div class="gray" v-else>{{ $t('请选择国家') }}</div>
             <div class="gray">
                 <van-icon name="arrow" />
             </div>
         </div>
 
-        <div class="size28 bold5 mt30">省/州</div>
+        <div class="size28 bold5 mt30">{{ $t('省/州') }}</div>
         <div class="cell flex ac mt20">
             <input type="text" v-model="form.state" :placeholder="$t('请输入省/州')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold5 mt30">城市</div>
+        <div class="size28 bold5 mt30">{{ $t('城市') }}</div>
         <div class="cell flex ac mt20">
             <input type="text" v-model="form.city" :placeholder="$t('请输入城市')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold5 mt30">街道地址</div>
+        <div class="size28 bold5 mt30">{{ $t('街道地址') }}</div>
         <div class="cell flex ac mt20">
             <input type="text" v-model="form.line1" :placeholder="$t('请输入街道地址')" class="flex1 size28">
         </div>
@@ -56,7 +56,7 @@
     <div class="safeArea"></div>
     <div class="gap150"></div>
     <div class="bottom">
-        <div class="mainBtn size28 bold6 flex jc ac" @click="submit">保存</div>
+        <div class="mainBtn size28 bold6 flex jc ac" @click="submit">{{ $t('保存') }}</div>
         <div class="safeArea"></div>
     </div>
 
@@ -82,19 +82,19 @@ const { params } = useRoute()
 const current = ref(-1)
 const pickerShow = ref(false)
 const countrys = computed(()=>([
-    {name:'法国', country:'France', country_code:'FR'},
-    {name:'柬埔寨', country:'Cambodia', country_code:'KH'},
-    {name:'韩国', country:'SouthKorea', country_code:'KR'},
-    {name:'马来西亚', country:'Malaysia', country_code:'MY'},
-    {name:'美国', country:'UnitedStates', country_code:'US'},
-    {name:'日本', country:'Japan', country_code:'JP'},
-    {name:'新加坡', country:'Singapore', country_code:'SG'},
-    {name:'泰国', country:'Thailand', country_code:'TH'},
-    {name:'越南', country:'Vietnam', country_code:'VN'},
-    {name:'印度', country:'India', country_code:'IN'},
-    {name:'印度尼西亚', country:'Indonesia', country_code:'ID'},
-    {name:'英国', country:'United Kingdom', country_code:'GB'},
-    {name:'中国', country:'中国', country_code:'CN'},
+    {name:t('法国'), country:'France', country_code:'FR'},
+    {name:t('柬埔寨'), country:'Cambodia', country_code:'KH'},
+    {name:t('韩国'), country:'SouthKorea', country_code:'KR'},
+    {name:t('马来西亚'), country:'Malaysia', country_code:'MY'},
+    {name:t('美国'), country:'UnitedStates', country_code:'US'},
+    {name:t('日本'), country:'Japan', country_code:'JP'},
+    {name:t('新加坡'), country:'Singapore', country_code:'SG'},
+    {name:t('泰国'), country:'Thailand', country_code:'TH'},
+    {name:t('越南'), country:'Vietnam', country_code:'VN'},
+    {name:t('印度'), country:'India', country_code:'IN'},
+    {name:t('印度尼西亚'), country:'Indonesia', country_code:'ID'},
+    {name:t('英国'), country:'United Kingdom', country_code:'GB'},
+    {name:t('中国'), country:'中国', country_code:'CN'},
 ]))
 const currentCountry = computed(()=> current.value >= 0 ? countrys.value[current.value] : null)
 

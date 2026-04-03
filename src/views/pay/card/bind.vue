@@ -2,19 +2,19 @@
     <CusNav :title="$t('绑定实体卡')"></CusNav>
     <div class="pl30 pr30 pt30 rel">
         
-        <div class="size28 bold6">持卡人</div>
+        <div class="size28 bold6">{{ $t('持卡人') }}</div>
         <div class="cell card mt20 flex jb ac" @click="pickerShow=true">
             <div v-if="currentPicker">{{ currentPicker.first_name }} {{ currentPicker.last_name }} ({{ currentPicker.country_code }})</div>
-            <div class="gray" v-else>请选择持卡人</div>
+            <div class="gray" v-else>{{ $t('请选择持卡人') }}</div>
             <div class="gray">
                 <van-icon name="arrow" />
             </div>
         </div>
 
         <div class="mt30">
-            <div class="size28 bold6">卡号</div>
+            <div class="size28 bold6">{{ $t('卡号') }}</div>
             <div class="cell card mb20 flex jb ac mt20">
-                <input type="text" v-model="card_number" placeholder="请输入卡号" class="flex1 size28">
+                <input type="text" v-model="card_number" :placeholder="$t('请输入卡号')" class="flex1 size28">
             </div>
         </div>
 
@@ -23,7 +23,7 @@
     <div class="safeArea"></div>
     <div class="gap130"></div>
     <div class="bottom">
-        <div class="mainBtn size28 bold6 flex jc ac" @click="submit">确认</div>
+        <div class="mainBtn size28 bold6 flex jc ac" @click="submit">{{ $t('确认') }}</div>
         <div class="safeArea"></div>
     </div>
 
@@ -31,8 +31,8 @@
         <template v-slot="{ item }">
             <span class="bold5">{{ item.first_name }} {{ item.last_name }}({{ item.country_code }})</span>
         </template>
-        <template #empty>
-            <div class="mainBtn flex jc ac bold5 size30" @click="routerPush('/cardholder/add')">添加持卡人</div>
+        <template #empty-action>
+            <div class="mainBtn flex jc ac bold5 size30" @click="routerPush('/cardholder/add')">{{ $t('添加持卡人') }}</div>
         </template>
     </CusPicker>
 </template>

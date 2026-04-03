@@ -40,9 +40,21 @@ const { isH5 } = storeToRefs(appStore)
 
 let ethereum:any = null
 const kefu = ref<HTMLImageElement>()
-const kefuLeft = ref(0)
-const kefuTop = ref(0)
+const getDefaultKefuPosition = () => {
+    if (typeof window === 'undefined') {
+        return { left: 0, top: 0 }
+    }
+    return {
+        left: Math.max(window.innerWidth - 80, 0),
+        top: Math.max(window.innerHeight - 80, 0)
+    }
+}
+
+const defaultKefuPosition = getDefaultKefuPosition()
+const kefuLeft = ref(defaultKefuPosition.left)
+const kefuTop = ref(defaultKefuPosition.top)
 const kefuDragging = ref(false)
+const kefuReady = ref(false)
 const dragOffsetX = ref(0)
 const dragOffsetY = ref(0)
 
@@ -73,7 +85,7 @@ const clampKefuPosition = (left: number, top: number) => {
 const kefuStyle = computed(() => ({
     left: `${kefuLeft.value}px`,
     top: `${kefuTop.value}px`,
-    transition: kefuDragging.value ? 'none' : 'left 0.3s ease, top 0.3s ease'
+    transition: !kefuReady.value || kefuDragging.value ? 'none' : 'left 0.3s ease, top 0.3s ease'
 }))
 
 const onKefuTouchStart = (event: TouchEvent) => {
@@ -153,6 +165,7 @@ onMounted(() => {
     const position = clampKefuPosition(window.innerWidth - 80, window.innerHeight - 80)
     kefuLeft.value = position.left
     kefuTop.value = position.top
+    kefuReady.value = true
 })
 
 if(isH5.value)init()

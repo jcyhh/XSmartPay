@@ -1,6 +1,6 @@
 <template>
     <CusNav :title="$t('全球付')">
-        <div class="tr size24" @click="routerPush('/pay/record')">汇款记录</div>
+        <div class="tr size24" @click="routerPush('/pay/record')">{{ $t('汇款记录') }}</div>
     </CusNav>
     <div class="pl30 pr30 pt30 rel">
         
@@ -11,21 +11,21 @@
         </div>
 
         <div class="mb60" v-if="stepCur==0">
-            <div class="tc size32 bold6">您要汇款到哪里？</div>
-            <div class="tc size24 mt12 opc5">先选择收款国家，再输入金额</div>
+            <div class="tc size32 bold6">{{ $t('您要汇款到哪里？') }}</div>
+            <div class="tc size24 mt12 opc5">{{ $t('先选择收款国家，再输入金额') }}</div>
         </div>
         <div class="mb60" v-else-if="stepCur==1">
-            <div class="tc size32 bold6">收款人是谁？</div>
+            <div class="tc size32 bold6">{{ $t('收款人是谁？') }}</div>
             <div class="tc size24 mt12">
-                <span class="opc5">汇款到</span>
+                <span class="opc5">{{ $t('汇款到') }}</span>
                 <span class="main">{{ currency?.NameCn }}</span>
-                <span class="opc5"> · 收款币种</span>
+                <span class="opc5"> · {{ $t('收款币种') }}</span>
                 <span class="main">{{ currency?.CurrencyCode }}</span>
             </div>
         </div>
         <div class="mb60" v-else>
-            <div class="tc size32 bold6">最后一步</div>
-            <div class="tc size24 mt12 opc5">选择汇款通道和到账时间</div>
+            <div class="tc size32 bold6">{{ $t('最后一步') }}</div>
+            <div class="tc size24 mt12 opc5">{{ $t('选择汇款通道和到账时间') }}</div>
         </div>
 
         <StepOne @nextStep="changeStepTwo" v-if="stepCur==0"></StepOne>

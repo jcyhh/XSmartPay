@@ -1,7 +1,7 @@
 <template>
     <CusNav :title="$t('我的社区')">
         <div class="tr rel" v-if="info && isLeader">
-            <span class="size26" @click="routerPush('/community/apply')">新成员</span>
+            <span class="size26" @click="routerPush('/community/apply')">{{ $t('新成员') }}</span>
             <div class="dot" v-if="info?.has_pending"></div>
         </div>
     </CusNav>
@@ -10,8 +10,8 @@
         <div class="pl30 pr30 pt30 rel">
 
             <div class="top">
-                <div class="tag size24 flex ac" v-if="info?.team_status==1">有效社团</div>
-                <div class="tag tag1 size24 flex ac" v-else>无效社团</div>
+                <div class="tag size24 flex ac" v-if="info?.team_status==1">{{ $t('有效社团') }}</div>
+                <div class="tag tag1 size24 flex ac" v-else>{{ $t('无效社团') }}</div>
                 <div class="flex ac">
                     <img :src="info?.logo" class="img100 avatar">
                     <div class="flex1">
@@ -19,7 +19,7 @@
                             <div class="size28 bold6">{{ info?.name }}</div>
                             <div class="size24 bold6">{{ info?.member_count }}/{{ info?.community_max_num }}</div>
                         </div>
-                        <div class="size24 opc5 mt10">创建人 {{ info?.email || info?.address }}</div>
+                        <div class="size24 opc5 mt10">{{ $t('创建人') }} {{ info?.email || info?.address }}</div>
                     </div>
                 </div>
                 <div class="line mt24 mb20"></div>
@@ -30,8 +30,8 @@
             </div>
 
             <div class="flex mt30 size28 bold6">
-                <div class="mainButton mainButtonDel flex jc ac main btn flex1" v-scale @click="showDestory=true" v-if="isLeader">解散社团</div>
-                <div class="mainButton mainButtonDel flex jc ac main btn flex1" v-scale @click="showQuit=true" v-else>退出社团</div>
+                <div class="mainButton mainButtonDel flex jc ac main btn flex1" v-scale @click="showDestory=true" v-if="isLeader">{{ $t('解散社团') }}</div>
+                <div class="mainButton mainButtonDel flex jc ac main btn flex1" v-scale @click="showQuit=true" v-else>{{ $t('退出社团') }}</div>
             </div>
 
 
@@ -40,7 +40,7 @@
                     <div class="flex1">
                         <div class="flex ac">
                             <img src="@/assets/user/24.png" class="img32 mr10">
-                            <div class="size24 opc5">社区总业绩</div>
+                            <div class="size24 opc5">{{ $t('社区总业绩') }}</div>
                         </div>
                         <div class="size40 bold main mt30">
                             <CusNumber :amount="info?.total_kpi" sizeClass="size24"></CusNumber>
@@ -55,7 +55,7 @@
                     <div class="flex1">
                         <div class="flex ac">
                             <img src="@/assets/user/25.png" class="img32 mr10">
-                            <div class="size24 opc5">社区当日业绩</div>
+                            <div class="size24 opc5">{{ $t('社区当日业绩') }}</div>
                         </div>
                         <div class="size40 bold green mt30 flex ac">
                             +<CusNumber :amount="info?.kpi" sizeClass="size24"></CusNumber>
@@ -77,20 +77,20 @@
     </div>
     <div class="pl30 pr30 rel" v-else>
         <CusEmpty></CusEmpty>
-        <div class="size24 opc5 tc">您还未创建社区...</div>
+        <div class="size24 opc5 tc">{{ $t('您还未创建社区...') }}</div>
         <div class="safeArea"></div>
         <div class="gap130"></div>
         <div class="bottom">
-            <div class="mainBtn size28 bold6 flex jc ac" @click="show = true">创建社区</div>
+            <div class="mainBtn size28 bold6 flex jc ac" @click="show = true">{{ $t('创建社区') }}</div>
             <div class="safeArea"></div>
         </div>
     </div>
 
     <Create v-model:show="show" @success="loadData()"></Create>
 
-    <CusAsk v-model:show="showQuit" @submit="submitQuit">确定要退出社区吗？</CusAsk>
+    <CusAsk v-model:show="showQuit" @submit="submitQuit">{{ $t('确定要退出社区吗？') }}</CusAsk>
 
-    <CusAsk v-model:show="showDestory" @submit="submitDestory">确定要解散社区吗？</CusAsk>
+    <CusAsk v-model:show="showDestory" @submit="submitDestory">{{ $t('确定要解散社区吗？') }}</CusAsk>
 </template>
 
 <script setup lang="ts">

@@ -11,7 +11,7 @@
         <van-list class="fullPage" v-bind="listProps">
             <div class="pl60 pr60 pt90 rel">
 
-                <CusTitle title="全网社区排行榜"></CusTitle>
+                <CusTitle :title="$t('全网社区排行榜')"></CusTitle>
 
                 <div class="gap50"></div>
 
@@ -32,14 +32,14 @@
                         <div class="flex jb ac flex1 ml20">
                             <div>
                                 <div class="size28 bold6">{{ item.name }}</div>
-                                <div class="size24 opc5 mt10">社区人数 {{ item.member_count }}人</div>
+                                <div class="size24 opc5 mt10">{{ $t('社区人数') }} {{ item.member_count }}{{ $t('人') }}</div>
                             </div>
                             <div class="size80 bold opc2">{{ padZero(Number(index) + 1) }}</div>
                         </div>
                     </div>
                     <div class="line mt12 mb24"></div>
                     <div class="flex jb ac">
-                        <div class="size24 bold5">社区业绩</div>
+                        <div class="size24 bold5">{{ $t('社区业绩') }}</div>
                         <div class="size24 bold6">
                             <span v-init="item.total_kpi"></span>
                             <span class="ml5">{{ assetUSDT }}</span>

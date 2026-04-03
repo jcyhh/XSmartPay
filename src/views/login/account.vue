@@ -5,8 +5,8 @@
             <div class="flex jb ac cell mb20" v-for="item in accountList" :key="item.email">
                 <div class="size28 bold6" v-init:address="item.email"></div>
                 <div>
-                    <div class="size28 main bold6" v-if="item.email === currentEmail">当前登录</div>
-                    <div class="mainButton btn size24 bold6 flex ac" v-else @click="switchAccount(item)">切换</div>
+                    <div class="size28 main bold6" v-if="item.email === currentEmail">{{ $t('当前登录') }}</div>
+                    <div class="mainButton btn size24 bold6 flex ac" v-else @click="switchAccount(item)">{{ $t('切换') }}</div>
                 </div>
             </div>
         </template>
@@ -17,7 +17,7 @@
     <div class="safeArea"></div>
     <div class="gap130"></div>
     <div class="bottom">
-        <div class="mainBtn size28 bold6 flex jc ac" @click="routerPush('/login')">添加账号</div>
+        <div class="mainBtn size28 bold6 flex jc ac" @click="routerPush('/login')">{{ $t('添加账号') }}</div>
         <div class="safeArea"></div>
     </div>
 </template>
@@ -26,6 +26,7 @@
 import CusNav from '@/components/CusNav/index.vue'
 import CusEmpty from '@/components/CusEmpty/index.vue'
 import { getAccount, getAccountList, setAccount, setToken, type LoginAccountItem } from '@/config/storage'
+import { t } from '@/locale'
 import { routerPush, routerReplace } from '@/router'
 import { message } from '@/utils/message'
 import { ref } from 'vue'
@@ -38,7 +39,7 @@ const switchAccount = (item: LoginAccountItem) => {
     setToken(item.token)
     setAccount(item.email)
     currentEmail.value = item.email
-    message('切换成功', 'success')
+    message(t('切换成功'), 'success')
     routerReplace('/user/index')
 }
 </script>

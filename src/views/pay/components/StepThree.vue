@@ -1,8 +1,8 @@
 <template>
-    <div class="size26 bold5">汇款目的</div>
+    <div class="size26 bold5">{{ $t('汇款目的') }}</div>
     <div class="cell mt20 flex jb ac size28" @click="pickerShow=true">
         <div v-if="currentPicker">{{ currentPicker.name }}</div>
-        <div class="opc5" v-else>请选择</div>
+        <div class="opc5" v-else>{{ $t('请选择') }}</div>
         <van-icon name="arrow" color="#FFFFFF80" />
     </div>
 
@@ -60,8 +60,8 @@
     </div>
 
     <div class="flex mt80 size28 bold6">
-        <div class="flex1 lineBtn flex jc ac" @click="submitPrev">上一步</div>
-        <div class="flex1 mainBtn flex jc ac ml20" @click="submit">确认汇款</div>
+        <div class="flex1 lineBtn flex jc ac" @click="submitPrev">{{ $t('上一步') }}</div>
+        <div class="flex1 mainBtn flex jc ac ml20" @click="submit">{{ $t('确认汇款') }}</div>
     </div>
 
     <CusPicker v-model:show="pickerShow" :list="pickerList" :title="$t('请选择')" :default-index="pickerCurrent" @change="$event=pickerCurrent=$event">

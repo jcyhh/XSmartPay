@@ -1,22 +1,22 @@
 <template>
     <CusNav :title="$t('申请实体卡')">
-        <div class="tr size26" @click="routerPush('/physical/record')">申请记录</div>
+        <div class="tr size26" @click="routerPush('/physical/record')">{{ $t('申请记录') }}</div>
     </CusNav>
     <div class="pl30 pr30 pt30 rel">
         
-        <div class="size28 bold6">收件人姓名</div>
+        <div class="size28 bold6">{{ $t('收件人姓名') }}</div>
         <div class="cell card mb20 flex jb ac mt20">
-            <input type="text" v-model="recipient_name" placeholder="请输入收件人姓名" class="flex1 size28">
+            <input type="text" v-model="recipient_name" :placeholder="$t('请输入收件人姓名')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold6 mt30">收件地址</div>
+        <div class="size28 bold6 mt30">{{ $t('收件地址') }}</div>
         <div class="cell card mb20 flex jb ac mt20">
-            <input type="text" placeholder="请输入收件地址" class="flex1 size28">
+            <input type="text" v-model="recipient_address" :placeholder="$t('请输入收件地址')" class="flex1 size28">
         </div>
 
-        <div class="size28 bold6 mt30">收件电话</div>
+        <div class="size28 bold6 mt30">{{ $t('收件电话') }}</div>
         <div class="cell card mb20 flex jb ac mt20">
-            <input type="text" placeholder="请输入收件电话" class="flex1 size28">
+            <input type="text" v-model="recipient_phone" :placeholder="$t('请输入收件电话')" class="flex1 size28">
         </div>
 
     </div>
@@ -24,11 +24,11 @@
     <div class="safeArea"></div>
     <div class="gap130"></div>
     <div class="bottom">
-        <div class="mainBtn size28 bold6 flex jc ac" @click="openAsk">确认</div>
+        <div class="mainBtn size28 bold6 flex jc ac" @click="openAsk">{{ $t('确认') }}</div>
         <div class="safeArea"></div>
     </div>
 
-    <CusAsk v-model:show="show" :title="$t('申请实体卡')" @submit="submit">支付 199$ 申请</CusAsk>
+    <CusAsk v-model:show="show" :title="$t('申请实体卡')" @submit="submit">{{ $t('支付 199$ 申请') }}</CusAsk>
 </template>
 
 <script setup lang="ts">
@@ -47,9 +47,9 @@ const recipient_address = ref()
 const recipient_phone = ref()
 
 const openAsk = () => {
-    if(!recipient_name.value)return message(t('请选择持卡人'))
-    if(!recipient_address.value)return message(t('请输入卡号'))
-    if(!recipient_phone.value)return message(t('请输入卡号'))
+    if(!recipient_name.value)return message(t('请输入收件人姓名'))
+    if(!recipient_address.value)return message(t('请输入收件地址'))
+    if(!recipient_phone.value)return message(t('请输入收件电话'))
     show.value = true
 }
 

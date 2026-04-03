@@ -5,27 +5,27 @@
         <div class="flex jc">
             <div class="tag flex ac">
                 <img src="@/assets/user/18.png" class="img30 mr10">
-                <div class="size24">资产安全有保障</div>
+                <div class="size24">{{ $t('资产安全有保障') }}</div>
             </div>
         </div>
 
         <div class="card mt30">
-            <div class="opc5 size24 tc">总金额({{ assetUSDT }})</div>
+            <div class="opc5 size24 tc">{{ $t('总金额') }}({{ assetUSDT }})</div>
             <div class="tc bold size52 mt20" v-init="stats?.deposit_amount"></div>
             <div class="stats mt30 flex ac tc">
                 <div class="flex1">
                     <div class="size28 bold6" v-init="stats?.total_income"></div>
-                    <div class="size24 opc5 mt10">累计收益</div>
+                    <div class="size24 opc5 mt10">{{ $t('累计收益') }}</div>
                 </div>
                 <div class="line"></div>
                 <div class="flex1">
                     <div class="size28 bold6" v-init="stats?.yesterday_income"></div>
-                    <div class="size24 opc5 mt10">昨日收益</div>
+                    <div class="size24 opc5 mt10">{{ $t('昨日收益') }}</div>
                 </div>
             </div>
             <div class="pl6 pr6 mt40 flex size28 bold6">
-                <div class="btn btn1 flex jc ac" @click="routerPush('/yuebao/record')">明细</div>
-                <div class="btn btn2 flex jc ac ml20" @click="saveRef?.open()">存入</div>
+                <div class="btn btn1 flex jc ac" @click="routerPush('/yuebao/record')">{{ $t('明细') }}</div>
+                <div class="btn btn2 flex jc ac ml20" @click="saveRef?.open()">{{ $t('存入') }}</div>
             </div>
         </div>
     </div>
@@ -38,34 +38,34 @@
             <div class="cell item mb20" v-for="(item, index) in list" :key="index">
                 <div class="flex jb">
                     <div>
-                        <div class="size24 opc5">存入金额(USDT)</div>
+                        <div class="size24 opc5">{{ $t('存入金额(USDT)') }}</div>
                         <div class="size40 bold6 main mt10" v-init="item.amount"></div>
                         <div class="size24 mt10">
-                            <span>年化利率</span>
+                            <span>{{ $t('年化利率') }}</span>
                             <span class="green ml10">{{ item.annual_rate }}%</span>
                         </div>
                     </div>
                     <div class="flex col ae">
-                        <div class="mainButton btn flex jc ac" v-scale v-if="item.can_withdraw && current==0" @click="openTakeout(item.id)">取出</div>
+                        <div class="mainButton btn flex jc ac" v-scale v-if="item.can_withdraw && current==0" @click="openTakeout(item.id)">{{ $t('取出') }}</div>
                         <div class="progressBox mt30" v-if="!item.can_withdraw && current==0">
                             <CusProgress :progress="getPercent(item.released_days, item?.package?.days)"></CusProgress>
                         </div>
-                        <div class="size24 opc5 mt10">进度 {{ item.released_days }}/{{ item?.package?.days }}天</div>
+                        <div class="size24 opc5 mt10">{{ $t('进度') }} {{ item.released_days }}/{{ item?.package?.days }}{{ $t('天') }}</div>
                     </div>
                 </div>
                 <div class="flex mt40">
                     <div class="flex1">
                         <div v-init="item.total_profit"></div>
-                        <div class="mt10 size20 opc5">累计收益({{ assetUSDT }})</div>
+                        <div class="mt10 size20 opc5">{{ $t('累计收益') }}({{ assetUSDT }})</div>
                     </div>
                     <div class="flex1">
                         <div v-init="item.daily_profit"></div>
-                        <div class="mt10 size20 opc5">每日预估收益({{ assetUSDT }})</div>
+                        <div class="mt10 size20 opc5">{{ $t('每日预估收益') }}({{ assetUSDT }})</div>
                     </div>
                     <div class="flex1">
                         <div v-init="item.released_token_amount"></div>
                         <div class="mt10 size20 opc5">
-                            已释放
+                            {{ $t('已释放') }}
                             <span v-if="item.ccy=='balance_usdt'">({{ assetUSDT }})</span>    
                             <span v-else-if="item.ccy=='balance_aix'">({{ assetAIX }})</span> 
                             <span v-else>({{ assetNFTC }})</span> 
@@ -85,11 +85,11 @@
                     <van-icon size="20" name="cross" color="#8D9094" @click="showAsk=false" />
                 </div>
 
-                <div class="size26 mt50">确定要取出吗？</div>
+                <div class="size26 mt50">{{ $t('确定要取出吗？') }}</div>
 
                 <div class="mt50 flex ac bold5">
-                    <div class="mainButton btn flex jc ac main" @click="showAsk=false">取消</div>
-                    <div class="mainBtn btn ml20 flex jc ac" @click="takeOut">确认</div>
+                    <div class="mainButton btn flex jc ac main" @click="showAsk=false">{{ $t('取消') }}</div>
+                    <div class="mainBtn btn ml20 flex jc ac" @click="takeOut">{{ $t('确认') }}</div>
                 </div>
             </div>
         </div>

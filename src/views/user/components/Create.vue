@@ -13,18 +13,18 @@
                         <img src="@/assets/user/22.png" class="upload" v-else>
                     </div>
                 </div>
-                <div class="tc size28 bold6 mt30">社团头像</div>
-                <div class="size26 mt40">社团名称</div>
+                <div class="tc size28 bold6 mt30">{{ $t('社团头像') }}</div>
+                <div class="size26 mt40">{{ $t('社团名称') }}</div>
                 <div class="inp mt30 flex">
-                    <input type="text" v-model="name" placeholder="请给社团起一个名称吧！" class="flex1 size28">
+                    <input type="text" v-model="name" :placeholder="$t('请给社团起一个名称吧！')" class="flex1 size28">
                 </div>
-                <div class="size26 mt40">社团介绍</div>
+                <div class="size26 mt40">{{ $t('社团介绍') }}</div>
                 <div class="area mt30">
-                    <textarea v-model="desc" :maxlength="40" placeholder="请简单介绍一下您的社团" class="size28 areainp" />
+                    <textarea v-model="desc" :maxlength="40" :placeholder="$t('请简单介绍一下您的社团')" class="size28 areainp" />
                     <div class="tr size24 opc5">{{ desc.length }}/40</div>
                 </div>
 
-                <div class="mainButton mt40 flex jc ac size28 main bold6 btn" v-scale @click="submit">确认创建</div>
+                <div class="mainButton mt40 flex jc ac size28 main bold6 btn" v-scale @click="submit">{{ $t('确认创建') }}</div>
                 <div class="safeArea"></div>
             </div>
         </div>

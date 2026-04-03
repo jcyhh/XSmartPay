@@ -7,7 +7,7 @@
         <div class="flex ac">
             <div class="flex ac level mr20 animate__animated animate__zoomIn ani5" v-if="userInfo?.is_council">
                 <img src="@/assets/tabbar/level.png" class="img44 mr8">
-                <div class="linearTxt size20 bold">理事会</div>
+                <div class="linearTxt size20 bold">{{ $t('理事会') }}</div>
             </div>
             <img src="@/assets/common/lang.png" class="img52" @click="show=true">
         </div>
@@ -25,7 +25,7 @@
 
             <div class="flex1 flex col ac" v-for="item in tabbar" @click="routerReplace(item.path)">
                 <img :src="currentRoute==item.path ? item.iconAct : item.icon" class="img44">
-                <div class="size24 mt4" :class="currentRoute==item.path?'main':''">{{ item.name }}</div>
+                <div class="size24 mt4 tc" :class="currentRoute==item.path?'main':''">{{ item.name }}</div>
             </div>
         </div>
         <div class="safeArea"></div>
@@ -51,39 +51,62 @@ import newsIcon from '@/assets/tabbar/news.png'
 import newsActIcon from '@/assets/tabbar/newsAct.png'
 import { t } from '@/locale';
 import { routerReplace } from '@/router';
-import { useUserStore } from '@/store';
+import { useAppStore, useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
 
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
+const appStore = useAppStore()
+const { lang } = storeToRefs(appStore)
+
+const tabbarLocaleMap: Record<string, { home: string; pay: string; draw: string; forum: string; mine: string }> = {
+    zh: { home: '首页', pay: '支付', draw: '抢卡', forum: '论坛', mine: '我的' },
+    hk: { home: '首頁', pay: '支付', draw: '搶卡', forum: '論壇', mine: '我的' },
+    en: { home: 'Home', pay: 'Pay', draw: 'Card', forum: 'Forum', mine: 'Me' },
+    ko: { home: '홈', pay: '결제', draw: '카드', forum: '포럼', mine: '내정보' },
+    ja: { home: 'ホーム', pay: '決済', draw: 'カード', forum: '掲示板', mine: 'マイ' },
+    ru: { home: 'Дом', pay: 'Оплата', draw: 'Карта', forum: 'Форум', mine: 'Мой' },
+    ma: { home: 'Utama', pay: 'Bayar', draw: 'Kad', forum: 'Forum', mine: 'Saya' },
+    id: { home: 'Home', pay: 'Bayar', draw: 'Kartu', forum: 'Forum', mine: 'Saya' },
+    vi: { home: 'Home', pay: 'Pay', draw: 'Thẻ', forum: 'Forum', mine: 'Tôi' },
+    hi: { home: 'होम', pay: 'पे', draw: 'कार्ड', forum: 'फोरम', mine: 'मेरी' }
+}
+
+const tabbarText = computed(() => tabbarLocaleMap[lang.value] || {
+    home: t('首页'),
+    pay: t('全球付'),
+    draw: t('抢卡'),
+    forum: t('论坛'),
+    mine: t('我的')
+})
 
 const tabbar = computed(()=>([
     {
-        name: t('首页'),
+        name: tabbarText.value.home,
         icon: homeIcon,
         iconAct: homeActIcon,
         path: '/home/index'
     },
     {
-        name: t('全球付'),
+        name: tabbarText.value.pay,
         icon: payIcon,
         iconAct: payActIcon,
         path: '/pay/index'
     },
     {
-        name: t('抢卡'),
+        name: tabbarText.value.draw,
         icon: cardIcon,
         iconAct: cardActIcon,
         path: '/draw/index'
     },
     {
-        name: t('论坛'),
+        name: tabbarText.value.forum,
         icon: newsIcon,
         iconAct: newsActIcon,
         path: '/news/index'
     },
     {
-        name: t('我的'),
+        name: tabbarText.value.mine,
         icon: userIcon,
         iconAct: userActIcon,
         path: '/user/index'
@@ -166,5 +189,12 @@ const currentRoute = computed(()=> route.fullPath)
     .bar{
         height: 100px;
     }
+}
+.tc{
+    max-width: 100%;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>

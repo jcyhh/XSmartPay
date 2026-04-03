@@ -1,7 +1,7 @@
 <template>
     <div class="flex jb ac mb30">
-        <div class="size28">社区成员</div>
-        <div class="size24 opc5" @click="show=!show" v-if="isLeader">{{ show ? '取消' : '管理' }}</div>
+        <div class="size28">{{ $t('社区成员') }}</div>
+        <div class="size24 opc5" @click="show=!show" v-if="isLeader">{{ show ? $t('取消') : $t('管理') }}</div>
     </div>
 
     <van-list v-bind="listProps">
@@ -13,20 +13,20 @@
                         <img src="@/assets/user/31.png" class="img32 mr10" v-else>
                     </div>
                     <div class="size28 bold5">{{ item.email || item.address }}</div>
-                    <div class="tag flex ac mainBtn ml20" v-if="leaderId==item.user_id">社区ceo</div>
+                    <div class="tag flex ac mainBtn ml20" v-if="leaderId==item.user_id">{{ $t('社区CEO') }}</div>
                 </div>
                 <div class="size28 bold main" v-init="item.kpi"></div>
             </div>
             <div class="flex jb mt20 size24 opc5">
                 <div>{{ item.joined_at }}</div>
-                <div>今日推荐业绩</div>
+                <div>{{ $t('今日推荐业绩') }}</div>
             </div>
         </div>
         <CusEmpty v-if="list?.length == 0"></CusEmpty>
     </van-list>
 
     <div class="gap60"></div>
-    <div class="delbtn flex jc ac size28 bold6 animate__animated animate__slideInUp" v-if="show" @click="submit">踢出社区</div>
+    <div class="delbtn flex jc ac size28 bold6 animate__animated animate__slideInUp" v-if="show" @click="submit">{{ $t('踢出社区') }}</div>
 </template>
 
 <script setup lang="ts">

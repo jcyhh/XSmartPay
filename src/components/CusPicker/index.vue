@@ -9,7 +9,9 @@
                 <div v-if="list.length==0">
                     <CusEmpty></CusEmpty>
                     <div class="mt60">
-                        <slot name="empty"></slot>
+                        <slot name="empty-action">
+                            <slot></slot>
+                        </slot>
                     </div>
                 </div>
                 <div v-else>

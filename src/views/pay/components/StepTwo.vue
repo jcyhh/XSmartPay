@@ -18,8 +18,8 @@
         </div>
 
         <div class="flex mt80 size28 bold6">
-            <div class="flex1 lineBtn flex jc ac" @click="submitPrev">上一步</div>
-            <div class="flex1 mainBtn flex jc ac ml20" @click="submit">下一步</div>
+            <div class="flex1 lineBtn flex jc ac" @click="submitPrev">{{ $t('上一步') }}</div>
+            <div class="flex1 mainBtn flex jc ac ml20" @click="submit">{{ $t('下一步') }}</div>
         </div>
 
     </div>

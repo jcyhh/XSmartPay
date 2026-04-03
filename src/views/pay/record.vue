@@ -6,20 +6,20 @@
         
                 <div class="cell card mb24" v-for="(item,index) in list" :key="index" @click="routerPush(`/pay/record/${item.id}`)">
                     <div class="flex jb ac">
-                        <div class="size28 bold6">订单号 {{ item.order_no || '--' }}</div>
+                        <div class="size28 bold6">{{ $t('订单号') }} {{ item.order_no || '--' }}</div>
                         <div class="size28 bold6 green" v-if="item.status==40">{{ item.status_text }}</div>
                         <div class="size28 bold6 red" v-else-if="item.status==20">{{ item.status_text }}</div>
                         <div class="size28 bold6 main" v-else>{{ item.status_text }}</div>
                     </div>
                     <div class="flex jb ac mt30">
-                        <div class="size24 opc5 mr10">支付金额</div>
+                        <div class="size24 opc5 mr10">{{ $t('支付金额') }}</div>
                         <div class="size24 bold5">
                             <span v-init="item.paid_amount"></span>
                             <span class="ml5">{{ item.paid_currency }}</span>
                         </div>
                     </div>
                     <div class="flex jb ac mt20">
-                        <div class="size24 opc5 mr10">到账金额</div>
+                        <div class="size24 opc5 mr10">{{ $t('到账金额') }}</div>
                         <div class="size24 bold5">
                             <span v-init="item.received_amount"></span>
                             <span class="ml5">{{ item.received_currency }}</span>
@@ -29,7 +29,7 @@
                     <div class="flex jb ac mt20">
                         <div class="size24 opc5 mr10">{{ item.created_at }}</div>
                         <div class="size24 bold5 flex ac opc5">
-                            <div>查看详情</div>
+                            <div>{{ $t('查看详情') }}</div>
                             <van-icon name="arrow" />
                         </div>
                     </div>

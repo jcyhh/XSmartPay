@@ -8,28 +8,28 @@
                 </div>
 
                 <div class="flex jb ac mt60">
-                    <div class="size28 bold5">选择卡</div>
+                    <div class="size28 bold5">{{ $t('选择卡') }}</div>
                 </div>
 
                 <div class="inp flex jb ac mt20 size28" @click="pickerShow=true">
                     <div v-if="currentPicker">{{ currentPicker.card_number }}</div>
-                    <div class="gray" v-else>请选择卡</div>
+                    <div class="gray" v-else>{{ $t('请选择卡') }}</div>
                     <div class="gray">
                         <van-icon name="arrow" />
                     </div>
                 </div>
 
-                <div class="size28 bold5 mt30">新交易密码</div>
+                <div class="size28 bold5 mt30">{{ $t('新交易密码') }}</div>
                 <div class="inp flex jb ac mt20 size28">
-                    <input type="password" v-model="password" placeholder="请输入交易密码" class="flex1">
+                    <input type="password" v-model="password" :placeholder="$t('请输入交易密码')" class="flex1">
                 </div>
 
-                <div class="size28 bold5 mt30">确认密码</div>
+                <div class="size28 bold5 mt30">{{ $t('确认密码') }}</div>
                 <div class="inp flex jb ac mt20 size28">
-                    <input type="password" v-model="password1" placeholder="请再次输入新交易密码" class="flex1">
+                    <input type="password" v-model="password1" :placeholder="$t('请再次输入新交易密码')" class="flex1">
                 </div>
 
-                <div class="mainBtn mt100 flex jc ac size28 main bold6 btn" @click="submit">确认</div>
+                <div class="mainBtn mt100 flex jc ac size28 main bold6 btn" @click="submit">{{ $t('确认') }}</div>
 
                 <div class="safeArea"></div>
             </div>

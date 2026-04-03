@@ -22,6 +22,10 @@
         </div>
 
         <div class="mainBtn mt60 flex jc ac size28 bold5" @click="submit">{{ $t('注册') }}</div>
+
+        <div class="flex jc mt20">
+            <div class="size24 main" @click="download">{{ $t('已注册？下载APP') }}</div>
+        </div>
     </div>
 </template>
 
@@ -34,7 +38,7 @@ import { apiRegister } from '@/api/login';
 import { message } from '@/utils/message';
 import { t } from '@/locale';
 import { apiVersion } from '@/api/user';
-import { openLink } from '@/utils';
+import { isIOS, openLink } from '@/utils';
 
 const props = defineProps(['type'])
 
@@ -51,10 +55,17 @@ if(storage)refCode.value = storage
 
 const download_url = ref()
 const loadData = async () => {
-    const res:any = await apiVersion()
+    const res:any = await apiVersion({
+        version: '1.0.0',
+        device: isIOS() ? 'ios' : 'android'
+    })
     download_url.value = res.download_url
 }
 loadData()
+
+const download = () => {
+    openLink(download_url.value)
+}
 
 const submit = async () => {
     if(!email.value)return message(t('请输入邮箱'))
@@ -71,7 +82,7 @@ const submit = async () => {
     setAccount(email.value)
     message(t('注册成功'), 'success')
     if(props?.type){
-        openLink(download_url.value)
+        download()
     }else{
         emits('change')
     }

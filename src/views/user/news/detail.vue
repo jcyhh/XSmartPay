@@ -5,16 +5,16 @@
         <div class="mainCard">
             <div class="size40 main lh60">{{ info?.title }}</div>
             <div class="flex jb ac mt30">
-                <div class="size24">来自 {{ info?.email || info?.address }}</div>
+                <div class="size24">{{ $t('来自') }} {{ info?.email || info?.address }}</div>
                 <div class="size24 opc5">{{ info?.created_at }}</div>
             </div>
             <div class="flex jb ac mt12">
                 <div class="flex ac">
                     <img src="@/assets/user/20.png" class="img34 mr6">
                     <div class="size20 opc5 mr10">{{ info?.community_name }}</div>
-                    <div class="size20 main">NO.{{ info?.community_rank }}</div>
+                    <div class="size20 main">{{ $t('NO.') }}{{ info?.community_rank }}</div>
                 </div>
-                <div class="size24 opc5">发布时间</div>
+                <div class="size24 opc5">{{ $t('发布时间') }}</div>
             </div>
             <div class="line mt40 mb40"></div>
             <div class="size26 lh40">{{ info?.content }}</div>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="size30 mt40 mb26">
-            <span class="bold">评论</span>
+            <span class="bold">{{ $t('评论') }}</span>
             <span class="size24 ml5">({{ info?.comment_count }})</span>
         </div>
 
@@ -40,7 +40,7 @@
     <div class="bottom">
         <div class="bottomBox flex jb ac">
             <div class="bottomSearch flex ac" @click="show=true">
-                <div class="size28 opc5">说点什么</div>
+                <div class="size28 opc5">{{ $t('说点什么') }}</div>
             </div>
         </div>
         <div class="safeArea"></div>

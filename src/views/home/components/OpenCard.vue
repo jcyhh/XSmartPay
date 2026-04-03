@@ -8,31 +8,31 @@
                 </div>
 
                 <div class="mt40 size48 bold" v-init="cardInfo?.price"></div>
-                <div class="size24 mt20 opc5">开卡金额({{ assetUSDT }})</div>
+                <div class="size24 mt20 opc5">{{ $t('开卡金额') }}({{ assetUSDT }})</div>
                 <div class="flex jb ac mt30">
                     <div class="size24">
-                        <span class="opc5">可用余额</span>
+                        <span class="opc5">{{ $t('可用余额') }}</span>
                         <span class="main ml10" v-init="userInfo?.balance_usdt"></span>
                         <span class="main ml5">{{ assetUSDT }}</span>
                     </div>
                     <div class="flex ac">
-                        <div class="size24 opc5">卡币种</div>
+                        <div class="size24 opc5">{{ $t('卡币种') }}</div>
                         <div class="tag flex ac ml10">
                             <img src="@/assets/common/usd.png" class="img28 mr10">
                             <div class="size20 bold6">{{ assetUSD }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="size28 bold5 mt30">持卡人</div>
+                <div class="size28 bold5 mt30">{{ $t('持卡人') }}</div>
                 <div class="inp flex jb ac mt20 size28" @click="pickerShow=true">
                     <div v-if="currentPicker">{{ currentPicker.first_name }} {{ currentPicker.last_name }}({{ currentPicker.country_code }})</div>
-                    <div class="gray" v-else>请选择持卡人</div>
+                    <div class="gray" v-else>{{ $t('请选择持卡人') }}</div>
                     <div class="gray">
                         <van-icon name="arrow" />
                     </div>
                 </div>
 
-                <div class="size28 bold5 mt30">首充金额</div>
+                <div class="size28 bold5 mt30">{{ $t('首充金额') }}</div>
                 <div class="inp flex jb ac mt20 size28">
                     <div class="flex1" v-init="1"></div>
                     <div class="line"></div>
@@ -40,7 +40,7 @@
                     <div class="size20 ml6">{{ assetUSDT }}</div>
                 </div>
 
-                <div class="size28 bold5 mt30">到账金额</div>
+                <div class="size28 bold5 mt30">{{ $t('到账金额') }}</div>
                 <div class="inp flex jb ac mt20 size28">
                     <div class="flex1" v-init="1"></div>
                     <div class="line"></div>
@@ -48,7 +48,7 @@
                     <div class="size20 ml6">{{ assetUSD }}</div>
                 </div>
 
-                <div class="mainBtn mt100 flex jc ac size28 main bold6 btn" @click="submit">确认开卡</div>
+                <div class="mainBtn mt100 flex jc ac size28 main bold6 btn" @click="submit">{{ $t('确认开卡') }}</div>
 
                 <div class="safeArea"></div>
                 
@@ -60,8 +60,8 @@
         <template v-slot="{ item }">
             <span class="bold5">{{ item.first_name }} {{ item.last_name }}({{ item.country_code }})</span>
         </template>
-        <template #empty>
-            <div class="mainBtn flex jc ac bold5 size30" @click="routerPush('/cardholder/add')">添加持卡人</div>
+        <template #empty-action>
+            <div class="mainBtn flex jc ac bold5 size30" @click="routerPush('/cardholder/add')">{{ $t('添加持卡人') }}</div>
         </template>
     </CusPicker>
 </template>

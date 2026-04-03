@@ -1,11 +1,11 @@
 <template>
     <CusNav :title="$t('提现')">
-        <div class="tr size26" @click="routerPush('/user/withdraw/record')">记录</div>
+        <div class="tr size26" @click="routerPush('/user/withdraw/record')">{{ $t('记录') }}</div>
     </CusNav>
     <div class="pl30 pr30 pt30 rel">
         
         <div class="cell card mb20 flex jb ac" @click="pickerShow=true">
-            <div class="size28 main">币种</div>
+            <div class="size28 main">{{ $t('币种') }}</div>
             <div class="size28 bold6 flex ac">
                 <img :src="currentPicker.icon" class="img48 mr10">
                 <div class="mr10">{{ currentPicker.name }}</div>
@@ -16,16 +16,16 @@
         </div>
 
         <div class="mt30">
-            <div class="size28 bold6">提现地址</div>
+            <div class="size28 bold6">{{ $t('提现地址') }}</div>
             <div class="cell card mb20 flex jb ac mt20">
-                <input type="text" v-model="address" placeholder="请输入提现地址" class="flex1 size28">
+                <input type="text" v-model="address" :placeholder="$t('请输入提现地址')" class="flex1 size28">
             </div>
         </div>
 
         <div class="flex jb ac mt30">
-            <div class="size28 bold6">提现金额</div>
+            <div class="size28 bold6">{{ $t('提现金额') }}</div>
             <div class="size24">
-                <span class="opc5 mr10">可用余额</span>
+                <span class="opc5 mr10">{{ $t('可用余额') }}</span>
                 <span class="main mr5">
                     <span v-if="pickerCurrent==0" v-init="userInfo?.balance_usdt"></span>
                     <span v-else-if="pickerCurrent==1" v-init="userInfo?.balance_aix"></span>
@@ -35,19 +35,19 @@
             </div>
         </div>
         <div class="cell card mb20 flex jb ac mt20">
-            <input type="number" v-model="inputAmount" placeholder="请输入提现金额" class="flex1 size28">
-            <div class="bold6" @click="inputAll">全部</div>
+            <input type="number" v-model="inputAmount" :placeholder="$t('请输入提现金额')" class="flex1 size28">
+            <div class="bold6" @click="inputAll">{{ $t('全部') }}</div>
         </div>
 
-        <div class="size28 bold6 mt30">支付密码</div>
+        <div class="size28 bold6 mt30">{{ $t('支付密码') }}</div>
         <div class="cell card mb20 flex jb ac mt20">
-            <input type="password" v-model="pay_password" placeholder="请输入支付密码" class="flex1 size28">
+            <input type="password" v-model="pay_password" :placeholder="$t('请输入支付密码')" class="flex1 size28">
         </div>
 
         <div class="flex jb ac mt30">
-            <div class="size28 bold6">到账金额</div>
+            <div class="size28 bold6">{{ $t('到账金额') }}</div>
             <div class="size24">
-                <span class="opc5 mr10">手续费</span>
+                <span class="opc5 mr10">{{ $t('手续费') }}</span>
                 <span class="main">{{ fee }}%</span>
             </div>
         </div>
@@ -61,7 +61,7 @@
     <div class="safeArea"></div>
     <div class="gap130"></div>
     <div class="bottom">
-        <div class="mainBtn size28 bold6 flex jc ac" @click="submit">确认</div>
+        <div class="mainBtn size28 bold6 flex jc ac" @click="submit">{{ $t('确认') }}</div>
         <div class="safeArea"></div>
     </div>
 

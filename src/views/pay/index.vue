@@ -11,12 +11,12 @@
             <div class="title size80 bold">{{ $t('全球付') }}</div>
         </div>
         <div class="size24 lh40 tc mt20">
-            <div>一卡连通世界，支付随心而行</div>
-            <div>全球付让每一笔交易都安全便捷</div>
+            <div>{{ $t('一卡连通世界，支付随心而行') }}</div>
+            <div>{{ $t('全球付让每一笔交易都安全便捷') }}</div>
         </div>
         <div class="search mt80 flex ac" @click="routerPush('/pay/remittance')">
             <img src="@/assets/pay/1.png" class="img32 mr16">
-            <div class="gray size28">请输入</div>
+            <div class="gray size28">{{ $t('请输入') }}</div>
         </div>
         <div class="gap20"></div>
         
@@ -28,9 +28,9 @@
         </div>
 
         <div class="flex ac mt80 size28 bold6 main">
-            <div class="flex1 mainButton btn flex jc ac" v-scale @click="routerPush('/pay/remittance')">全球付</div>
-            <div class="flex1 mainButton btn flex jc ac ml15 mr15" v-scale @click="routerPush('/physical')">实体卡</div>
-            <div class="flex1 mainButton btn flex jc ac" v-scale @click="routerPush('/virtual')">虚拟卡</div>
+            <div class="flex1 mainButton btn flex jc ac" v-scale @click="routerPush('/pay/remittance')">{{ $t('全球付') }}</div>
+            <div class="flex1 mainButton btn flex jc ac ml15 mr15" v-scale @click="routerPush('/physical')">{{ $t('实体卡') }}</div>
+            <div class="flex1 mainButton btn flex jc ac" v-scale @click="routerPush('/virtual')">{{ $t('虚拟卡') }}</div>
         </div>
 
     </div>

@@ -5,7 +5,7 @@
             <div class="size28 bold6">{{ assetAIX }}</div>
         </div>
         <div class="flex ac">
-            <div class="size28 opc5 mr10">余额</div>
+            <div class="size28 opc5 mr10">{{ $t('余额') }}</div>
             <div class="size28 main mr10 bold5" v-init="userInfo?.balance_aix"></div>
             <img src="@/assets/user/30.png" class="img32 animate__animated animate__zoomIn ani3" v-if="paytype == 'balance_aix'">
             <img src="@/assets/user/31.png" class="img32" v-else>
@@ -18,7 +18,7 @@
             <div class="size28 bold6">{{ assetNFTC }}</div>
         </div>
         <div class="flex ac">
-            <div class="size28 opc5 mr10">余额</div>
+            <div class="size28 opc5 mr10">{{ $t('余额') }}</div>
             <div class="size28 main mr10 bold5" v-init="userInfo?.balance_nftc"></div>
             <img src="@/assets/user/30.png" class="img32 animate__animated animate__zoomIn ani3" v-if="paytype == 'balance_nftc'">
             <img src="@/assets/user/31.png" class="img32" v-else>

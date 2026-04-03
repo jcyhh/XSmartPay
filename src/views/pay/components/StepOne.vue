@@ -4,21 +4,21 @@
         <van-loading />
     </div>
     <div v-else>
-        <div class="size26 bold5">收款国家/地区</div>
+        <div class="size26 bold5">{{ $t('收款国家/地区') }}</div>
         <div class="cell mt20 flex jb ac size28" @click="pickerShow=true">
             <div v-if="currentPicker">{{ currentPicker.NameCn }} ({{ currentPicker.CurrencyCode }})</div>
-            <div class="opc5" v-else>请选择</div>
+            <div class="opc5" v-else>{{ $t('请选择') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
-        <div class="mt30 size26 bold5">汇款通道</div>
+        <div class="mt30 size26 bold5">{{ $t('汇款通道') }}</div>
         <div class="cell mt20 flex jb ac size28" @click="pickerChannelShow=true">
             <div v-if="currentPickerChannel">{{ currentPickerChannel.Name }}</div>
-            <div class="opc5" v-else>请选择</div>
+            <div class="opc5" v-else>{{ $t('请选择') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
-        <div class="mt30 size26 bold5">汇款金额</div>
+        <div class="mt30 size26 bold5">{{ $t('汇款金额') }}</div>
         <div class="cell mt20 flex jb ac size28">
             <input type="number" v-model="inputAmount" placeholder="0.00" class="flex1">
             <div class="line ml26 mr26"></div>
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="mainBtn flex jc ac mt80 size28 bold6" @click="submit">下一步</div>
+        <div class="mainBtn flex jc ac mt80 size28 bold6" @click="submit">{{ $t('下一步') }}</div>
     </div>
 
     <CusPicker v-model:show="pickerShow" :list="pickerList" :title="$t('请选择')" :default-index="pickerCurrent" @change="onPickerChange">

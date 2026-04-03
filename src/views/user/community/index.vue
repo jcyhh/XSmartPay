@@ -5,7 +5,7 @@
         <van-list class="fullPage" v-bind="listProps">
             <div class="pl30 pr30 pt30 rel">
                 <div class="box">
-                    <CusTitle title="全网社区排行榜"></CusTitle>
+                    <CusTitle :title="$t('全网社区排行榜')"></CusTitle>
                     <div class="pl20 pr20 mt35">
                         <div class="pt15 pb15 flex jb ac" v-for="(item,index) in rankList" :key="index">
                             <div class="flex ac">
@@ -24,7 +24,7 @@
 
                     <div class="mainButton mt30 flex jc ac size26 bold6 btn" v-scale @click="routerPush('/community/rank')">
                         <img src="@/assets/user/29.png" class="img36 mr10">
-                        <div>查看全部排行榜</div>
+                        <div>{{ $t('查看全部排行榜') }}</div>
                     </div>
                 </div>
                 <div class="cell card mb20 mt30" v-for="(item, index) in list" :key="index">
@@ -35,7 +35,7 @@
                                 <div class="size28 bold6 main">{{ item.name }}</div>
                                 <div class="size24 bold6">{{ item.member_count }}/{{ item.community_max_num }}</div>
                             </div>
-                            <div class="size24 opc5 mt10">创建人 {{ item.email || item.address }}</div>
+                            <div class="size24 opc5 mt10">{{ $t('创建人') }} {{ item.email || item.address }}</div>
                         </div>
                     </div>
                     <div class="line mt24 mb20"></div>
@@ -44,7 +44,7 @@
                             <img src="@/assets/user/21.png" class="img26 mr10">
                             <div class="size24 opc5 line1 desc">{{ item.desc }}</div>
                         </div>
-                        <div class="mainButton btn flex ac main" v-scale @click="openAsk(item)">申请加入</div>
+                        <div class="mainButton btn flex ac main" v-scale @click="openAsk(item)">{{ $t('申请加入') }}</div>
                     </div>
                 </div>
                 <CusEmpty v-if="list?.length == 0"></CusEmpty>
@@ -52,7 +52,7 @@
         </van-list>
     </van-pull-refresh>
 
-    <CusAsk v-model:show="show" @submit="submit">确定要申请加入 "{{ currentData?.name }}" 吗？</CusAsk>
+    <CusAsk v-model:show="show" @submit="submit">{{ $t('确定要申请加入 {name} 吗？', { name: currentData?.name || '' }) }}</CusAsk>
 </template>
 
 <script setup lang="ts">

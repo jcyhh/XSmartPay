@@ -12,7 +12,7 @@
                     </div>
                     <div class="flex jb ac mt10">
                         <div class="size24 opc5">{{ item.country }}({{ item.country_code }})</div>
-                        <div class="mainButton btn flex ac main" @click="routerPush(`/cardholder/${item.id}`)">查看详情</div>
+                        <div class="mainButton btn flex ac main" @click="routerPush(`/cardholder/${item.id}`)">{{ $t('查看详情') }}</div>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
     <div class="safeArea"></div>
     <div class="gap130"></div>
     <div class="bottom">
-        <div class="mainBtn size28 bold6 flex jc ac" @click="routerPush('/cardholder/add')">添加持卡人</div>
+        <div class="mainBtn size28 bold6 flex jc ac" @click="routerPush('/cardholder/add')">{{ $t('添加持卡人') }}</div>
         <div class="safeArea"></div>
     </div>
 

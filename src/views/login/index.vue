@@ -7,15 +7,15 @@
 
     <div class="pl30 pr30 rel">
 
-        <div class="size52 bold main">登录</div>
+        <div class="size52 bold main">{{ $t('登录') }}</div>
 
         <div class="flex tab size32">
             <div class="tabItem flex col ac" @click="current=0">
-                <div class="mb10 ani" :class="current==0?'':'grey'">邮箱登录</div>
+                <div class="mb10 ani" :class="current==0?'':'grey'">{{ $t('邮箱登录') }}</div>
                 <div class="tabLine animate__animated animate__zoomIn ani5" v-if="current==0"></div>
             </div>
             <div class="tabItem flex col ac" @click="current=1">
-                <div class="mb10 ani" :class="current==1?'':'grey'">邮箱注册</div>
+                <div class="mb10 ani" :class="current==1?'':'grey'">{{ $t('邮箱注册') }}</div>
                 <div class="tabLine animate__animated animate__zoomIn ani5" v-if="current==1"></div>
             </div>
         </div>

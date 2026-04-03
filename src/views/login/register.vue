@@ -7,7 +7,7 @@
 
     <div class="pl30 pr30 rel">
 
-        <div class="size52 bold main mb60">注册</div>
+        <div class="size52 bold main mb60">{{ $t('注册') }}</div>
 
         <Register type="1"></Register>
 
