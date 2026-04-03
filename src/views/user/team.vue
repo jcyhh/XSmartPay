@@ -6,7 +6,7 @@
         <div class="flex jb ac">
             <div class="size24 gray">{{ $t('我的邮箱') }}</div>
             <div class="flex ac tag">
-                <img :src="userInfo?.level.icon" class="img24">
+                <img :src="userInfo?.level.icon" class="levelicon">
                 <div class="size24 bold6 ml10">{{ userInfo?.level.name }}</div>
             </div>
         </div>
@@ -113,7 +113,7 @@
                 <div class="flex jb ac mt20">
                     <div class="size24 opc5 bold5">{{ item.created_at }}</div>
                     <div class="flex ac tag">
-                        <img :src="item?.level?.icon" class="img24">
+                        <img :src="item?.level?.icon" class="levelicon">
                         <div class="size24 bold6 ml10">{{ item?.level?.name }}</div>
                     </div>
                 </div>
@@ -177,5 +177,9 @@ loadList()
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+}
+.levelicon{
+    height: 24px;
+    width: auto;
 }
 </style>
