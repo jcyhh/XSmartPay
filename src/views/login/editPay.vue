@@ -34,7 +34,7 @@ const submit = async () => {
     if(!o_password.value)return message(t('请输入旧密码'))
     if(!n_password.value)return message(t('请输入新密码'))
     if(!passwordAgain.value)return message(t('请再次输入新密码'))
-    if(o_password.value != n_password.value)return message(t('新密码输入不一致'))
+    if(n_password.value != passwordAgain.value)return message(t('新密码输入不一致'))
 
     await apiEditPassword({
         o_password: o_password.value,
