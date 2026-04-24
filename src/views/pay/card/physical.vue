@@ -77,7 +77,7 @@
                     <div class="size28 ml10">{{ show ? (currentCard.cvv || '***') : '***' }}</div>
                 </div>
 
-                <div class="flex ac">
+                <div class="flex ac" v-if="currentCard.card_status == 'ACTIVE'">
                     <div class="size30 bold main" @click="routerPush(`/setcard/${currentCard?.id}`)">{{ currentCard?.complete_card_number ? t('编辑') : t('绑定') }}</div>
                     <img src="@/assets/card/8.png" class="img36 ml5">
                 </div>
