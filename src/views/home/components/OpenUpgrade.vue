@@ -10,12 +10,11 @@
                 <div class="mt100 size48 bold tc" v-init="diff"></div>
                 <div class="size24 mt20 opc5 tc">升级补差金额({{ assetUSDT }})</div>
                 
-                <div class="tc mt200 mb20 size24">
-                    <span class="opc5 mr10">可用余额</span>
-                    <span class="main bold5" v-init="userInfo?.balance_usdt"></span>
-                    <span class="main bold5">{{ assetUSDT }}</span>
-                </div>
-                <div class="mainBtn flex jc ac size28 main bold6 btn" @click="submit">确认升级</div>
+
+                <div class="size28 bold6 mt100 mb30">{{ $t('支付方式') }}</div>
+                <CusPaytype v-model:paytype="paytype"></CusPaytype>
+
+                <div class="mainBtn flex jc ac size28 main bold6 btn mt50" @click="submit">确认升级</div>
 
                 <div class="safeArea"></div>
                 
@@ -33,11 +32,14 @@ import { computedSub } from '@/utils';
 import { apiUpgradeVirtualCard } from '@/api/card';
 import { message } from '@/utils/message';
 import { t } from '@/locale';
+import CusPaytype from '@/components/CusPaytype/pay.vue'
 
 const emits = defineEmits(['success'])
 
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
+
+const paytype = ref('balance_usdt')
 
 const show = ref(false)
 

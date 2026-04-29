@@ -46,8 +46,17 @@ const getDefaultKefuPosition = () => {
     }
     return {
         left: Math.max(window.innerWidth - 80, 0),
-        top: Math.max(window.innerHeight - 80, 0)
+        top: Math.max(window.innerHeight - 150, 0)
     }
+}
+
+const getKefuSnapEdgeLeft = (side: 'left' | 'right') => {
+    if (typeof window === 'undefined') return 0
+    const width = kefu.value?.offsetWidth || 100
+    const rightSnapLeft = getDefaultKefuPosition().left
+    const visibleWidth = window.innerWidth - rightSnapLeft
+    const leftSnapLeft = visibleWidth - width
+    return side === 'left' ? leftSnapLeft : rightSnapLeft
 }
 
 const defaultKefuPosition = getDefaultKefuPosition()
@@ -82,6 +91,17 @@ const clampKefuPosition = (left: number, top: number) => {
     }
 }
 
+const snapKefuToEdge = (left: number, top: number) => {
+    const position = clampKefuPosition(left, top)
+    const centerX = window.innerWidth / 2
+    const currentCenterX = position.left + (kefu.value?.offsetWidth || 100) / 2
+    const snapLeft = currentCenterX <= centerX ? getKefuSnapEdgeLeft('left') : getKefuSnapEdgeLeft('right')
+    return {
+        left: snapLeft,
+        top: position.top
+    }
+}
+
 const kefuStyle = computed(() => ({
     left: `${kefuLeft.value}px`,
     top: `${kefuTop.value}px`,
@@ -109,6 +129,9 @@ const onKefuTouchMove = (event: TouchEvent) => {
 
 const onKefuTouchEnd = () => {
     kefuDragging.value = false
+    const position = snapKefuToEdge(kefuLeft.value, kefuTop.value)
+    kefuLeft.value = position.left
+    kefuTop.value = position.top
 }
 
 // 检测钱包环境
@@ -162,9 +185,8 @@ const init = async () => {
 }
 
 onMounted(() => {
-    const position = clampKefuPosition(window.innerWidth - 80, window.innerHeight - 80)
-    kefuLeft.value = position.left
-    kefuTop.value = position.top
+    kefuLeft.value = getKefuSnapEdgeLeft('right')
+    kefuTop.value = Math.max(window.innerHeight - 150, 0)
     kefuReady.value = true
 })
 
@@ -176,7 +198,7 @@ if(isH5.value)init()
 	width: 100px;
 	height: 100px;
 	position: fixed;
-	z-index: 9999;
+	z-index: 100;
 	touch-action: none;
 	user-select: none;
 }

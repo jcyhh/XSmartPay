@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    copy: typeof import('./src/components/CusPaytype/index copy.vue')['default']
     CusAsk: typeof import('./src/components/CusAsk/index.vue')['default']
     CusEmpty: typeof import('./src/components/CusEmpty/index.vue')['default']
     CusLang: typeof import('./src/components/CusLang/index.vue')['default']
@@ -20,6 +21,7 @@ declare module 'vue' {
     CusSms: typeof import('./src/components/CusSms/index.vue')['default']
     CusTab: typeof import('./src/components/CusTab/index.vue')['default']
     CusTitle: typeof import('./src/components/CusTitle/index.vue')['default']
+    Pay: typeof import('./src/components/CusPaytype/pay.vue')['default']
     QRCode: typeof import('vue-amazing-ui')['QRCode']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

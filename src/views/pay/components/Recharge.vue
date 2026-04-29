@@ -9,11 +9,6 @@
 
                 <div class="flex jb ac mt60">
                     <div class="size28 bold5">{{ $t('选择卡') }}</div>
-                    <div class="size24">
-                        <span class="opc5">{{ $t('可用余额') }}</span>
-                        <span class="bold5 main ml10" v-init="userInfo?.balance_usdt"></span>
-                        <span class="bold5 main ml5">{{ assetUSDT }}</span>
-                    </div>
                 </div>
 
                 <div class="inp flex jb ac mt20 size28" @click="pickerShow=true">
@@ -40,6 +35,9 @@
                     <div class="size20 ml6">{{ assetUSD }}</div>
                 </div>
 
+                <div class="size28 bold6 mt30 mb30">{{ $t('支付方式') }}</div>
+                <CusPaytype v-model:paytype="paytype"></CusPaytype>
+
                 <div class="mainBtn mt100 flex jc ac size28 main bold6 btn" @click="submit">{{ $t('确认') }}</div>
 
                 <div class="safeArea"></div>
@@ -64,6 +62,7 @@ import { storeToRefs } from 'pinia';
 import { message } from '@/utils/message';
 import { t } from '@/locale';
 import { apiRecharge } from '@/api/card';
+import CusPaytype from '@/components/CusPaytype/pay.vue'
 
 const emits = defineEmits(['success'])
 
@@ -71,6 +70,8 @@ const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 
 const { pickerShow, pickerList, currentPicker, pickerCurrent, loadPickerList } = useCard()
+
+const paytype = ref('balance_usdt')
 
 const show = ref(false)
 

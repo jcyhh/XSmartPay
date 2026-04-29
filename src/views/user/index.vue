@@ -6,13 +6,13 @@
             <div class="flex ac">
                 <img src="@/assets/user/1.png" class="img110 mr24">
                 <div v-if="isH5">
-                    <div class="size32 bold mt20" v-init:address="userInfo?.address"></div>
+                    <div class="size32 bold" v-init:address="userInfo?.address"></div>
                     <div class="flex mt20" v-if="!userInfo?.email">
                         <div class="mainButton flex jc ac bindTag" @click="routerPush('/bindEmail')">{{ $t('绑定邮箱') }}</div>
                     </div>
                 </div>
                 <div v-else>
-                    <div class="size32 bold mt20" v-init:address="userInfo?.email"></div>
+                    <div class="size32 bold" v-init:address="userInfo?.email"></div>
                     <div class="flex mt20" v-if="!userInfo?.address">
                         <div class="mainButton flex jc ac bindTag" @click="routerPush('/bindAddress')">{{ $t('绑定钱包') }}</div>
                     </div>
@@ -33,6 +33,21 @@
             <div class="bannerBox">
                 <Banner></Banner>
             </div>
+        </div>
+
+        <div class="cell mt30" @click="show=true">
+            <div class="gap10"></div>
+            <div class="flex jb ac pl10 pr10">
+                <div class="flex ac">
+                    <img src="@/assets/user/40.png" class="img30 mr20">
+                    <div class="size28">理财档位</div>
+                </div>
+                <div class="main flex ac">
+                    <div class="size28 main mr10">基础档</div>
+                    <van-icon name="arrow" />
+                </div>
+            </div>
+            <div class="gap10"></div>
         </div>
 
         <div class="mainCard mt30" @click="routerPush('/user/asset')">
@@ -138,6 +153,8 @@
     </div>
 
     <div class="gap40"></div>
+
+    <Popup v-model:show="show"></Popup>
 </template>
 
 <script setup lang="ts">
@@ -146,6 +163,8 @@ import Banner from './components/Banner.vue';
 import { routerPush } from '@/router';
 import { useAppStore, useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
+import Popup from '@/views/home/components/Popup.vue';
+import { ref } from 'vue';
 
 const appStore = useAppStore()
 const { isH5 } = storeToRefs(appStore)
@@ -153,6 +172,8 @@ const { isH5 } = storeToRefs(appStore)
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 userStore.loadUserInfo()
+
+const show = ref(false)
 </script>
 
 <style lang="scss" scoped>

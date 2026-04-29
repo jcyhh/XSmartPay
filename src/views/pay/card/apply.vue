@@ -19,6 +19,9 @@
             <input type="text" v-model="recipient_phone" :placeholder="$t('请输入收件电话')" class="flex1 size28">
         </div>
 
+        <div class="size28 bold6 mt30 mb30">{{ $t('支付方式') }}</div>
+        <CusPaytype v-model:paytype="paytype"></CusPaytype>
+
     </div>
 
     <div class="safeArea"></div>
@@ -39,8 +42,16 @@ import { routerPush, routerReplace } from '@/router';
 import { message } from '@/utils/message';
 import { ref } from 'vue';
 import CusAsk from '@/components/CusAsk/index.vue'
+import CusPaytype from '@/components/CusPaytype/pay.vue'
+import { useUserStore } from '@/store';
+
+const userStore = useUserStore()
+
+userStore.loadUserInfo()
 
 const show = ref(false)
+
+const paytype = ref('balance_usdt')
 
 const recipient_name = ref()
 const recipient_address = ref()
@@ -60,6 +71,7 @@ const submit = async () => {
         recipient_phone: recipient_phone.value
     })
     message(t('提交成功'), 'success')
+    userStore.loadUserInfo()
     setTimeout(() => {
         routerReplace('/physical/record')
     }, 1200);

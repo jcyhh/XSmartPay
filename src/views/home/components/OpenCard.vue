@@ -48,7 +48,10 @@
                     <div class="size20 ml6">{{ assetUSD }}</div>
                 </div>
 
-                <div class="mainBtn mt100 flex jc ac size28 main bold6 btn" @click="submit">{{ $t('确认开卡') }}</div>
+                <div class="size28 bold6 mt30 mb30">{{ $t('支付方式') }}</div>
+                <CusPaytype v-model:paytype="paytype"></CusPaytype>
+
+                <div class="mainBtn mt50 flex jc ac size28 main bold6 btn" @click="submit">{{ $t('确认开卡') }}</div>
 
                 <div class="safeArea"></div>
                 
@@ -77,6 +80,7 @@ import { message } from '@/utils/message';
 import { t } from '@/locale';
 import { apiOpenVirtualCard } from '@/api/card';
 import { routerPush } from '@/router';
+import CusPaytype from '@/components/CusPaytype/pay.vue'
 
 const emits = defineEmits(['success'])
 
@@ -84,6 +88,8 @@ const { pickerShow, pickerList, currentPicker, pickerCurrent, loadPickerList } =
 
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
+
+const paytype = ref('balance_usdt')
 
 const show = ref(false)
 

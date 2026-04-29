@@ -100,6 +100,8 @@
     </div>
 
     <div class="gap40"></div>
+
+    <Popup v-model:show="show"></Popup>
 </template>
 
 <script setup lang="ts">
@@ -112,6 +114,9 @@ import Cards from './components/Cards.vue';
 import CusNumber from '@/components/CusNumber/index.vue'
 import { useUserStore } from '@/store';
 import { apiYuebaoStats } from '@/api/yuebao';
+import Popup from './components/Popup.vue';
+
+const show = ref(false)
 
 const userStore = useUserStore()
 userStore.loadUserInfo()
