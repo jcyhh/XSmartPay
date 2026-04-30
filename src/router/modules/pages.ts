@@ -156,6 +156,10 @@ export default [
         component: () => import('@/views/user/order.vue')
     },
     {
+        path:'/user/aixOrder',
+        component: () => import('@/views/user/aixOrder.vue')
+    },
+    {
         path:'/user/asset',
         component: () => import('@/views/user/asset.vue')
     },

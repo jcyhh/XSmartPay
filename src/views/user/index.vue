@@ -142,6 +142,14 @@
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
+        <div class="cell flex jb ac mt20" @click="routerPush('/user/aixOrder')">
+            <div class="flex ac">
+                <img src="@/assets/user/11.png" class="img64 mr20">
+                <div class="size28">AIX {{ $t('释放订单') }}</div>
+            </div>
+            <van-icon name="arrow" color="#FFFFFF80" />
+        </div>
+
         <div class="cell flex jb ac mt20" @click="routerPush('/cardholder')">
             <div class="flex ac">
                 <img src="@/assets/user/12.png" class="img64 mr20">

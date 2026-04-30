@@ -383,5 +383,9 @@
     "充值时缴纳充值额": "Pay the recharge amount at the time of deposit",
     "服务费": "Service fee",
     "享受充值额": "Eligible recharge amount",
-    "等值的AIX释放权益": "Equivalent AIX release benefits"
+    "等值的AIX释放权益": "Equivalent AIX release benefits",
+    "已结束": "Ended",
+    "总额度": "Total limit",
+    "释放次数": "Release count",
+    "今日释放": "Released today"
 }

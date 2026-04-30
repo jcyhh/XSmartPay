@@ -96,6 +96,7 @@ export function getPercent(a:number|string, b:number|string) {
     const numB = Number(b)
 
     if(!Number.isFinite(numA) || !Number.isFinite(numB) || numA < 0 || numB <= 0)return 0
+    if(numA === 0)return 0
     if(numA >= numB)return 100
 
     return computedMul(computedDiv(numA, numB), 100)
