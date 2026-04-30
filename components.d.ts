@@ -8,7 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    copy: typeof import('./src/components/CusPaytype/index copy.vue')['default']
     CusAsk: typeof import('./src/components/CusAsk/index.vue')['default']
     CusEmpty: typeof import('./src/components/CusEmpty/index.vue')['default']
     CusLang: typeof import('./src/components/CusLang/index.vue')['default']
