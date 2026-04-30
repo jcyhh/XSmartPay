@@ -378,5 +378,10 @@
     "激活": "Activate",
     "交易密码": "Transaction password",
     "请设置交易密码": "Please set a transaction password",
-    "激活成功": "Activation successful"
+    "激活成功": "Activation successful",
+    "理财档位": "Wealth management tier",
+    "充值时缴纳充值额": "Pay the recharge amount at the time of deposit",
+    "服务费": "Service fee",
+    "享受充值额": "Eligible recharge amount",
+    "等值的AIX释放权益": "Equivalent AIX release benefits"
 }

@@ -12,14 +12,14 @@
                 </div>
 
                 <div class="size24 mt20">
-                    <span class="opc6">充值时缴纳充值额</span>
+                    <span class="opc6">{{ $t('充值时缴纳充值额') }}</span>
                     <span class="main ml5 mr5">{{ currentLevel?.service_rate }}%</span>
-                    <span class="opc6">服务费</span>
+                    <span class="opc6">{{ $t('服务费') }}</span>
                 </div>
                 <div class="size24 mt20">
-                    <span class="opc6">享受充值额</span>
+                    <span class="opc6">{{ $t('享受充值额') }}</span>
                     <span class="main ml5 mr5">{{ currentLevel?.gift_rate }}%</span>
-                    <span class="opc6">等值的AIX释放权益</span>
+                    <span class="opc6">{{ $t('等值的AIX释放权益') }}</span>
                 </div>
 
                 <div class="mt50 flex ac bold5">

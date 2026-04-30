@@ -40,7 +40,7 @@
             <div class="flex jb ac pl10 pr10">
                 <div class="flex ac">
                     <img src="@/assets/user/40.png" class="img30 mr20">
-                    <div class="size28">理财档位</div>
+                    <div class="size28">{{ $t('理财档位') }}</div>
                 </div>
                 <div class="main flex ac">
                     <div class="size28 main mr10">{{ userInfo?.finance_level?.name }}</div>
