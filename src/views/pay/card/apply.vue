@@ -68,7 +68,8 @@ const submit = async () => {
     await apiCardApply({
         recipient_name: recipient_name.value,
         recipient_address: recipient_address.value,
-        recipient_phone: recipient_phone.value
+        recipient_phone: recipient_phone.value,
+        ccy: paytype.value
     })
     message(t('提交成功'), 'success')
     userStore.loadUserInfo()

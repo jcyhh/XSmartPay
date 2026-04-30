@@ -115,11 +115,21 @@ import CusNumber from '@/components/CusNumber/index.vue'
 import { useUserStore } from '@/store';
 import { apiYuebaoStats } from '@/api/yuebao';
 import Popup from './components/Popup.vue';
+import { storeToRefs } from 'pinia';
+import { apiUserInfo } from '@/api/user';
 
 const show = ref(false)
 
 const userStore = useUserStore()
-userStore.loadUserInfo()
+const { userInfo } = storeToRefs(userStore)
+
+const loadUserInfo = async () => {
+    userInfo.value = await apiUserInfo()
+    if(!userInfo.value?.finance_level){
+        show.value = true
+    }
+}
+loadUserInfo()
 
 // 统计
 const stats = ref()

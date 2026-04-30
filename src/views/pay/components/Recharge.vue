@@ -58,7 +58,6 @@ import { ref } from 'vue';
 import CusPicker from '@/components/CusPicker/index.vue';
 import { assetUSD, assetUSDT } from '@/config';
 import { useUserStore } from '@/store';
-import { storeToRefs } from 'pinia';
 import { message } from '@/utils/message';
 import { t } from '@/locale';
 import { apiRecharge } from '@/api/card';
@@ -67,7 +66,6 @@ import CusPaytype from '@/components/CusPaytype/pay.vue'
 const emits = defineEmits(['success'])
 
 const userStore = useUserStore()
-const { userInfo } = storeToRefs(userStore)
 
 const { pickerShow, pickerList, currentPicker, pickerCurrent, loadPickerList } = useCard()
 
@@ -89,8 +87,10 @@ const submit = async () => {
     if(!inputAmount.value)return message(t('请输入充值金额'))
     await apiRecharge({
         amount: inputAmount.value,
-        card_id: currentPicker.value.id
+        card_id: currentPicker.value.id,
+        ccy: paytype.value
     })
+    userStore.loadUserInfo()
     message(t('充值成功'), 'success')
     show.value = false
     emits('success')

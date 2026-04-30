@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="cell mt30" @click="show=true">
+        <div class="cell mt30" @click="show=true" v-if="userInfo?.finance_level">
             <div class="gap10"></div>
             <div class="flex jb ac pl10 pr10">
                 <div class="flex ac">
@@ -43,7 +43,7 @@
                     <div class="size28">理财档位</div>
                 </div>
                 <div class="main flex ac">
-                    <div class="size28 main mr10">基础档</div>
+                    <div class="size28 main mr10">{{ userInfo?.finance_level?.name }}</div>
                     <van-icon name="arrow" />
                 </div>
             </div>

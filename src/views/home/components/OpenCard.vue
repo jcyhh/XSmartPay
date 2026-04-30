@@ -107,7 +107,8 @@ const submit = async () => {
     if(!currentPicker.value)return message(t('请选择持卡人'))
     await apiOpenVirtualCard({
         product_id: cardInfo.value.id,
-        cardholder_id: currentPicker.value.cardholder_id
+        cardholder_id: currentPicker.value.cardholder_id,
+        ccy: paytype.value
     })
     message(t('开卡成功'), 'success')
     userStore.loadUserInfo()

@@ -76,13 +76,19 @@
     </div>
 
     <div class="tc mt30 size24 bold6">
+        <span>{{ $t('抽卡次数') }}</span>
+        <span class="red">{{ Number(userInfo?.balance_lottery) }}</span>
+    </div>
+    <div class="tc mt10 size24 bold6">
         <span>{{ $t('消耗') }}</span>
         <span class="green ml5">{{ assetAIX }}≈</span>
         <span class="green" v-init="drawPrice"></span>
         <span class="green">{{ assetUSDT }}</span>
+        <span class="ml5 mr5 opc5">/</span>
+        <span class="green ml5">{{ assetNFTC }}≈</span>
+        <span class="green" v-init="lottery_nftc_price"></span>
+        <span class="green">{{ assetUSDT }}</span>
         <span class="ml5 mr10">{{ $t('抽一次') }}</span>
-        <span>{{ $t('抽卡次数') }}</span>
-        <span class="red">{{ Number(userInfo?.balance_lottery) }}</span>
     </div>
 
     <DrawResult ref="resultRef" @again="submit"></DrawResult>
@@ -93,7 +99,7 @@ import { computed, onMounted, ref } from 'vue'
 import DrawResult from './DrawResult.vue'
 import { apiDraw, apiDrawConfig, apiDrawList } from '@/api/card'
 import { getChinaFlashSaleCountdown, padZero } from '@/utils'
-import { assetAIX, assetUSDT } from '@/config'
+import { assetAIX, assetNFTC, assetUSDT } from '@/config'
 import { useUserStore } from '@/store'
 import { storeToRefs } from 'pinia'
 
@@ -112,9 +118,11 @@ const refreshSaleCountdown = () => {
 }
 
 const drawPrice = ref()
+const lottery_nftc_price = ref()
 const loadPrice = async () => {
     const res:any = await apiDrawConfig()
     drawPrice.value = res.lottery_aix_price
+    lottery_nftc_price.value = res.lottery_nftc_price
 }
 
 const loadData = async () => {

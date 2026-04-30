@@ -57,7 +57,8 @@ const close = () => show.value = false
 
 const submit = async () => {
     await apiUpgradeVirtualCard({
-        product_id: cardInfo.value.id
+        product_id: cardInfo.value.id,
+        ccy: paytype.value
     })
 
     message(t('升级成功'), 'success')

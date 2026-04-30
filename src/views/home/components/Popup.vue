@@ -7,18 +7,18 @@
                 </div>
 
                 <div class="cell mt40 flex jb ac" @click="showPicker=true">
-                    <div>{{ list[current].name }}</div>
+                    <div>{{ currentLevel?.name || '--' }}</div>
                     <van-icon name="arrow" />
                 </div>
 
                 <div class="size24 mt20">
                     <span class="opc6">充值时缴纳充值额</span>
-                    <span class="main ml5 mr5">{{ list[current].rate1 }}%</span>
+                    <span class="main ml5 mr5">{{ currentLevel?.service_rate }}%</span>
                     <span class="opc6">服务费</span>
                 </div>
                 <div class="size24 mt20">
                     <span class="opc6">享受充值额</span>
-                    <span class="main ml5 mr5">{{ list[current].rate2 }}%</span>
+                    <span class="main ml5 mr5">{{ currentLevel?.gift_rate }}%</span>
                     <span class="opc6">等值的AIX释放权益</span>
                 </div>
 
@@ -37,9 +37,14 @@
 </template>
 
 <script setup lang="ts">
+import { apiLeves, apiUpdateUserInfo } from '@/api/user';
 import CusPicker from '@/components/CusPicker/index.vue';
 import { t } from '@/locale';
-import { computed, ref } from 'vue';
+import { useUserStore } from '@/store';
+import { message } from '@/utils/message';
+import { computed, onMounted, ref } from 'vue';
+
+const userStore = useUserStore()
 
 const showPicker = ref(false)
 
@@ -47,15 +52,30 @@ const show = defineModel<boolean>('show', { default: false })
 
 const current = ref(0)
 
-const list = computed(()=>([
-    {name:t('基础档'), rate1: 5, rate2: 15},
-    {name:t('默认档'), rate1: 15, rate2: 50},
-    {name:t('尊享档'), rate1: 30, rate2: 100}
-]))
+const list = ref<any[]>([])
 
-const submit = () => {
+const currentLevel = computed(()=>{
+    if(list.value.length>0)return list.value[current.value]
+    else return null
+})
 
+const loadData = async () => {
+    const res:any = await apiLeves()
+    list.value = res.data
 }
+
+const submit = async () => {
+    await apiUpdateUserInfo({
+        finance_level_id: currentLevel.value?.id
+    })
+    message(t('操作成功'), 'success')
+    show.value = false
+    userStore.loadUserInfo()
+}
+
+onMounted(()=>{
+    loadData()
+})
 </script>
 
 <style lang="scss" scoped>
