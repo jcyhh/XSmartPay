@@ -102,6 +102,20 @@
     <div class="gap40"></div>
 
     <Popup v-model:show="show"></Popup>
+
+    <van-popup v-model:show="showNoticePop" style="background-color: transparent !important;" overlay-class="cusMask" teleport="#app">
+        <div class="popupCenter mainCard">
+            <div class="size28 bold">{{ noticePopInfo.title }}</div>
+
+            <div class="size24 opc6 mt10">{{ noticePopInfo.updated_at }}</div>
+
+            <div class="noticecontent mt30" v-html="noticePopInfo.content"></div>
+
+            <div class="flex ac mt60 font2 size28">
+                <div class="mainBtn flex1 flex jc ac" @click="readNotice">{{ $t('知道了') }}</div>
+            </div>
+        </div>
+    </van-popup>
 </template>
 
 <script setup lang="ts">
@@ -156,13 +170,14 @@ const loadMessage = async () => {
 }
 
 // 公告
-const { noticeList, loadNotice } = useNotice()
+const { noticeList, loadNotice, loadNoticePop, showNoticePop, readNotice, noticePopInfo } = useNotice()
 
 onMounted(()=>{
     loadStats()
     loadBanner()
     loadMessage()
     loadNotice()
+    loadNoticePop()
 })
 </script>
 
@@ -175,6 +190,14 @@ onMounted(()=>{
 .notice{
     width: 100%;
     height: 100px;
+}
+.noticecontent{
+    max-height: 60vh;
+    width: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
 }
 .bannerBox{
     width: 100%;
