@@ -2,12 +2,12 @@
     <CusNav :title="$t('设置')" :show-bg="false"></CusNav>
     <div class="pl30 pr30 pt30">
         
-        <div class="cell card flex jb ac" @click="routerPush('/edit')">
+        <div class="cell card flex jb ac mb20" @click="routerPush('/edit')" v-if="!isH5">
             <div class="size28">{{ $t('修改密码') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
-        <div class="cell card flex jb ac mt20" @click="routerPush('/editPay')">
+        <div class="cell card flex jb ac" @click="routerPush('/editPay')">
             <div class="size28">{{ $t('修改支付密码') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
