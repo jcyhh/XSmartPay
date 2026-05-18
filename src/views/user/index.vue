@@ -81,7 +81,10 @@
                     <div class="size28" v-init="userInfo?.balance_year"></div>
                     <div class="size24 opc5 mt10">{{ $t('年终奖') }}</div>
                 </div>
-                <div class="flex1"></div>
+                <div class="flex1">
+                    <div class="size28" v-init="userInfo?.balance_year_aix"></div>
+                    <div class="size24 opc5 mt10">{{ $t('年终奖') }} {{ assetAIX }}</div>
+                </div>
             </div>
         </div>
 

@@ -1,7 +1,7 @@
 <template>
     <CusNav :title="$t('资产明细')" :show-bg="false" :show-glass="false"></CusNav>
 
-    <CusTab v-model="current" :list="tabs"></CusTab>
+    <CusTabScroll v-model="current" :list="tabs"></CusTabScroll>
 
     <van-pull-refresh class="page rel" v-bind="props">
         <van-list class="page" v-bind="listProps">
@@ -31,12 +31,13 @@
 
 <script setup lang="ts">
 import CusNav from '@/components/CusNav/index.vue'
-import CusTab from '@/components/CusTab/index.vue'
+import CusTabScroll from '@/components/CusTabScroll/index.vue'
 import { assetAIX, assetNFTC, assetUSDT } from '@/config';
 import { computed, ref, watch } from 'vue';
 import { useLoadList } from '@/hooks/useLoadList';
 import { usePullRefresh } from '@/hooks/usePullRefresh';
 import CusEmpty from '@/components/CusEmpty/index.vue'
+import { t } from '@/locale';
 
 const current = ref(0)
 
@@ -54,12 +55,16 @@ const tabs = computed(()=>([
         value: 'balance_nftc'
     },
     {
-        name: `抽奖 ${assetAIX}`,
+        name: `${t('抽奖')} ${assetAIX}`,
         value: 'balance_lottery_aix'
     },
     {
-        name: `年终奖`,
+        name: `${t('年终奖')}`,
         value: 'balance_year'
+    },
+    {
+        name: `${t('年终奖')} ${assetAIX}`,
+        value: 'balance_year_aix'
     }
 ]))
 
