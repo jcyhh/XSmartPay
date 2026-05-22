@@ -55,7 +55,7 @@
             <div v-init="realAmount"></div>
             <div>{{ currentPicker.name }}</div>
         </div>
-        <div class="main opc8 size24">{{ $t('提现理财，外部提现额外收取50%手续费') }}</div>
+        <div class="main opc8 size24">{{ $t('提现理财，外部提现AIX额外损耗50%') }}</div>
 
     </div>
 

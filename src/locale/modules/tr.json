@@ -1,9 +1,10 @@
 {
-    "额度已满":"Kota dolu",
-    "一键复投":"Tek tıkla yeniden yatırım",
-    "没有可赎回的订单":"Kullanılabilir sipariş yok",
-    "一键赎回":"Tek tıkla geri al",
-    "到期时间":"Son kullanma tarihi",
-    "快速通道":"Hizli erisim",
-    "备用":"Yedek"
+    "额度已满": "Kota dolu",
+    "一键复投": "Tek tıkla yeniden yatırım",
+    "没有可赎回的订单": "Kullanılabilir sipariş yok",
+    "一键赎回": "Tek tıkla geri al",
+    "到期时间": "Son kullanma tarihi",
+    "快速通道": "Hizli erisim",
+    "备用": "Yedek",
+    "提现理财，外部提现AIX额外损耗50%": "Finansal çekimlerde, harici AIX çekimlerinde ek %50 kayıp oluşacaktır"
 }
