@@ -46,16 +46,19 @@
 
         <div class="flex jb ac mt30">
             <div class="size28 bold6">{{ $t('到账金额') }}</div>
-            <div class="size24">
+            <!-- <div class="size24">
                 <span class="opc5 mr10">{{ $t('手续费') }}</span>
                 <span class="main">{{ fee }}%</span>
-            </div>
+            </div> -->
         </div>
         <div class="cell card mb20 flex jb ac mt20 bold6">
             <div v-init="realAmount"></div>
             <div>{{ currentPicker.name }}</div>
         </div>
-        <div class="main opc8 size24" v-if="fee>0">{{ $t('提现理财，外部提现AIX额外损耗') }}{{ fee }}%</div>
+        <div class="main opc8 size24 lh40" v-if="fee>0">
+            {{ $t('向 Xsmartpay 系统内充值地址提现仅参与理财') }}<br>
+            {{ $t('向 Xsmartpay 系统外地址提现额外扣去') }} {{ fee }}%
+        </div>
 
     </div>
 

@@ -52,5 +52,6 @@
     "到期时间": "Date d'expiration",
     "快速通道": "Acces rapide",
     "备用": "Secours",
-    "提现理财，外部提现AIX额外损耗": "Pour les retraits financiers, les retraits externes en AIX entraîneront une perte supplémentaire"
+    "向 Xsmartpay 系统外地址提现额外扣去": "Les retraits vers des adresses hors du système Xsmartpay déduiront en plus",
+    "向 Xsmartpay 系统内充值地址提现仅参与理财": "Les retraits vers des adresses de recharge au sein du système Xsmartpay participent uniquement à la gestion financière"
 }

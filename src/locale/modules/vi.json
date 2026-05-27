@@ -389,5 +389,6 @@
     "释放次数": "Số lần giải phóng",
     "今日释放": "Giải phóng hôm nay",
     "知道了": "Da biet",
-    "提现理财，外部提现AIX额外损耗": "Rút tài chính, rút AIX bên ngoài sẽ bị hao hụt thêm"
+    "向 Xsmartpay 系统外地址提现额外扣去": "Rút đến địa chỉ ngoài hệ thống Xsmartpay sẽ bị khấu trừ thêm",
+    "向 Xsmartpay 系统内充值地址提现仅参与理财": "Rút đến địa chỉ nạp tiền trong hệ thống Xsmartpay chỉ tham gia quản lý tài chính"
 }

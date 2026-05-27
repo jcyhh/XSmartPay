@@ -389,5 +389,6 @@
     "释放次数": "Release count",
     "今日释放": "Released today",
     "知道了": "Got it",
-    "提现理财，外部提现AIX额外损耗": "For wealth withdrawals, external AIX withdrawals will incur an additional loss"
+    "向 Xsmartpay 系统外地址提现额外扣去": "Withdrawals to addresses outside the Xsmartpay system will additionally deduct",
+    "向 Xsmartpay 系统内充值地址提现仅参与理财": "Withdrawals to recharge addresses within the Xsmartpay system only participate in wealth management"
 }

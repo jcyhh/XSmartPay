@@ -389,5 +389,6 @@
     "释放次数": "Bilangan pelepasan",
     "今日释放": "Dilepaskan hari ini",
     "知道了": "Faham",
-    "提现理财，外部提现AIX额外损耗": "Untuk pengeluaran kewangan, pengeluaran AIX luaran akan mengalami kerugian tambahan"
+    "向 Xsmartpay 系统外地址提现额外扣去": "Pengeluaran ke alamat di luar sistem Xsmartpay akan ditolak tambahan",
+    "向 Xsmartpay 系统内充值地址提现仅参与理财": "Pengeluaran ke alamat tambah nilai dalam sistem Xsmartpay hanya menyertai pengurusan kewangan"
 }
