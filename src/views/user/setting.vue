@@ -12,6 +12,33 @@
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
+        <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/bank')">
+            <div class="size28">银行卡</div>
+            <div class="flex ac">
+                <div class="bind unbind flex ac">未绑定</div>
+                <div class="bind binded flex ac">已绑定</div>
+                <van-icon name="arrow" color="#FFFFFF80" />
+            </div>
+        </div>
+
+        <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/alipay')">
+            <div class="size28">支付宝</div>
+            <div class="flex ac">
+                <div class="bind unbind flex ac">未绑定</div>
+                <div class="bind binded flex ac">已绑定</div>
+                <van-icon name="arrow" color="#FFFFFF80" />
+            </div>
+        </div>
+
+        <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/wechat')">
+            <div class="size28">微信</div>
+            <div class="flex ac">
+                <div class="bind unbind flex ac">未绑定</div>
+                <div class="bind binded flex ac">已绑定</div>
+                <van-icon name="arrow" color="#FFFFFF80" />
+            </div>
+        </div>
+
         <div class="cell card flex jb ac mt20" @click="routerPush('/helps')">
             <div class="size28">{{ $t('帮助中心') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
@@ -61,5 +88,20 @@ const logout = () => {
 .btn{
     height: 88px;
     border-radius: 44px;
+}
+.bind{
+    height: 44px;
+    border-radius: 22px;
+    padding: 0 10px;
+    font-size: 20px;
+    margin-right: 10px;
+}
+.unbind{
+    background-color: #E2323233;
+    color: #E23232;
+}
+.binded{
+    background-color: #2CA23033;
+    color: #2CA230;
 }
 </style>

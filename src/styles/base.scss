@@ -200,3 +200,27 @@
         padding: 1px;
     }
 }
+
+.inp{
+    background-color: #FFE5A50F;
+    border: 1px solid #FFFFFF1A;
+    height: 88px;
+    border-radius: 14px;
+    padding: 0 30px;
+}
+.pay{
+    .line{
+        width: 4px;
+        height: 18px;
+        border-radius: 2px;
+    }
+    .bank{
+        background-color: #EFB85E;
+    }
+    .wechat{
+        background-color: #0CC76D;
+    }
+    .alipay{
+        background-color: #019CEB;
+    }
+}

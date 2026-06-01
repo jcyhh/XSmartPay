@@ -103,6 +103,11 @@
             </div>
         </div>
 
+        <div class="otc mt30 flex col jc" @click="routerPush('/otc')">
+            <div class="title size40 bold">OTC 交易</div>
+            <div class="size24 opc5 mt10">安全便捷 自由买卖</div>
+        </div>
+
         <div class="mt40 size34 bold6 main">{{ $t('常用功能') }}</div>
 
         <div class="cell flex jb ac mt30" @click="routerPush('/community/my')">
@@ -213,5 +218,19 @@ const show = ref(false)
     font-size: 22px;
     height: 48px;
     padding: 0 20px;
+}
+.otc{
+    height: 190px;
+    background-image: url("@/assets/user/41.png");
+    background-size: 100% 100%;
+    padding-left: 210px;
+    .title{
+        display: inline-block;
+        background: linear-gradient(281.88deg, #FFF1BF 24.66%, #FFF1BF 37.09%, #FFCD48 39.28%, #FFF1BF 59.99%, #FFCD48 64.38%, #FFF1BF 75.34%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
 }
 </style>

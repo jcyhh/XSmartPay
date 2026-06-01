@@ -4,6 +4,7 @@
 import Start from '@/views/index.vue'
 import Layout from '@/layout/index.vue'
 import pages from './pages'
+import otc from './otc'
 
 export default [
     {
@@ -56,6 +57,7 @@ export default [
         }]
     },
     ...pages,
+    ...otc,
     {
         path:'/ref/:ref([a-zA-Z0-9]+)', // 接收邀请码，需配置在常规路由的下方
         component: Start

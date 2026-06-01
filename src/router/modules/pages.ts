@@ -164,6 +164,18 @@ export default [
         component: () => import('@/views/user/asset.vue')
     },
     {
+        path:'/user/bind/bank',
+        component: () => import('@/views/user/bind/bank.vue')
+    },
+    {
+        path:'/user/bind/wechat',
+        component: () => import('@/views/user/bind/wechat.vue')
+    },
+    {
+        path:'/user/bind/alipay',
+        component: () => import('@/views/user/bind/alipay.vue')
+    },
+    {
         path:'/pay/record',
         component: () => import('@/views/pay/record.vue')
     },

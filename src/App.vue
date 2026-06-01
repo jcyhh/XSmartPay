@@ -45,7 +45,7 @@ const getDefaultKefuPosition = () => {
         return { left: 0, top: 0 }
     }
     return {
-        left: Math.max(window.innerWidth - 80, 0),
+        left: Math.max(window.innerWidth - 70, 0),
         top: Math.max(window.innerHeight - 150, 0)
     }
 }
