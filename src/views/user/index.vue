@@ -224,6 +224,9 @@ const show = ref(false)
     background-image: url("@/assets/user/41.png");
     background-size: 100% 100%;
     padding-left: 210px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
     .title{
         display: inline-block;
         background: linear-gradient(281.88deg, #FFF1BF 24.66%, #FFF1BF 37.09%, #FFCD48 39.28%, #FFF1BF 59.99%, #FFCD48 64.38%, #FFF1BF 75.34%);
@@ -231,6 +234,37 @@ const show = ref(false)
         background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent;
+    }
+    &::after{
+        content: '';
+        position: absolute;
+        top: -35%;
+        left: -35%;
+        width: 26%;
+        height: 170%;
+        pointer-events: none;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 241, 191, 0.5), rgba(255, 255, 255, 0));
+        transform: rotate(18deg);
+        filter: blur(2px);
+        animation: otcShine 4s linear infinite;
+    }
+}
+
+@keyframes otcShine {
+    0% {
+        left: -35%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    34% {
+        left: 115%;
+        opacity: 0.8;
+    }
+    35%, 100% {
+        left: 115%;
+        opacity: 0;
     }
 }
 </style>

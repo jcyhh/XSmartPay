@@ -3,14 +3,14 @@
         <div class="popup">
             <div class="content">
                 <div class="flex jb ac">
-                    <div class="size36 bold6">{{ $t('购买') }} {{ assetUSDT }}</div>
+                    <div class="size36 bold6">{{ $t('购买') }} {{ assetName }}</div>
                     <van-icon size="20" name="cross" color="#8D9094" @click="show=false" />
                 </div>
 
                 <div class="size24 mt16">
                     <span class="opc5">单价</span>
                     <span class="ml10 mr5 main">¥</span>
-                    <span class="main" v-init="1000"></span>
+                    <span class="main" v-init="info?.price"></span>
                 </div>
 
                 <div class="flex mt30">
@@ -25,24 +25,27 @@
                 </div>
 
                 <div class="inp flex jb ac mt20 size28">
-                    <input type="password" v-model="inputAmount" :placeholder="$t('请输入购买金额')" class="flex1">
-                    <div class="size26">CNY</div>
+                    <input type="number" v-model="inputAmount" :placeholder="current==0 ? $t('请输入购买金额') : $t('请输入购买数量')" class="flex1">
+                    <div class="size26">{{ current==0 ? 'CNY' : assetName }}</div>
                 </div>
 
                 <div class="size24 opc5 mt30">
                     <span>限额 : </span>
-                    <span v-init="1000"></span>
+                    <span v-init="info?.cny_min_num"></span>
                     <span class="ml5">CNY</span>
                     <span class="ml5 mr5">-</span>
-                    <span v-init="1000"></span>
-                    <span class="ml5">CNY</span>
+                    <template v-if="hasMaxLimit">
+                        <span v-init="info?.cny_max_num"></span>
+                        <span class="ml5">CNY</span>
+                    </template>
+                    <span v-else>不限</span>
                 </div>
 
                 <div class="flex jb ac mt40 size26">
                     <div class="opc5">交易数量</div>
                     <div>
-                        <span v-init="1000"></span>
-                        <span class="ml5">CNY</span>
+                        <span v-init="tradeNum"></span>
+                        <span class="ml5">{{ assetName }}</span>
                     </div>
                 </div>
 
@@ -50,7 +53,7 @@
                     <div class="opc5">交易总额</div>
                     <div>
                         <span class="mr5">¥</span>
-                        <span v-init="1000"></span>
+                        <span v-init="tradeAmount"></span>
                     </div>
                 </div>
 
@@ -65,10 +68,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { message } from '@/utils/message';
 import { t } from '@/locale';
-import { assetUSDT } from '@/config';
+import { getAssetByCode } from '@/config';
+import { apiOtcDeal } from '@/api/otc';
+import { computedDiv, computedMul } from '@/utils';
 
 const emits = defineEmits(['success'])
 
@@ -76,6 +81,7 @@ const current = ref(0)
 const onTabChange = (index:number) => {
     if(current.value == index)return
     current.value = index
+    inputAmount.value = ''
 }
 
 const show = ref(false)
@@ -84,14 +90,36 @@ const show = ref(false)
 const info = ref()
 const open = (data:any) => {
     current.value = 0
+    inputAmount.value = ''
     info.value = data
     show.value = true
 }
 
 const inputAmount = ref()
+const assetName = computed(() => getAssetByCode(info.value?.ccy || ''))
+const hasMaxLimit = computed(() => Number(info.value?.max_num) > 0)
+const tradeNum = computed(() => {
+    if(!inputAmount.value)return 0
+    if(current.value == 1)return inputAmount.value
+    if(!info.value?.price)return 0
+    return computedDiv(inputAmount.value, info.value.price)
+})
+const tradeAmount = computed(() => {
+    if(!inputAmount.value)return 0
+    if(current.value == 0)return inputAmount.value
+    return computedMul(inputAmount.value, info.value?.price || 0)
+})
+
 const submit = async () => {
-    
-    message(t('激活成功'), 'success')
+    if(!info.value?.id)return message(t('委托单不存在'))
+    if(!inputAmount.value)return message(current.value == 0 ? t('请输入购买金额') : t('请输入购买数量'))
+
+    await apiOtcDeal({
+        order_id: info.value.id,
+        ...(current.value == 0 ? { money: inputAmount.value } : { num: inputAmount.value })
+    })
+
+    message(t('购买成功'), 'success')
     emits('success')
     show.value = false
 }

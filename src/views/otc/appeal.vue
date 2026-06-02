@@ -4,20 +4,19 @@
     <div class="pl30 pr30 pt30 rel">
         
         <div class="card">
-            <textarea placeholder="请输入本次申请原因" v-model="remark" class="area"></textarea>
-            <div class="size24 opc5 mt30">{{ remark.length }}/200 字</div>
+            <textarea :placeholder="$t('请输入本次申请原因')" v-model="remark" maxlength="500" class="area"></textarea>
+            <div class="size24 opc5 mt30">{{ remark.length }}/500 字</div>
         </div>
 
         <div class="card mt30 flex jb ast">
             <div class="flex col jb">
                 <div>
-                    <div class="size28">支付凭证</div>
+                    <div class="size28">申诉凭证</div>
                     <div class="size24 opc5 mt10">请上传清晰的图片</div>
                 </div>
+                <div class="size24 main">点击图片查看大图</div>
             </div>
-            <div>
-                <img src="@/assets/otc/6.png" class="img160">
-            </div>
+            <CusUpload v-model:url="appealVoucher"></CusUpload>
         </div>
 
     </div>
@@ -31,12 +30,37 @@
 </template>
 
 <script setup lang="ts">
+import { apiAppealOtcTrade } from '@/api/otc';
+import CusUpload from '@/components/CusUpload/index.vue';
+import { t } from '@/locale';
+import { routerGo } from '@/router';
+import { message } from '@/utils/message';
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+const { query } = useRoute()
 
 const remark = ref('')
+const appealVoucher = ref('')
+const submitting = ref(false)
 
-const submit = () => {
-    
+const submit = async () => {
+    if(submitting.value)return
+    if(!query.id)return message(t('订单不存在'))
+    if(!remark.value.trim())return message(t('请输入本次申请原因'))
+
+    submitting.value = true
+    try {
+        await apiAppealOtcTrade({
+            id: query.id,
+            appeal_reason: remark.value.trim(),
+            appeal_voucher: appealVoucher.value
+        })
+        message(t('提交成功'), 'success')
+        routerGo()
+    } finally {
+        submitting.value = false
+    }
 }
 </script>
 

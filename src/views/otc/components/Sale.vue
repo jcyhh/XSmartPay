@@ -3,14 +3,14 @@
         <div class="popup">
             <div class="content">
                 <div class="flex jb ac">
-                    <div class="size36 bold6">{{ $t('出售') }} {{ assetUSDT }}</div>
+                    <div class="size36 bold6">{{ $t('出售') }} {{ assetName }}</div>
                     <van-icon size="20" name="cross" color="#8D9094" @click="show=false" />
                 </div>
 
                 <div class="size24 mt16">
                     <span class="opc5">单价</span>
                     <span class="ml10 mr5 main">¥</span>
-                    <span class="main" v-init="1000"></span>
+                    <span class="main" v-init="info?.price"></span>
                 </div>
 
                 <div class="flex mt30">
@@ -25,35 +25,38 @@
                 </div>
 
                 <div class="inp flex jb ac mt20 size28">
-                    <input type="password" v-model="inputAmount" :placeholder="$t('请输入出售金额')" class="flex1">
-                    <div class="size26">CNY</div>
+                    <input type="number" v-model="inputAmount" :placeholder="current==0 ? $t('请输入出售金额') : $t('请输入出售数量')" class="flex1">
+                    <div class="size26">{{ current==0 ? 'CNY' : assetName }}</div>
                 </div>
 
                 <div class="size24 opc5 mt30">
                     <span>限额 : </span>
-                    <span v-init="1000"></span>
+                    <span v-init="info?.cny_min_num"></span>
                     <span class="ml5">CNY</span>
                     <span class="ml5 mr5">-</span>
-                    <span v-init="1000"></span>
-                    <span class="ml5">CNY</span>
+                    <template v-if="hasMaxLimit">
+                        <span v-init="info?.cny_max_num"></span>
+                        <span class="ml5">CNY</span>
+                    </template>
+                    <span v-else>不限</span>
                 </div>
 
-                <div class="size26 opc5 mt40 mb16">{{ $t('支付方式') }}</div>
-                <CusPaytype v-model:paytype="paytype"></CusPaytype>
+                <div class="size26 opc5 mt40 mb16">{{ $t('支付方式') }} <span class="opc5">（可多选）</span></div>
+                <CusPaytype v-model:paytype="paytype" :multiple="true" :options="allowedPayTypes" @before-bind="show=false"></CusPaytype>
 
                 <div class="flex jb ac mt26 size26">
                     <div class="opc5">交易数量</div>
                     <div>
-                        <span v-init="1000"></span>
-                        <span class="ml5">CNY</span>
+                        <span v-init="tradeNum"></span>
+                        <span class="ml5">{{ assetName }}</span>
                     </div>
                 </div>
 
                 <div class="flex jb ac mt20 size26">
                     <div class="opc5">手续费</div>
                     <div>
-                        <span class="mr5">¥</span>
-                        <span v-init="1000"></span>
+                        <span v-init="fee"></span>
+                        <span class="ml5">{{ assetName }}</span>
                     </div>
                 </div>
 
@@ -61,7 +64,7 @@
                     <div class="opc5">交易总额</div>
                     <div>
                         <span class="mr5">¥</span>
-                        <span v-init="1000"></span>
+                        <span v-init="tradeAmount"></span>
                     </div>
                 </div>
 
@@ -74,10 +77,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { message } from '@/utils/message';
 import { t } from '@/locale';
-import { assetUSDT } from '@/config';
+import { getAssetByCode } from '@/config';
+import { apiOtcDeal } from '@/api/otc';
+import { computedDiv, computedMul } from '@/utils';
 import CusPaytype from '@/components/CusPaytype/otc.vue'
 
 const emits = defineEmits(['success'])
@@ -86,24 +91,62 @@ const current = ref(0)
 const onTabChange = (index:number) => {
     if(current.value == index)return
     current.value = index
+    inputAmount.value = ''
 }
 
-const paytype = ref('bank')
+const paytype = ref<string[]>([])
+const feeRate = ref<number | string>(0)
+
+const payTypeOrder = ['bank_card', 'alipay', 'wechat']
+const apiToPaytype = (type:string) => type === 'bank_card' ? 'bank' : type
+const getAllowedPayTypes = (payTypes:string[] = []) => payTypeOrder
+    .filter(type => payTypes.includes(type))
+    .map(apiToPaytype)
 
 const show = ref(false)
 
-// 打开弹窗
 const info = ref()
-const open = (data:any) => {
+const allowedPayTypes = computed(() => getAllowedPayTypes(info.value?.pay_types || []))
+const open = (data:any, rate?: number | string) => {
     current.value = 0
+    inputAmount.value = ''
+    feeRate.value = rate || 0
     info.value = data
+    const allowed = getAllowedPayTypes(data?.pay_types || [])
+    paytype.value = allowed.length ? [allowed[0]] : []
     show.value = true
 }
 
 const inputAmount = ref()
+const assetName = computed(() => getAssetByCode(info.value?.ccy || ''))
+const hasMaxLimit = computed(() => Number(info.value?.max_num) > 0)
+const tradeNum = computed(() => {
+    if(!inputAmount.value)return 0
+    if(current.value == 1)return inputAmount.value
+    if(!info.value?.price)return 0
+    return computedDiv(inputAmount.value, info.value.price)
+})
+const tradeAmount = computed(() => {
+    if(!inputAmount.value)return 0
+    if(current.value == 0)return inputAmount.value
+    return computedMul(inputAmount.value, info.value?.price || 0)
+})
+const fee = computed(() => computedDiv(computedMul(tradeNum.value || 0, feeRate.value || 0), 100))
+
+const getPayTypes = () => paytype.value.map(item => item === 'bank' ? 'bank_card' : item)
+
 const submit = async () => {
-    
-    message(t('激活成功'), 'success')
+    if(!info.value?.id)return message(t('委托单不存在'))
+    if(!inputAmount.value)return message(current.value == 0 ? t('请输入出售金额') : t('请输入出售数量'))
+    if(paytype.value.length === 0)return message(t('请选择支付方式'))
+
+    await apiOtcDeal({
+        order_id: info.value.id,
+        ...(current.value == 0 ? { money: inputAmount.value } : { num: inputAmount.value }),
+        pay_types: getPayTypes()
+    })
+
+    message(t('出售成功'), 'success')
     emits('success')
     show.value = false
 }

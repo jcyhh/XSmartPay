@@ -12,12 +12,12 @@ export default [
         component: () => import('@/views/otc/order.vue')
     },
     {
-        path:'/otc/detail/buy',
-        component: () => import('@/views/otc/detailBuy.vue')
+        path:'/otc/details/:id',
+        component: () => import('@/views/otc/details.vue')
     },
     {
-        path:'/otc/detail/sale',
-        component: () => import('@/views/otc/detailSale.vue')
+        path:'/otc/detail/:id',
+        component: () => import('@/views/otc/detail.vue')
     },
     {
         path:'/otc/appeal',

@@ -9,3 +9,11 @@ export const assetUSD: string = 'USD'; // 资产名称
 export const assetAIX: string = 'AIX'; // 资产名称
 
 export const assetNFTC: string = 'NFTC'; // 资产名称
+
+const assetMap:Record<string, string> = {
+    balance_usdt: assetUSDT,
+    balance_aix: assetAIX,
+    balance_nftc: assetNFTC
+}
+
+export const getAssetByCode = (assetCode:string) => assetMap[assetCode] || assetCode

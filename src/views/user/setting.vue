@@ -15,8 +15,8 @@
         <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/bank')">
             <div class="size28">银行卡</div>
             <div class="flex ac">
-                <div class="bind unbind flex ac">未绑定</div>
-                <div class="bind binded flex ac">已绑定</div>
+                <div class="bind binded flex ac animate__animated animate__zoomIn ani3" v-if="isPaymentBinded('bank_card')">已绑定</div>
+                <div class="bind unbind flex ac animate__animated animate__zoomIn ani3" v-else>未绑定</div>
                 <van-icon name="arrow" color="#FFFFFF80" />
             </div>
         </div>
@@ -24,8 +24,8 @@
         <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/alipay')">
             <div class="size28">支付宝</div>
             <div class="flex ac">
-                <div class="bind unbind flex ac">未绑定</div>
-                <div class="bind binded flex ac">已绑定</div>
+                <div class="bind binded flex ac animate__animated animate__zoomIn ani3" v-if="isPaymentBinded('alipay')">已绑定</div>
+                <div class="bind unbind flex ac animate__animated animate__zoomIn ani3" v-else>未绑定</div>
                 <van-icon name="arrow" color="#FFFFFF80" />
             </div>
         </div>
@@ -33,8 +33,8 @@
         <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/wechat')">
             <div class="size28">微信</div>
             <div class="flex ac">
-                <div class="bind unbind flex ac">未绑定</div>
-                <div class="bind binded flex ac">已绑定</div>
+                <div class="bind binded flex ac animate__animated animate__zoomIn ani3" v-if="isPaymentBinded('wechat')">已绑定</div>
+                <div class="bind unbind flex ac animate__animated animate__zoomIn ani3" v-else>未绑定</div>
                 <van-icon name="arrow" color="#FFFFFF80" />
             </div>
         </div>
@@ -63,12 +63,36 @@ import { routerPush, routerReplace } from '@/router';
 import { useAppStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import CusAsk from '@/components/CusAsk/index.vue'
-import { ref } from 'vue';
+import { onActivated, onMounted, ref } from 'vue';
+import { apiOtcPaymentDetail } from '@/api/otc';
+
+interface PaymentItem {
+    id?: number
+    type: string
+}
 
 const appStore = useAppStore()
 const { isH5 } = storeToRefs(appStore)
 
 const show = ref(false)
+const bindedPayTypes = ref<string[]>([])
+const payTypes = ['bank_card', 'alipay', 'wechat']
+
+const loadPaymentStatus = async () => {
+    const results = await Promise.allSettled(
+        payTypes.map(type => apiOtcPaymentDetail({ type }))
+    )
+
+    bindedPayTypes.value = results.reduce<string[]>((types, result, index) => {
+        if (result.status === 'fulfilled') {
+            const payment = result.value as unknown as PaymentItem
+            if (payment?.id) types.push(payTypes[index])
+        }
+        return types
+    }, [])
+}
+
+const isPaymentBinded = (type:string) => bindedPayTypes.value.includes(type)
 
 const logout = () => {
     const email = getAccount()
@@ -79,6 +103,14 @@ const logout = () => {
     delAccount()
     routerReplace(isH5.value ? '/' : '/login')
 }
+
+onMounted(() => {
+    loadPaymentStatus()
+})
+
+onActivated(() => {
+    loadPaymentStatus()
+})
 </script>
 
 <style lang="scss" scoped>
