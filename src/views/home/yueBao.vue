@@ -3,9 +3,9 @@
     <div class="pl30 pr30 pt30 rel">
         
         <div class="flex jc">
-            <div class="tag flex ac">
+            <div class="tag flex ac" @click="showRulePop=true">
                 <img src="@/assets/user/18.png" class="img30 mr10">
-                <div class="size24">{{ $t('资产安全有保障') }}</div>
+                <div class="size24">{{ $t('请查看规则后参与') }}</div>
             </div>
         </div>
 
@@ -95,6 +95,18 @@
         </div>
     </VanPopup>
 
+    <van-popup v-model:show="showRulePop" style="background-color: transparent !important;" overlay-class="cusMask" teleport="#app">
+        <div class="popupCenter mainCard">
+            <div class="size28 bold">{{ $t('赚币宝规则') }}</div>
+
+            <div class="noticecontent mt30" v-html="config?.yue_bao_text"></div>
+
+            <div class="flex ac mt60 font2 size28">
+                <div class="mainBtn flex1 flex jc ac" @click="showRulePop=false">{{ $t('知道了') }}</div>
+            </div>
+        </div>
+    </van-popup>
+
     <Save ref="saveRef" @success="onSuccess()"></Save>
 </template>
 
@@ -108,7 +120,7 @@ import CusProgress from '@/components/CusProgress/index.vue'
 import { getPercent } from '@/utils';
 import { useLoadList } from '@/hooks/useLoadList';
 import CusEmpty from '@/components/CusEmpty/index.vue'
-import { apiTakeOut, apiYuebaoStats } from '@/api/yuebao';
+import { apiTakeOut, apiYuebaoConfig, apiYuebaoStats } from '@/api/yuebao';
 import { routerPush } from '@/router';
 import { message } from '@/utils/message';
 import Save from './components/Save.vue';
@@ -134,7 +146,16 @@ const { list, props: listProps, loadList } = useLoadList('/api/yuebao/orders', '
 watch(current, () => loadList(), {immediate:true})
 
 const stats = ref()
-const loadData = async () => stats.value = await apiYuebaoStats()
+const config = ref()
+const showRulePop = ref(false)
+const loadData = async () => {
+    const [statsRes, configRes] = await Promise.all([
+        apiYuebaoStats(),
+        apiYuebaoConfig()
+    ])
+    stats.value = statsRes
+    config.value = configRes
+}
 
 const orderId = ref()
 const showAsk = ref(false)
@@ -168,6 +189,14 @@ onMounted(()=>{
     border-radius: 27px;
     background-color: #FFFFFF33;
     padding: 0 30px;
+}
+.noticecontent{
+    max-height: 60vh;
+    width: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
 }
 .card{
     background: linear-gradient(140.58deg, #FFE7AB 5.95%, #D3AC61 94.05%);

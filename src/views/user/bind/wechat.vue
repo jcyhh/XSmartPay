@@ -13,10 +13,10 @@
         <div class="cell upload flex jb ast mt20">
             <div class="flex col jb">
                 <div>
-                    <div class="size28">收款二维码</div>
-                    <div class="size24 opc5 mt10">请上传清晰的图片</div>
+                    <div class="size28">{{ $t('收款二维码') }}</div>
+                    <div class="size24 opc5 mt10">{{ $t('请上传清晰的图片') }}</div>
                 </div>
-                <div class="size24 main">点击图片查看大图</div>
+                <div class="size24 main">{{ $t('点击图片查看大图') }}</div>
             </div>
             <CusUpload v-model:url="qr_code"></CusUpload>
         </div>

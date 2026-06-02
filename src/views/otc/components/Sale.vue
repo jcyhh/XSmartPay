@@ -8,18 +8,18 @@
                 </div>
 
                 <div class="size24 mt16">
-                    <span class="opc5">单价</span>
+                    <span class="opc5">{{ $t('单价') }}</span>
                     <span class="ml10 mr5 main">¥</span>
                     <span class="main" v-init="info?.price"></span>
                 </div>
 
                 <div class="flex mt30">
                     <div class="tabitem" :class="current==0?'':'opc5'" @click="onTabChange(0)">
-                        <span>按金额出售</span>
+                        <span>{{ $t('按金额出售') }}</span>
                         <div class="line animate__animated animate__zoomIn ani3" v-if="current==0"></div>
                     </div>
                     <div class="tabitem ml40" :class="current==1?'':'opc5'" @click="onTabChange(1)">
-                        <span>按数量出售</span>
+                        <span>{{ $t('按数量出售') }}</span>
                         <div class="line animate__animated animate__zoomIn ani3" v-if="current==1"></div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="size24 opc5 mt30">
-                    <span>限额 : </span>
+                    <span>{{ $t('限额') }} : </span>
                     <span v-init="info?.cny_min_num"></span>
                     <span class="ml5">CNY</span>
                     <span class="ml5 mr5">-</span>
@@ -38,14 +38,14 @@
                         <span v-init="info?.cny_max_num"></span>
                         <span class="ml5">CNY</span>
                     </template>
-                    <span v-else>不限</span>
+                    <span v-else>{{ $t('不限') }}</span>
                 </div>
 
-                <div class="size26 opc5 mt40 mb16">{{ $t('支付方式') }} <span class="opc5">（可多选）</span></div>
+                <div class="size26 opc5 mt40 mb16">{{ $t('支付方式') }} <span class="opc5">{{ $t('（可多选）') }}</span></div>
                 <CusPaytype v-model:paytype="paytype" :multiple="true" :options="allowedPayTypes" @before-bind="show=false"></CusPaytype>
 
                 <div class="flex jb ac mt26 size26">
-                    <div class="opc5">交易数量</div>
+                    <div class="opc5">{{ $t('交易数量') }}</div>
                     <div>
                         <span v-init="tradeNum"></span>
                         <span class="ml5">{{ assetName }}</span>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="flex jb ac mt20 size26">
-                    <div class="opc5">手续费</div>
+                    <div class="opc5">{{ $t('手续费') }}</div>
                     <div>
                         <span v-init="fee"></span>
                         <span class="ml5">{{ assetName }}</span>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="flex jb ac mt20 size26">
-                    <div class="opc5">交易总额</div>
+                    <div class="opc5">{{ $t('交易总额') }}</div>
                     <div>
                         <span class="mr5">¥</span>
                         <span v-init="tradeAmount"></span>

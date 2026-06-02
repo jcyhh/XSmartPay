@@ -104,8 +104,8 @@
         </div>
 
         <div class="otc mt30 flex col jc" @click="routerPush('/otc')">
-            <div class="title size40 bold">OTC 交易</div>
-            <div class="size24 opc5 mt10">安全便捷 自由买卖</div>
+            <div class="title size40 bold">{{ $t('OTC 交易') }}</div>
+            <div class="size24 opc5 mt10">{{ $t('安全便捷 自由买卖') }}</div>
         </div>
 
         <div class="mt40 size34 bold6 main">{{ $t('常用功能') }}</div>

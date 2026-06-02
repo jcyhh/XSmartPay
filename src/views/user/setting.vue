@@ -13,28 +13,28 @@
         </div>
 
         <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/bank')">
-            <div class="size28">银行卡</div>
+            <div class="size28">{{ $t('银行卡') }}</div>
             <div class="flex ac">
-                <div class="bind binded flex ac animate__animated animate__zoomIn ani3" v-if="isPaymentBinded('bank_card')">已绑定</div>
-                <div class="bind unbind flex ac animate__animated animate__zoomIn ani3" v-else>未绑定</div>
+                <div class="bind binded flex ac animate__animated animate__zoomIn ani3" v-if="isPaymentBinded('bank_card')">{{ $t('已绑定') }}</div>
+                <div class="bind unbind flex ac animate__animated animate__zoomIn ani3" v-else>{{ $t('未绑定') }}</div>
                 <van-icon name="arrow" color="#FFFFFF80" />
             </div>
         </div>
 
         <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/alipay')">
-            <div class="size28">支付宝</div>
+            <div class="size28">{{ $t('支付宝') }}</div>
             <div class="flex ac">
-                <div class="bind binded flex ac animate__animated animate__zoomIn ani3" v-if="isPaymentBinded('alipay')">已绑定</div>
-                <div class="bind unbind flex ac animate__animated animate__zoomIn ani3" v-else>未绑定</div>
+                <div class="bind binded flex ac animate__animated animate__zoomIn ani3" v-if="isPaymentBinded('alipay')">{{ $t('已绑定') }}</div>
+                <div class="bind unbind flex ac animate__animated animate__zoomIn ani3" v-else>{{ $t('未绑定') }}</div>
                 <van-icon name="arrow" color="#FFFFFF80" />
             </div>
         </div>
 
         <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/wechat')">
-            <div class="size28">微信</div>
+            <div class="size28">{{ $t('微信') }}</div>
             <div class="flex ac">
-                <div class="bind binded flex ac animate__animated animate__zoomIn ani3" v-if="isPaymentBinded('wechat')">已绑定</div>
-                <div class="bind unbind flex ac animate__animated animate__zoomIn ani3" v-else>未绑定</div>
+                <div class="bind binded flex ac animate__animated animate__zoomIn ani3" v-if="isPaymentBinded('wechat')">{{ $t('已绑定') }}</div>
+                <div class="bind unbind flex ac animate__animated animate__zoomIn ani3" v-else>{{ $t('未绑定') }}</div>
                 <van-icon name="arrow" color="#FFFFFF80" />
             </div>
         </div>

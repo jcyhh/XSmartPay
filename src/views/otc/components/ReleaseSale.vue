@@ -1,20 +1,20 @@
 <template>
     <div class="mainCard">
         <div class="inp flex jb ac" @click="pickerShow=true">
-            <div class="size28">挂卖币种</div>
+            <div class="size28">{{ $t('挂卖币种') }}</div>
             <div class="flex ac size28 opc5">
                 <img :src="currentPicker?.icon" class="img32 mr10" v-if="currentPicker?.icon">
                 <div class="mr10">{{ currentPicker?.name }}</div>
                 <van-icon name="arrow" />
             </div>
         </div>
-        <div class="size28 mt30">挂卖数量</div>
+        <div class="size28 mt30">{{ $t('挂卖数量') }}</div>
         <div class="inp flex jb ac mt25">
-            <input type="number" v-model="num" placeholder="请输入数量" class="flex1 size28">
+            <input type="number" v-model="num" :placeholder="$t('请输入数量')" class="flex1 size28">
             <div class="size28">{{ currentPicker?.name }}</div>
         </div>
         <div class="size24 opc5 mt16">
-            <span>限量 : </span>
+            <span>{{ $t('限量') }} : </span>
             <span v-init="currentPicker?.min_order_amount"></span>
             <span class="ml5">{{ currentPicker?.name }}</span>
             <span class="ml5 mr5">-</span>
@@ -22,38 +22,38 @@
                 <span v-init="currentPicker?.max_order_amount"></span>
                 <span class="ml5">{{ currentPicker?.name }}</span>
             </template>
-            <span v-else>不限</span>
+            <span v-else>{{ $t('不限') }}</span>
         </div>
-        <div class="size28 mt30">挂卖单价</div>
+        <div class="size28 mt30">{{ $t('挂卖单价') }}</div>
         <div class="inp flex jb ac mt25">
-            <input type="number" v-model="price" placeholder="请输入金额" class="flex1 size28">
+            <input type="number" v-model="price" :placeholder="$t('请输入金额')" class="flex1 size28">
             <div class="size28">CNY</div>
         </div>
         <div class="size24 opc5 mt16">
-            <span>限价 : </span>
+            <span>{{ $t('限价') }} : </span>
             <span v-init="currentPicker?.min_price"></span>
             <span class="ml5">CNY</span>
             <span class="ml5 mr5">-</span>
             <span v-init="currentPicker?.max_price"></span>
             <span class="ml5">CNY</span>
         </div>
-        <div class="size28 mt30">订单限额 <span class="size24 opc5">(不填则不限制)</span></div>
+        <div class="size28 mt30">{{ $t('订单限额') }} <span class="size24 opc5">{{ $t('(不填则不限制)') }}</span></div>
         <div class="mt24 flex ac">
             <div class="inp flex flex1">
-                <input type="number" v-model="min_num" placeholder="最低" class="flex1 size28">
+                <input type="number" v-model="min_num" :placeholder="$t('最低')" class="flex1 size28">
             </div>
             
             <div class="line"></div>
             <div class="inp flex flex1">
-                <input type="number" v-model="max_num" placeholder="最高" class="flex1 size28">
+                <input type="number" v-model="max_num" :placeholder="$t('最高')" class="flex1 size28">
             </div>
         </div>
         <div class="size28 opc5 mt40">
-            <span>手续费 : </span>
+            <span>{{ $t('手续费') }} : </span>
             <span v-init="fee"></span>
             <span class="ml5">{{ currentPicker?.name }}</span>
         </div>
-        <div class="size28 mt40 mb16">支付方式 <span class="opc5">（可多选）</span></div>
+        <div class="size28 mt40 mb16">{{ $t('支付方式') }} <span class="opc5">{{ $t('（可多选）') }}</span></div>
         <CusPaytype v-model:paytype="paytype" :multiple="true"></CusPaytype>
     </div>
 

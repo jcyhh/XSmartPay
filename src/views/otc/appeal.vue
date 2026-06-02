@@ -5,16 +5,16 @@
         
         <div class="card">
             <textarea :placeholder="$t('请输入本次申请原因')" v-model="remark" maxlength="500" class="area"></textarea>
-            <div class="size24 opc5 mt30">{{ remark.length }}/500 字</div>
+            <div class="size24 opc5 mt30">{{ remark.length }}/500 {{ $t('字') }}</div>
         </div>
 
         <div class="card mt30 flex jb ast">
             <div class="flex col jb">
                 <div>
-                    <div class="size28">申诉凭证</div>
-                    <div class="size24 opc5 mt10">请上传清晰的图片</div>
+                    <div class="size28">{{ $t('申诉凭证') }}</div>
+                    <div class="size24 opc5 mt10">{{ $t('请上传清晰的图片') }}</div>
                 </div>
-                <div class="size24 main">点击图片查看大图</div>
+                <div class="size24 main">{{ $t('点击图片查看大图') }}</div>
             </div>
             <CusUpload v-model:url="appealVoucher"></CusUpload>
         </div>

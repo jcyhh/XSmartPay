@@ -2,15 +2,15 @@
     <div class="paytype flex jb ac" @click="onRowClick('bank')" v-if="showOption('bank')">
         <div class="flex ac">
             <div class="line bank mr10"></div>
-            <div class="size28 bold6">银行卡</div>
+            <div class="size28 bold6">{{ $t('银行卡') }}</div>
         </div>
         <div class="flex ac" v-if="isBinded('bank')">
             <img src="@/assets/user/30.png" class="img32 animate__animated animate__zoomIn ani3" v-if="isSelected('bank')">
             <img src="@/assets/user/31.png" class="img32" v-else>
         </div>
         <div class="flex ac size24" v-else @click.stop="goBind('bank')">
-            <div class="red">未绑定</div>
-            <div class="ml10 mr10">前往绑定</div>
+            <div class="red">{{ $t('未绑定') }}</div>
+            <div class="ml10 mr10">{{ $t('前往绑定') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
     </div>
@@ -18,15 +18,15 @@
     <div class="paytype flex jb ac" @click="onRowClick('alipay')" v-if="showOption('alipay')">
         <div class="flex ac">
             <div class="line alipay mr10"></div>
-            <div class="size28 bold6">支付宝</div>
+            <div class="size28 bold6">{{ $t('支付宝') }}</div>
         </div>
         <div class="flex ac" v-if="isBinded('alipay')">
             <img src="@/assets/user/30.png" class="img32 animate__animated animate__zoomIn ani3" v-if="isSelected('alipay')">
             <img src="@/assets/user/31.png" class="img32" v-else>
         </div>
         <div class="flex ac size24" v-else @click.stop="goBind('alipay')">
-            <div class="red">未绑定</div>
-            <div class="ml10 mr10">前往绑定</div>
+            <div class="red">{{ $t('未绑定') }}</div>
+            <div class="ml10 mr10">{{ $t('前往绑定') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
     </div>
@@ -34,15 +34,15 @@
     <div class="paytype flex jb ac" @click="onRowClick('wechat')" v-if="showOption('wechat')">
         <div class="flex ac">
             <div class="line wechat mr10"></div>
-            <div class="size28 bold6">微信</div>
+            <div class="size28 bold6">{{ $t('微信') }}</div>
         </div>
         <div class="flex ac" v-if="isBinded('wechat')">
             <img src="@/assets/user/30.png" class="img32 animate__animated animate__zoomIn ani3" v-if="isSelected('wechat')">
             <img src="@/assets/user/31.png" class="img32" v-else>
         </div>
         <div class="flex ac size24" v-else @click.stop="goBind('wechat')">
-            <div class="red">未绑定</div>
-            <div class="ml10 mr10">前往绑定</div>
+            <div class="red">{{ $t('未绑定') }}</div>
+            <div class="ml10 mr10">{{ $t('前往绑定') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
     </div>

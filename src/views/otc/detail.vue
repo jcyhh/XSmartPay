@@ -1,30 +1,34 @@
 <template>
-    <CusNav :title="$t('订单详情')"></CusNav>
+    <CusNav :title="$t('订单详情')">
+        <div class="flex je">
+            <van-icon :size="24" name="chat-o" @click="routerPush(`/otc/chat/${info?.receiver_id}`)" v-if="showChatEntry" />
+        </div>
+    </CusNav>
 
     <div class="pl30 pr30 pt30 rel" v-if="info">
 
         <div class="inp flex jb ac size24">
-            <div>订单状态</div>
+            <div>{{ $t('订单状态') }}</div>
             <div :class="statusClass">{{ statusText }}</div>
         </div>
 
         <div class="mainCard mt30">
             <div class="flex jb ac">
-                <div class="opc5">{{ isBuyer ? '购买总价' : '交易总额' }}</div>
+                <div class="opc5">{{ isBuyer ? $t('购买总价') : $t('交易总额') }}</div>
                 <div>
                     <span v-init="info.total_amount"></span>
                     <span class="ml5">CNY</span>
                 </div>
             </div>
             <div class="flex jb ac mt25">
-                <div class="opc5">交易单价</div>
+                <div class="opc5">{{ $t('交易单价') }}</div>
                 <div>
                     <span>¥</span>
                     <span v-init="info.price"></span>
                 </div>
             </div>
             <div class="flex jb ac mt25">
-                <div class="opc5">交易数量</div>
+                <div class="opc5">{{ $t('交易数量') }}</div>
                 <div>
                     <span v-init="info.num"></span>
                     <span class="ml5">{{ assetName }}</span>
@@ -33,18 +37,18 @@
         </div>
 
         <div class="mainCard mt30 pay" v-if="showPaymentInfo">
-            <div class="size28">{{ isSeller ? '收款方式' : '支付方式' }}</div>
+            <div class="size28">{{ isSeller ? $t('收款方式') : $t('支付方式') }}</div>
             <template v-for="payment in payments" :key="payment.type">
                 <div class="flex ac mt28 mb26">
                     <div class="line" :class="payTypeClass(payment.type)"></div>
                     <div class="size26 ml10">{{ payTypeName(payment.type) }}</div>
                 </div>
                 <div class="flex jb ac size26">
-                    <div class="opc5">{{ payment.type === 'bank_card' ? '持卡人姓名' : '真实姓名' }}</div>
+                    <div class="opc5">{{ payment.type === 'bank_card' ? $t('持卡人姓名') : $t('真实姓名') }}</div>
                     <div>{{ payment.real_name || '--' }}</div>
                 </div>
                 <div class="flex jb ac size26 mt20" v-if="payment.type === 'bank_card'">
-                    <div class="opc5">卡号</div>
+                    <div class="opc5">{{ $t('卡号') }}</div>
                     <div class="flex ac">
                         <div>{{ payment.account || '--' }}</div>
                         <img src="@/assets/otc/5.png" class="img24 ml10" v-copy="payment.account" v-if="payment.account">
@@ -52,23 +56,23 @@
                 </div>
                 <template v-else>
                     <div class="flex jb ac size26 mt20">
-                        <div class="opc5">账号</div>
+                        <div class="opc5">{{ $t('账号') }}</div>
                         <div class="flex ac">
                             <div>{{ payment.account || '--' }}</div>
                             <img src="@/assets/otc/5.png" class="img24 ml10" v-copy="payment.account" v-if="payment.account">
                         </div>
                     </div>
                     <div class="flex jb ast size26 mt20" v-if="payment.qr_code">
-                        <div class="opc5">收款二维码</div>
+                        <div class="opc5">{{ $t('收款二维码') }}</div>
                         <img :src="payment.qr_code" class="img160 netimg" @click="previewImgs([payment.qr_code])">
                     </div>
                 </template>
                 <div class="flex jb ac size26 mt20" v-if="payment.type === 'bank_card' && payment.bank_name">
-                    <div class="opc5">银行名称</div>
+                    <div class="opc5">{{ $t('银行名称') }}</div>
                     <div>{{ payment.bank_name }}</div>
                 </div>
                 <div class="flex jb ac size26 mt20" v-if="payment.type === 'bank_card' && payment.branch_name">
-                    <div class="opc5">开户行</div>
+                    <div class="opc5">{{ $t('开户行') }}</div>
                     <div>{{ payment.branch_name }}</div>
                 </div>
             </template>
@@ -77,10 +81,10 @@
         <div class="card mt30 flex jb ast" v-if="showPayVoucherUpload">
             <div class="flex col jb">
                 <div>
-                    <div class="size28">支付凭证</div>
-                    <div class="size24 opc5 mt10">请上传清晰的图片</div>
+                    <div class="size28">{{ $t('支付凭证') }}</div>
+                    <div class="size24 opc5 mt10">{{ $t('请上传清晰的图片') }}</div>
                 </div>
-                <div class="size24 main">点击图片查看大图</div>
+                <div class="size24 main">{{ $t('点击图片查看大图') }}</div>
             </div>
             <CusUpload v-model:url="payVoucher"></CusUpload>
         </div>
@@ -88,10 +92,10 @@
         <div class="card mt30 flex jb ast" v-else-if="showPayVoucherView">
             <div class="flex col jb">
                 <div>
-                    <div class="size28">支付凭证</div>
-                    <div class="size24 opc5 mt10">请核对买家上传的凭证</div>
+                    <div class="size28">{{ $t('支付凭证') }}</div>
+                    <div class="size24 opc5 mt10">{{ $t('请核对买家上传的凭证') }}</div>
                 </div>
-                <div class="size24 main" @click="previewImgs([displayPayVoucher])">点击图片查看大图</div>
+                <div class="size24 main" @click="previewImgs([displayPayVoucher])">{{ $t('点击图片查看大图') }}</div>
             </div>
             <img :src="displayPayVoucher" class="img160 netimg" @click="previewImgs([displayPayVoucher])">
         </div>
@@ -112,27 +116,27 @@
                 </van-count-down>
             </div>
             <div class="size24" v-if="showAppealLink">
-                <span>对此订单有疑惑？</span>
-                <span class="red" @click="goAppeal">点击申诉</span>
+                <span>{{ $t('对此订单有疑惑？') }}</span>
+                <span class="red" @click="goAppeal">{{ $t('点击申诉') }}</span>
             </div>
         </div>
 
         <div class="mainCard mt30 size26" v-if="info.status==3 && info.appeal_reason">
             <div class="flex jb ac ast">
-                <div class="opc5">申诉原因</div>
+                <div class="opc5">{{ $t('申诉原因') }}</div>
                 <div class="flex1 tr ml30">{{ info.appeal_reason }}</div>
             </div>
             <div class="flex jb ast mt25" v-if="info.appeal_voucher">
-                <div class="opc5">申诉凭证</div>
+                <div class="opc5">{{ $t('申诉凭证') }}</div>
                 <img :src="info.appeal_voucher" class="img160 netimg" @click="previewImgs([info.appeal_voucher])">
             </div>
         </div>
 
-        <div class="mainButton mt40 btn flex jc ac main" v-if="showConfirmPayBtn" @click="showConfirm=true">确认已支付</div>
+        <div class="mainButton mt40 btn flex jc ac main" v-if="showConfirmPayBtn" @click="showConfirm=true">{{ $t('确认已支付') }}</div>
 
-        <div class="mainButton mt40 btn flex jc ac main" v-if="showConfirmReceiptBtn" @click="showPayConfirm=true">确认已收款</div>
+        <div class="mainButton mt40 btn flex jc ac main" v-if="showConfirmReceiptBtn" @click="showPayConfirm=true">{{ $t('确认已收款') }}</div>
 
-        <div class="cancelBtn flex jc ac mt30" v-if="showCancelBtn" @click="showCancel=true">取消订单</div>
+        <div class="cancelBtn flex jc ac mt30" v-if="showCancelBtn" @click="showCancel=true">{{ $t('取消订单') }}</div>
 
         <div class="gap100"></div>
     </div>
@@ -142,12 +146,12 @@
     </CusAsk>
 
     <CusAsk v-model:show="showConfirm" :title="$t('确认已支付')" @submit="submitPay">
-        <div class="size28">请确认已向卖家付款！</div>
-        <div class="size28 red mt10">如果恶意标记打款订单，可能会被封号处理</div>
+        <div class="size28">{{ $t('请确认已向卖家付款！') }}</div>
+        <div class="size28 red mt10">{{ $t('如果恶意标记打款订单，可能会被封号处理') }}</div>
     </CusAsk>
 
     <CusAsk v-model:show="showPayConfirm" :title="$t('确认已收款')" @submit="submitConfirm">
-        <div class="size28">请确认买家已向您打款！</div>
+        <div class="size28">{{ $t('请确认买家已向您打款！') }}</div>
     </CusAsk>
 </template>
 
@@ -187,9 +191,9 @@ const payments = computed(() => {
 })
 
 const payTypeMap:Record<string, { name:string, className:string }> = {
-    bank_card: { name: '银行卡', className: 'bank' },
-    wechat: { name: '微信', className: 'wechat' },
-    alipay: { name: '支付宝', className: 'alipay' }
+    bank_card: { name: t('银行卡'), className: 'bank' },
+    wechat: { name: t('微信'), className: 'wechat' },
+    alipay: { name: t('支付宝'), className: 'alipay' }
 }
 
 const payTypeName = (type:string) => payTypeMap[type]?.name || type
@@ -197,11 +201,11 @@ const payTypeClass = (type:string) => payTypeMap[type]?.className || ''
 
 const statusText = computed(() => {
     const status = info.value?.status
-    if (status == 0) return '已取消'
-    if (status == 1) return isBuyer.value ? '待付款' : '待买家付款'
-    if (status == 2) return isBuyer.value ? '待卖家确认收款' : '待确认收款'
-    if (status == 3) return '申诉中'
-    if (status == 4) return '已完成'
+    if (status == 0) return t('已取消')
+    if (status == 1) return isBuyer.value ? t('待付款') : t('待买家付款')
+    if (status == 2) return isBuyer.value ? t('待卖家确认收款') : t('待确认收款')
+    if (status == 3) return t('申诉中')
+    if (status == 4) return t('已完成')
     return '--'
 })
 
@@ -232,7 +236,7 @@ const showCountdown = computed(() => {
 
 const countdownMs = computed(() => Number(info.value?.countdown || 0) * 1000)
 
-const countdownLabel = computed(() => info.value?.status == 1 ? '付款倒计时' : '确认倒计时')
+const countdownLabel = computed(() => info.value?.status == 1 ? t('付款倒计时') : t('确认倒计时'))
 
 const showAppealLink = computed(() => isSeller.value && info.value?.status == 2)
 
@@ -243,6 +247,8 @@ const showConfirmReceiptBtn = computed(() => isSeller.value && info.value?.statu
 const showCancelBtn = computed(() => isBuyer.value && info.value?.status == 1)
 
 const isOrderEnded = (status?:number) => status === 0 || status === 4
+
+const showChatEntry = computed(() => !!info.value?.receiver_id && !isOrderEnded(info.value?.status))
 
 const clearPoll = () => {
     if (pollTimer) {

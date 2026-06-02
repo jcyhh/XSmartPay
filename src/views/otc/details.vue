@@ -5,18 +5,18 @@
 
         <div class="mainCard size26 mb30">
             <div class="flex jb ac">
-                <div class="opc5">委托单号</div>
+                <div class="opc5">{{ $t('委托单号') }}</div>
                 <div>{{ order.order_no || '--' }}</div>
             </div>
             <div class="flex jb ac mt25">
-                <div class="opc5">交易单价</div>
+                <div class="opc5">{{ $t('交易单价') }}</div>
                 <div>
                     <span>¥</span>
                     <span v-init="order.price"></span>
                 </div>
             </div>
             <div class="flex jb ac mt25">
-                <div class="opc5">交易限额</div>
+                <div class="opc5">{{ $t('交易限额') }}</div>
                 <div>
                     <span v-init="order.cny_min_num"></span>
                     <span class="ml5 mr5">CNY</span>
@@ -25,39 +25,39 @@
                         <span class="ml5 mr5" v-init="order.cny_max_num"></span>
                         <span>CNY</span>
                     </template>
-                    <span class="ml5" v-else>不限</span>
+                    <span class="ml5" v-else>{{ $t('不限') }}</span>
                 </div>
             </div>
             <div class="flex jb ac mt25">
-                <div class="opc5">交易数量</div>
+                <div class="opc5">{{ $t('交易数量') }}</div>
                 <div>
                     <span v-init="order.num"></span>
                     <span class="ml5">{{ assetName }}</span>
                 </div>
             </div>
             <div class="flex jb ac mt25">
-                <div class="opc5">交易总额</div>
+                <div class="opc5">{{ $t('交易总额') }}</div>
                 <div>
                     <span v-init="order.total_amount"></span>
                     <span class="ml5">CNY</span>
                 </div>
             </div>
             <div class="flex jb ac mt25">
-                <div class="opc5">已交易数量</div>
+                <div class="opc5">{{ $t('已交易数量') }}</div>
                 <div>
                     <span v-init="order.traded_num"></span>
                     <span class="ml5">{{ assetName }}</span>
                 </div>
             </div>
             <div class="flex jb ac mt25">
-                <div class="opc5">已交易总额</div>
+                <div class="opc5">{{ $t('已交易总额') }}</div>
                 <div>
                     <span>¥</span>
                     <span v-init="order.traded_amount"></span>
                 </div>
             </div>
             <div class="flex jb ac mt25">
-                <div class="opc5">支付方式</div>
+                <div class="opc5">{{ $t('支付方式') }}</div>
                 <div class="flex ac pay size22">
                     <template v-for="payType in getPayTypes(order.pay_types)" :key="payType">
                         <div class="line ml30" :class="payTypeClass(payType)"></div>
@@ -70,7 +70,7 @@
         <div class="card mb20" v-for="item in trades" :key="item.id" @click="goTradeDetail(item)">
             <div class="flex jb ac">
                 <div class="flex ac">
-                    <div class="tag" :class="item.role=='buyer'?'in':'out'">{{ item.role=='buyer' ? '买入' : '卖出' }}</div>
+                    <div class="tag" :class="item.role=='buyer'?'in':'out'">{{ item.role=='buyer' ? $t('买入') : $t('卖出') }}</div>
                     <div class="ml16">
                         <span class="size32">{{ getAssetByCode(item.ccy) }}</span>
                         <span class="size32 opc5">/</span>
@@ -82,20 +82,20 @@
             <div class="size24 opc5 mt20">{{ item.created_at }}</div>
             <div class="flex mt24">
                 <div class="flex1">
-                    <div class="size20 opc5">交易单价</div>
+                    <div class="size20 opc5">{{ $t('交易单价') }}</div>
                     <div class="size24 bold5 mt10">
                         <span>¥</span>
                         <span v-init="item.price"></span>
                     </div>
                 </div>
                 <div class="flex1">
-                    <div class="size20 opc5">交易数量({{ getAssetByCode(item.ccy) }})</div>
+                    <div class="size20 opc5">{{ $t('交易数量') }}({{ getAssetByCode(item.ccy) }})</div>
                     <div class="size24 bold5 mt10">
                         <span v-init="item.num"></span>
                     </div>
                 </div>
                 <div class="flex1">
-                    <div class="size20 opc5">交易总额</div>
+                    <div class="size20 opc5">{{ $t('交易总额') }}</div>
                     <div class="size24 bold5 mt10">
                         <span v-init="item.total_amount"></span>
                     </div>
@@ -111,6 +111,7 @@
 import CusNav from '@/components/CusNav/index.vue'
 import CusEmpty from '@/components/CusEmpty/index.vue'
 import { getAssetByCode } from '@/config';
+import { t } from '@/locale';
 import { routerPush } from '@/router';
 import { apiOtcOrderDetail } from '@/api/otc';
 import { computed, onMounted, ref } from 'vue';
@@ -127,15 +128,15 @@ const hasMaxLimit = computed(() => Number(order.value?.max_num) > 0)
 
 const payTypeMap:Record<string, { name:string, className:string }> = {
     bank_card: {
-        name: '银行卡',
+        name: t('银行卡'),
         className: 'bank'
     },
     wechat: {
-        name: '微信',
+        name: t('微信'),
         className: 'wechat'
     },
     alipay: {
-        name: '支付宝',
+        name: t('支付宝'),
         className: 'alipay'
     }
 }
@@ -146,11 +147,11 @@ const payTypeOrder = ['bank_card', 'wechat', 'alipay']
 const getPayTypes = (payTypes:string[] = []) => payTypeOrder.filter(type => payTypes?.includes(type))
 
 const getTradeStatusText = (status:number) => {
-    if(status==0)return '已取消'
-    if(status==1)return '待付款'
-    if(status==2)return '待确认收款'
-    if(status==3)return '申诉中'
-    if(status==4)return '已完成'
+    if(status==0)return t('已取消')
+    if(status==1)return t('待付款')
+    if(status==2)return t('待确认收款')
+    if(status==3)return t('申诉中')
+    if(status==4)return t('已完成')
     return '--'
 }
 

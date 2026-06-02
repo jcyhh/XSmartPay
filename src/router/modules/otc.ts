@@ -22,5 +22,9 @@ export default [
     {
         path:'/otc/appeal',
         component: () => import('@/views/otc/appeal.vue')
+    },
+    {
+        path:'/otc/chat/:id',
+        component: () => import('@/views/otc/chat.vue')
     }
 ]

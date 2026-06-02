@@ -22,7 +22,7 @@
                     <div class="card mb20" v-for="item in list" :key="item.id" @click="goOrderDetail(item)">
                         <div class="flex jb ac">
                             <div class="flex ac">
-                                <div class="tag" :class="item.type==1?'in':'out'">{{ item.type==1 ? '买入' : '卖出' }}</div>
+                                <div class="tag" :class="item.type==1?'in':'out'">{{ item.type==1 ? $t('买入') : $t('卖出') }}</div>
                                 <div class="ml16">
                                     <span class="size32">{{ getAssetByCode(item.ccy) }}</span>
                                     <span class="size32 opc5">/</span>
@@ -34,26 +34,26 @@
                         <div class="size24 opc5 mt20">{{ item.created_at }}</div>
                         <div class="flex mt24">
                             <div class="flex1">
-                                <div class="size20 opc5">交易单价</div>
+                                <div class="size20 opc5">{{ $t('交易单价') }}</div>
                                 <div class="size24 bold5 mt10">
                                     <span>¥</span>
                                     <span v-init="item.price"></span>
                                 </div>
                             </div>
                             <div class="flex1">
-                                <div class="size20 opc5">剩余数量({{ getAssetByCode(item.ccy) }})</div>
+                                <div class="size20 opc5">{{ $t('剩余数量') }}({{ getAssetByCode(item.ccy) }})</div>
                                 <div class="size24 bold5 mt10">
                                     <span v-init="item.remain_num"></span>
                                 </div>
                             </div>
                             <div class="flex1">
-                                <div class="size20 opc5">交易总额</div>
+                                <div class="size20 opc5">{{ $t('交易总额') }}</div>
                                 <div class="size24 bold5 mt10">
                                     <span v-init="item.total_amount"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="cancel flex jc ac mt30 size24" v-if="item.status==1" @click.stop="openCancel(item)">撤销委托单</div>
+                        <div class="cancel flex jc ac mt30 size24" v-if="item.status==1" @click.stop="openCancel(item)">{{ $t('撤销委托单') }}</div>
                     </div>
                 </template>
 
@@ -61,7 +61,7 @@
                     <div class="card mb20" v-for="item in list" :key="item.id" @click="goTradeDetail(item)">
                         <div class="flex jb ac">
                             <div class="flex ac">
-                                <div class="tag" :class="item.role=='buyer'?'in':'out'">{{ item.role=='buyer' ? '买入' : '卖出' }}</div>
+                                <div class="tag" :class="item.role=='buyer'?'in':'out'">{{ item.role=='buyer' ? $t('买入') : $t('卖出') }}</div>
                                 <div class="ml16">
                                     <span class="size32">{{ getAssetByCode(item.ccy) }}</span>
                                     <span class="size32 opc5">/</span>
@@ -73,20 +73,20 @@
                         <div class="size24 opc5 mt20">{{ item.created_at }}</div>
                         <div class="flex mt24">
                             <div class="flex1">
-                                <div class="size20 opc5">交易单价</div>
+                                <div class="size20 opc5">{{ $t('交易单价') }}</div>
                                 <div class="size24 bold5 mt10">
                                     <span>¥</span>
                                     <span v-init="item.price"></span>
                                 </div>
                             </div>
                             <div class="flex1">
-                                <div class="size20 opc5">交易数量({{ getAssetByCode(item.ccy) }})</div>
+                                <div class="size20 opc5">{{ $t('交易数量') }}({{ getAssetByCode(item.ccy) }})</div>
                                 <div class="size24 bold5 mt10">
                                     <span v-init="item.num"></span>
                                 </div>
                             </div>
                             <div class="flex1">
-                                <div class="size20 opc5">交易总额</div>
+                                <div class="size20 opc5">{{ $t('交易总额') }}</div>
                                 <div class="size24 bold5 mt10">
                                     <span v-init="item.total_amount"></span>
                                 </div>
@@ -158,9 +158,9 @@ const onCcyChange = (index:number) => {
 }
 
 const getOrderStatusText = (status:number) => {
-    if(status==0)return '已取消'
-    if(status==1)return '挂单中'
-    if(status==2)return '已完成'
+    if(status==0)return t('已取消')
+    if(status==1)return t('挂单中')
+    if(status==2)return t('已完成')
     return '--'
 }
 
@@ -171,11 +171,11 @@ const getOrderStatusClass = (status:number) => {
 }
 
 const getTradeStatusText = (status:number) => {
-    if(status==0)return '已取消'
-    if(status==1)return '待付款'
-    if(status==2)return '待确认收款'
-    if(status==3)return '申诉中'
-    if(status==4)return '已完成'
+    if(status==0)return t('已取消')
+    if(status==1)return t('待付款')
+    if(status==2)return t('待确认收款')
+    if(status==3)return t('申诉中')
+    if(status==4)return t('已完成')
     return '--'
 }
 

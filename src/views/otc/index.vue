@@ -1,11 +1,11 @@
 <template>
-    <CusNav :title="$t('OTC交易')" :show-bg="false"></CusNav>
+    <CusNav :title="$t('交易')" :show-bg="false"></CusNav>
     <img src="@/assets/otc/4.png" class="img92 pic92" @click="routerPush('/otc/release')">
     <div class="header">
         <div class="flex jb ac">
             <div class="tab flex size30 bold5">
-                <div class="item flex ac jc" :style="{color:type==0?'#000000':'#FFFFFF80'}" @click="onTypeChange(0)">买入</div>
-                <div class="item flex ac jc" :style="{color:type==1?'#000000':'#FFFFFF80'}" @click="onTypeChange(1)">卖出</div>
+                <div class="item flex ac jc" :style="{color:type==0?'#000000':'#FFFFFF80'}" @click="onTypeChange(0)">{{ $t('买入') }}</div>
+                <div class="item flex ac jc" :style="{color:type==1?'#000000':'#FFFFFF80'}" @click="onTypeChange(1)">{{ $t('卖出') }}</div>
                 <div class="line" :class="type==0?'line0':'line1'"></div>
             </div>
             <img src="@/assets/otc/1.png" class="img48" @click="routerPush('/otc/order')">
@@ -25,7 +25,7 @@
                 <div class="line flex0"></div>
                 <div class="flex ac ml30 flex0">
                     <img src="@/assets/otc/3.png" class="img24 mr10">
-                    <div class="size24 opc5">指导价</div>
+                    <div class="size24 opc5">{{ $t('指导价') }}</div>
                 </div>
             </div>
         </div>
@@ -50,12 +50,12 @@
                     </div>
                     <div class="line mt24 mb24"></div>
                     <div class="size24 opc5">
-                        <span class="mr10">数量:</span>
+                        <span class="mr10">{{ $t('数量') }}:</span>
                         <span v-init="item.remain_num" class="mr10"></span>
                         <span>{{ currentPicker?.name }}</span>
                     </div>
                     <div class="size24 opc5 mt16">
-                        <span class="mr10">订单限额:</span>
+                        <span class="mr10">{{ $t('订单限额') }}:</span>
                         <span v-init="item.cny_min_num" class="mr10"></span>
                         <span>CNY - </span>
                         <span v-init="item.cny_max_num" class="mr10"></span>
@@ -68,8 +68,8 @@
                                 <div class="ml10 mr30">{{ payTypeName(payType) }}</div>
                             </template>
                         </div>
-                        <div class="mainButton btn flex ac size24 main" @click="openBuy(item)" v-if="type==0">购买 {{ currentPicker?.name }}</div>
-                        <div class="mainButtonDel btn flex ac size24 main" @click="openSale(item)" v-else>出售 {{ currentPicker?.name }}</div>
+                        <div class="mainButton btn flex ac size24 main" @click="openBuy(item)" v-if="type==0">{{ $t('购买') }} {{ currentPicker?.name }}</div>
+                        <div class="mainButtonDel btn flex ac size24 main" @click="openSale(item)" v-else>{{ $t('出售') }} {{ currentPicker?.name }}</div>
                     </div>
                 </div>
 
@@ -100,6 +100,7 @@ import Buy from './components/Buy.vue';
 import Sale from './components/Sale.vue';
 import { routerPush } from '@/router/index.ts';
 import { apiOtcAssets } from '@/api/otc';
+import { t } from '@/locale';
 
 interface OtcAsset {
     asset_code: string
@@ -111,15 +112,15 @@ interface OtcAsset {
 
 const payTypeMap:Record<string, { name:string, className:string }> = {
     bank_card: {
-        name: '银行卡',
+        name: t('银行卡'),
         className: 'bank'
     },
     wechat: {
-        name: '微信',
+        name: t('微信'),
         className: 'wechat'
     },
     alipay: {
-        name: '支付宝',
+        name: t('支付宝'),
         className: 'alipay'
     }
 }
