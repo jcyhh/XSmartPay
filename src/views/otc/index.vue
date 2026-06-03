@@ -155,7 +155,6 @@ const params = computed(()=>({
 }))
 const { list, props: listProps, loadList } = useLoadList('/api/otc', 'data', params)
 const { props } = usePullRefresh(loadList)
-loadList()
 
 const loadAssets = async () => {
     const res:any = await apiOtcAssets()
@@ -186,8 +185,9 @@ const openSale = (data:any) => {
     saleRef.value?.open(data, asset?.fee_rate)
 }
 
-onMounted(() => {
-    loadAssets()
+onMounted(async () => {
+    await loadAssets()
+    loadList()
 })
 </script>
 
