@@ -60,10 +60,10 @@
             <img src="@/assets/home/2.png" class="img24">
         </div>
 
-        <div class="otc mt30 flex col jc" @click="routerPush('/otc')">
+        <!-- <div class="otc mt30 flex col jc" @click="routerPush('/otc')">
             <div class="title size40 bold">{{ $t('OTC 交易') }}</div>
             <div class="size24 opc5 mt10">{{ $t('安全便捷 自由买卖') }}</div>
-        </div>
+        </div> -->
 
         <div class="mainCard mt40 rel">
             <div class="size34 bold5 main">{{ appName }} {{ $t('开卡') }}</div>
