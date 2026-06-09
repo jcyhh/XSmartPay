@@ -2,7 +2,7 @@
     <CusNav :title="$t('设置')" :show-bg="false"></CusNav>
     <div class="pl30 pr30 pt30">
         
-        <div class="cell card flex jb ac mb20" @click="routerPush('/edit')" v-if="!isH5">
+        <div class="cell card flex jb ac mb20" @click="routerPush('/edit')" v-if="!(isH5 && providerStatus==1)">
             <div class="size28">{{ $t('修改密码') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
@@ -44,12 +44,12 @@
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
-        <div class="cell card flex jb ac mt20" @click="routerPush('/account')" v-if="!isH5">
+        <div class="cell card flex jb ac mt20" @click="routerPush('/account')" v-if="!(isH5 && providerStatus==1)">
             <div class="size28">{{ $t('切换账号') }}</div>
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
-        <div class="mainButton mainButtonDel flex jc ac main btn flex1 mt100" v-scale @click="show=true" v-if="!isH5">{{ $t('退出登录') }}</div>
+        <div class="mainButton mainButtonDel flex jc ac main btn flex1 mt100" v-scale @click="show=true" v-if="!(isH5 && providerStatus==1)">{{ $t('退出登录') }}</div>
 
     </div>
 
@@ -60,7 +60,7 @@
 import CusNav from '@/components/CusNav/index.vue'
 import { delAccount, delToken, getAccount, removeAccountItem } from '@/config/storage';
 import { routerPush, routerReplace } from '@/router';
-import { useAppStore } from '@/store';
+import { useAppStore, useDappStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import CusAsk from '@/components/CusAsk/index.vue'
 import { onActivated, onMounted, ref } from 'vue';
@@ -73,6 +73,9 @@ interface PaymentItem {
 
 const appStore = useAppStore()
 const { isH5 } = storeToRefs(appStore)
+
+const dappStore = useDappStore()
+const { providerStatus } = storeToRefs(dappStore)
 
 const show = ref(false)
 const bindedPayTypes = ref<string[]>([])

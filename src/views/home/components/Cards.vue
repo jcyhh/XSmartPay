@@ -112,6 +112,7 @@ const diff = computed(()=>{
 const space = getAdaptPx(30)
 
 onMounted(()=>{
+    userStore.loadCardConfig()
     loadData()
 })
 

@@ -5,7 +5,7 @@
         <div class="flex jb ac">
             <div class="flex ac">
                 <img src="@/assets/user/1.png" class="img110 mr24">
-                <div v-if="isH5">
+                <div v-if="isH5 && providerStatus==1">
                     <div class="size32 bold" v-init:address="userInfo?.address"></div>
                     <div class="flex mt20" v-if="!userInfo?.email">
                         <div class="mainButton flex jc ac bindTag" @click="routerPush('/bindEmail')">{{ $t('绑定邮箱') }}</div>
@@ -172,13 +172,16 @@
 import { assetAIX, assetNFTC, assetUSDT } from '@/config';
 import Banner from './components/Banner.vue';
 import { routerPush } from '@/router';
-import { useAppStore, useUserStore } from '@/store';
+import { useAppStore, useDappStore, useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import Popup from '@/views/home/components/Popup.vue';
 import { ref } from 'vue';
 
 const appStore = useAppStore()
 const { isH5 } = storeToRefs(appStore)
+
+const dappStore = useDappStore()
+const { providerStatus } = storeToRefs(dappStore)
 
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
