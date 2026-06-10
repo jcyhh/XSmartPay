@@ -2,9 +2,17 @@
     <CusNav :title="$t('修改支付密码')"></CusNav>
     <div class="pl30 pr30 pt30 rel">
 
-        <Password v-model="o_password" :tips="$t('旧密码')"></Password>
+        <div class="cell flex jb ac mt30 mb30">
+            <div>{{ $t('邮箱') }}</div>
+            <div class="size28 main flex0" v-init:address="userInfo?.email"></div>
+        </div>
 
-        <div class="gap30"></div>
+        <div class="cell flex ac mt30 mb30">
+            <input type="text" v-model="email_code" :placeholder="$t('验证码')" class="flex1 size28">
+            <div class="size28 main flex0">
+                <CusSms :account="userInfo?.email" type="4"></CusSms>
+            </div>
+        </div>
 
         <Password v-model="n_password" :tips="$t('新密码')"></Password>
 
@@ -25,19 +33,25 @@ import { message } from '@/utils/message';
 import { t } from '@/locale';
 import { apiEditPassword } from '@/api/login';
 import { routerGo } from '@/router';
+import { useUserStore } from '@/store/index.ts';
+import { storeToRefs } from 'pinia';
+import CusSms from '@/components/CusSms/index.vue'
 
-const o_password = ref()
+const userStore = useUserStore()
+const { userInfo } = storeToRefs(userStore)
+
 const n_password = ref()
 const passwordAgain = ref()
+const email_code = ref()
 
 const submit = async () => {
-    if(!o_password.value)return message(t('请输入旧密码'))
+    if(!email_code.value)return message(t('请输入验证码'))
     if(!n_password.value)return message(t('请输入新密码'))
     if(!passwordAgain.value)return message(t('请再次输入新密码'))
     if(n_password.value != passwordAgain.value)return message(t('新密码输入不一致'))
 
     await apiEditPassword({
-        o_password: o_password.value,
+        email_code: email_code.value,
         n_password: n_password.value,
         type: 2
     })
