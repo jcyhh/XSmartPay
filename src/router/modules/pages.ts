@@ -4,6 +4,10 @@ export default [
         component: () => import('@/views/download.vue')
     },
     {
+        path:'/chat',
+        component: () => import('@/views/chat.vue')
+    },
+    {
         path:'/login',
         component: () => import('@/views/login/index.vue')
     },
@@ -162,6 +166,10 @@ export default [
     {
         path:'/user/asset',
         component: () => import('@/views/user/asset.vue')
+    },
+    {
+        path:'/user/nft',
+        component: () => import('@/views/user/nft.vue')
     },
     {
         path:'/user/bind/bank',

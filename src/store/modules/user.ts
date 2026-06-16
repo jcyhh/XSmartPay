@@ -1,5 +1,6 @@
 import { apiCardConfig } from '@/api/card'
 import { apiUserInfo } from '@/api/user'
+import { getToken } from '@/config/storage'
 import { computedSub } from '@/utils'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
@@ -18,11 +19,14 @@ export const useUserStore = defineStore('user', () => {
         card_usdt_pay_rate.value = res.card_usdt_pay_rate
     }
 
+    const token = ref(getToken()?true:false)
+
     return {
         userInfo,
         loadUserInfo,
         card_usdt_pay_rate,
         card_aix_pay_rate,
-        loadCardConfig
+        loadCardConfig,
+        token
     }
 })

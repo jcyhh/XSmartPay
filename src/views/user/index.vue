@@ -113,6 +113,14 @@
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
+        <div class="cell flex jb ac mt20" @click="routerPush('/user/nft')">
+            <div class="flex ac">
+                <img src="@/assets/user/42.png" class="img64 mr20">
+                <div class="size28">{{ $t('我的NFT') }}</div>
+            </div>
+            <van-icon name="arrow" color="#FFFFFF80" />
+        </div>
+
         <div class="cell flex jb ac mt20" @click="routerPush('/community')">
             <div class="flex ac">
                 <img src="@/assets/user/8.png" class="img64 mr20">

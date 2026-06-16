@@ -510,5 +510,9 @@
     "限价": "Price limit",
     "限量": "Quantity limit",
     "限额": "Limit",
-    "（可多选）": "(multiple allowed)"
+    "（可多选）": "(multiple allowed)",
+    "交易": "Trade",
+    "我的NFT": "My NFT",
+    "价值": "Value",
+    "总量": "Total"
 }

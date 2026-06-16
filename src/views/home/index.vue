@@ -4,15 +4,27 @@
     <div class="rel pt30 pl30 pr30">
         
         <div class="flex">
-            <div class="card flex1 mr20">
-                <div class="flex ac">
-                    <img src="@/assets/common/aix.png" class="img52 mr12">
-                    <div class="size24 bold6">{{ assetAIX }}</div>
+            <div class="card flex2 mr20">
+                <div class="flex jb as">
+                    <div class="flex ac">
+                        <img src="@/assets/common/aix.png" class="img52 mr12">
+                        <div class="size24 bold6">{{ assetAIX }}</div>
+                    </div>
+                    <div class="tr">
+                        <div class="size28">
+                            $<span v-init="stats?.aix_price"></span>
+                        </div>
+                        <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
+                    </div>
                 </div>
-                <div class="size40 bold6 main mt30">
-                    $<span v-init="stats?.aix_price"></span>
+                <div>
+                    <span class="size24 opc5">{{ $t('总量') }}</span>
+                    <span class="size30 bold6 main ml5" v-init="stats?.private_equity_amount"></span>
                 </div>
-                <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
+                <div class="green size24 mt10">
+                    <span>≈$</span>
+                    <span v-init="stats?.private_equity_price"></span>
+                </div>
             </div>
             <div class="card flex1">
                 <div class="flex ac">

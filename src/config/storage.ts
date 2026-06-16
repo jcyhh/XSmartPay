@@ -1,3 +1,5 @@
+import { useUserStore } from "@/store"
+
 const addressKey: string = 'WELLET_ADDRESS' // 存储钱包地址的KEY
 
 const refKey: string = 'REF' // 存储邀请码的KEY
@@ -38,9 +40,17 @@ export const getRef = (): string => localStorage.getItem(refKey)||''
 export const delRef = (): void => localStorage.removeItem(refKey)
 
 // 存储Token
-export const setToken = (data: string): void => localStorage.setItem(tokenKey, data)
+export const setToken = (data: string): void => {
+    localStorage.setItem(tokenKey, data)
+    const userStore = useUserStore()
+    userStore.token = true
+}
 export const getToken = (): string => localStorage.getItem(tokenKey)||''
-export const delToken = (): void => localStorage.removeItem(tokenKey)
+export const delToken = (): void => {
+    localStorage.removeItem(tokenKey)
+    const userStore = useUserStore()
+    userStore.token = false
+}
 
 // 存储登入账户
 export const setAccount = (data: string): void => localStorage.setItem(accountKey, data)

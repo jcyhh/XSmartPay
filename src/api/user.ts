@@ -27,3 +27,5 @@ export const apiTransfer = async (params:any) => await apiPost('/api/transfer', 
 export const apiHelpDetail = async (params:any) => await apiGet(`/api/help_center/${params}`)
 
 export const apiLeves = async () => await apiGet('/api/config/finance_levels')
+
+export const apiChat = async () => await apiGet('/api/chat/customer_service')

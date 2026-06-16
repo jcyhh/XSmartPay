@@ -13,7 +13,8 @@
         src="@/assets/kefu.png"
         class="kefu"
         :style="kefuStyle"
-        @click="openLink(kf_url)"
+        v-show="token"
+        @click="openKefu"
         @touchstart="onKefuTouchStart"
         @touchmove="onKefuTouchMove"
         @touchend="onKefuTouchEnd"
@@ -23,20 +24,23 @@
 <script setup lang="ts">
 import CusLoading from '@/components/CusLoading/index.vue'
 import { storeToRefs } from 'pinia';
-import { useAppStore, useDappStore } from './store';
+import { useAppStore, useDappStore, useUserStore } from './store';
 import { delToken } from './config/storage';
-import { routerReplace } from './router';
+import { routerPush, routerReplace } from './router';
 import { checkChain, getConnectedAddress } from './dapp';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { computed, onMounted, ref } from 'vue';
 import { apiConfig } from './api/home';
-import { openLink } from './utils';
+// import { openLink } from './utils';
 
 const dappStore = useDappStore()
 const { dappLoading } = storeToRefs(dappStore)
 
 const appStore = useAppStore()
 const { isH5 } = storeToRefs(appStore)
+
+const userStore = useUserStore()
+const { token } = storeToRefs(userStore)
 
 let ethereum:any = null
 const kefu = ref<HTMLImageElement>()
@@ -48,6 +52,10 @@ const getDefaultKefuPosition = () => {
         left: Math.max(window.innerWidth - 70, 0),
         top: Math.max(window.innerHeight - 150, 0)
     }
+}
+
+const openKefu = () => {
+    routerPush('/chat')
 }
 
 const getKefuSnapEdgeLeft = (side: 'left' | 'right') => {
