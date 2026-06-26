@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import CusNav from '@/components/CusNav/index.vue'
 import CusTabScroll from '@/components/CusTabScroll/index.vue'
-import { assetAIX, assetNFTC, assetUSDT } from '@/config';
+import { assetAIX, assetBot, assetNFTC, assetUSDT } from '@/config';
 import { computed, ref, watch } from 'vue';
 import { useLoadList } from '@/hooks/useLoadList';
 import { usePullRefresh } from '@/hooks/usePullRefresh';
@@ -55,8 +55,8 @@ const tabs = computed(()=>([
         value: 'balance_nftc'
     },
     {
-        name: `${t('抽奖')} ${assetAIX}`,
-        value: 'balance_lottery_aix'
+        name: assetBot,
+        value: 'balance_bot'
     },
     {
         name: `${t('年终奖')}`,
