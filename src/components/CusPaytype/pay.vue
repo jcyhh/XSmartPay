@@ -12,6 +12,19 @@
         </div>
     </div>
 
+    <div class="paytype flex jb ac mt20" @click="paytype = 'balance_bot'" v-if="showBot">
+        <div class="flex ac">
+            <img src="@/assets/bot.png" class="img42 mr10">
+            <div class="size28 bold6">{{ assetBot }}</div>
+        </div>
+        <div class="flex ac">
+            <div class="size28 opc5 mr10">{{ $t('余额') }}</div>
+            <div class="size28 main mr10 bold5" v-init="userInfo?.balance_bot"></div>
+            <img src="@/assets/user/30.png" class="img32 animate__animated animate__zoomIn ani3" v-if="paytype == 'balance_bot'">
+            <img src="@/assets/user/31.png" class="img32" v-else>
+        </div>
+    </div>
+
     <div class="paytype mt20" @click="paytype = 'usdt_aix'" v-if="isMixin">
         <div class="flex jb ac">
             <div class="size28 bold6">混合支付</div>
@@ -57,12 +70,16 @@
 </template>
 
 <script setup lang="ts">
-import { assetAIX, assetUSDT } from '@/config';
+import { assetAIX, assetBot, assetUSDT } from '@/config';
 import { useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
 
 defineProps({
     isMixin:{
+        type: Boolean,
+        default: false
+    },
+    showBot:{
         type: Boolean,
         default: false
     }

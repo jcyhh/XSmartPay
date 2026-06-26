@@ -29,7 +29,8 @@
                 <span class="main mr5">
                     <span v-if="pickerCurrent==0" v-init="userInfo?.balance_usdt"></span>
                     <span v-else-if="pickerCurrent==1" v-init="userInfo?.balance_aix"></span>
-                    <span v-else v-init="userInfo?.balance_nftc"></span>
+                    <span v-else-if="pickerCurrent==2" v-init="userInfo?.balance_nftc"></span>
+                    <span v-else v-init="userInfo?.balance_bot"></span>
                 </span>
                 <span class="main">{{ currentPicker.name }}</span>
             </div>
@@ -81,11 +82,12 @@
 
 <script setup lang="ts">
 import CusNav from '@/components/CusNav/index.vue'
-import { assetAIX, assetNFTC, assetUSDT } from '@/config'
+import { assetAIX, assetBot, assetNFTC, assetUSDT } from '@/config'
 import { computed, onMounted, ref } from 'vue'
 import CusPicker from '@/components/CusPicker/index.vue';
 import iconUsdt from '@/assets/common/usdt.png'
 import iconAix from '@/assets/common/aix.png'
+import iconBot from '@/assets/bot.png'
 import { useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import { apiWithdraw, apiWithdrawConfig } from '@/api/user';
@@ -101,7 +103,8 @@ const config = ref()
 const fee = computed(()=>{
     if(pickerCurrent.value==0)return config.value?.withdraw_usdt_fee
     else if(pickerCurrent.value==1)return config.value?.withdraw_aix_fee
-    else return config.value?.withdraw_nftc_fee
+    else if(pickerCurrent.value==2) return config.value?.withdraw_nftc_fee
+    else return config.value?.withdraw_bot_fee
 })
 const loadData = async () => config.value = await apiWithdrawConfig()
 
@@ -110,7 +113,8 @@ const pickerShow = ref(false)
 const pickerList = [
     {name:assetUSDT, icon: iconUsdt, value:'balance_usdt'},
     {name:assetAIX, icon: iconAix, value:'balance_aix'},
-    {name:assetNFTC, icon: iconUsdt, value:'balance_nftc'}
+    {name:assetNFTC, icon: iconUsdt, value:'balance_nftc'},
+    {name:assetBot, icon: iconBot, value:'balance_bot'}
 ]
 const currentPicker = computed(()=>pickerList[pickerCurrent.value])
 
@@ -124,8 +128,11 @@ const inputAll = () => {
     }else if(pickerCurrent.value==1){
         const amount = userInfo.value?.balance_aix
         inputAmount.value = Number(amount)
-    }else{
+    }else if(pickerCurrent.value==2){
         const amount = userInfo.value?.balance_nftc
+        inputAmount.value = Number(amount)
+    }else{
+        const amount = userInfo.value?.balance_bot
         inputAmount.value = Number(amount)
     }
 }

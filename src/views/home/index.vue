@@ -2,31 +2,8 @@
     <img src="@/assets/login/bg.png" class="pagebg animate__animated animate__slideInDown">
 
     <div class="rel pt30 pl30 pr30">
-        
         <div class="flex">
-            <div class="card flex2 mr20">
-                <div class="flex jb as">
-                    <div class="flex ac">
-                        <img src="@/assets/common/aix.png" class="img52 mr12">
-                        <div class="size24 bold6">{{ assetAIX }}</div>
-                    </div>
-                    <div class="tr">
-                        <div class="size28">
-                            $<span v-init="stats?.aix_price"></span>
-                        </div>
-                        <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
-                    </div>
-                </div>
-                <div>
-                    <span class="size24 opc5">{{ $t('总量') }}</span>
-                    <span class="size30 bold6 main ml5" v-init="stats?.private_equity_amount"></span>
-                </div>
-                <div class="green size24 mt10">
-                    <span>≈$</span>
-                    <span v-init="stats?.private_equity_price"></span>
-                </div>
-            </div>
-            <div class="card flex1">
+            <div class="card flex1 mr20">
                 <div class="flex ac">
                     <img src="@/assets/common/usdt.png" class="img52 mr12">
                     <div class="size24 bold6">{{ assetNFTC }}</div>
@@ -35,6 +12,40 @@
                     $<span v-init="stats?.nftc_price"></span>
                 </div>
                 <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
+            </div>
+            <div class="card flex1">
+                <div class="flex ac">
+                    <img src="@/assets/bot.png" class="img52 mr12">
+                    <div class="size24 bold6">{{ assetBot }}</div>
+                </div>
+                <div class="size40 bold6 main mt30">
+                    $<span v-init="stats?.bot_price"></span>
+                </div>
+                <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
+            </div>
+        </div>
+        <div class="card mt20">
+            <div class="flex jb ac">
+                <div class="flex ac">
+                    <img src="@/assets/common/aix.png" class="img62 mr20">
+                    <div>
+                        <div>
+                            <span class="size24 opc5">{{ $t('总量') }}</span>
+                            <span class="size30 bold6 main ml5" v-init="stats?.private_equity_amount"></span>
+                            <span class="size30 bold5 ml5">{{ assetAIX }}</span>
+                        </div>
+                        <div class="green size24 mt5">
+                            <span>≈$</span>
+                            <span v-init="stats?.private_equity_price"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tr">
+                    <div class="size30">
+                        $<span v-init="stats?.aix_price"></span>
+                    </div>
+                    <div class="size24 opc5 mt5">{{ $t('实时币价') }}</div>
+                </div>
             </div>
         </div>
 
@@ -137,7 +148,7 @@
 
 <script setup lang="ts">
 import { apiBanner, apiConfig, apiMessage } from '@/api/home';
-import { appName, assetAIX, assetNFTC, assetUSDT } from '@/config';
+import { appName, assetAIX, assetBot, assetNFTC, assetUSDT } from '@/config';
 import { onMounted, ref } from 'vue';
 import { routerPush } from '@/router';
 import { useNotice } from '@/hooks/useNotice';

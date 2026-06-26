@@ -4,46 +4,65 @@
         
         <div class="cell card mb20 flex jb ac">
             <div class="size28 main">{{ $t('链') }}</div>
-            <div class="size28 bold6">BEP20</div>
+            <div class="size28 bold6">{{ pickerList[pickerCurrent].chain }}</div>
         </div>
 
-        <div class="cell card mb20 flex jb ac">
+        <div class="cell card mb20 flex jb ac" @click="showPicker=true">
             <div class="size28 main">{{ $t('币种') }}</div>
             <div class="size28 bold6 flex ac">
-                <img src="@/assets/common/usdt.png" class="img48 mr10">
-                <div>{{ assetUSDT }}</div>
+                <img :src="pickerList[pickerCurrent].logo" class="img48 mr10">
+                <div class="mr10">{{ pickerList[pickerCurrent].name }}</div>
+                <van-icon name="arrow" />
             </div>
         </div>
 
         <div class="flex jc mt100">
             <div class="mainCard box flex jc ac">
                 <QRCode :value="address" :size="160" :bordered="false" v-if="address" />
+                <CusEmpty v-else></CusEmpty>
             </div>
         </div>
 
         <div class="cell card mb20 mt100">
             <div class="flex jb ac">
                 <div class="size28 main">{{ $t('充值地址') }}</div>
-                <img src="@/assets/user/17.png" class="img26 ml10">
             </div>
-            <div class="br size24 bold5 lh40 opc6 mt30">{{ address }}</div>
+            <div class="br size24 bold5 lh40 opc6 mt30">{{ address || '--' }}</div>
         </div>
 
         <div class="mainBtn flex jc ac size28 bold6 mt40" v-copy="address" v-if="address">{{ $t('复制地址') }}</div>
 
     </div>
+
+    <CusPicker v-model:show="showPicker" :list="pickerList" :title="$t('请选择')" :default-index="pickerCurrent" @change="($event:any)=>pickerCurrent=$event">
+        <template v-slot="{ item }">
+            <span class="bold5">{{ item.name }}</span>
+        </template>
+    </CusPicker>
 </template>
 
 <script setup lang="ts">
 import { apiRecharge } from '@/api/user';
 import CusNav from '@/components/CusNav/index.vue'
-import { assetUSDT } from '@/config';
-import { onMounted, ref } from 'vue';
+import { assetBot, assetUSDT } from '@/config';
+import { computed, onMounted, ref } from 'vue';
+import usdtLogo from '@/assets/common/usdt.png'
+import botLogo from '@/assets/bot.png'
+import CusEmpty from '@/components/CusEmpty/index.vue'
 
-const address = ref()
+const showPicker = ref(false)
+const pickerCurrent = ref(0)
+const pickerList = [
+    {name: assetUSDT, logo:usdtLogo, chain: 'BEP20', address:''},
+    {name: assetBot, logo:botLogo, chain: 'BOT', address:''}
+]
+
+const address = computed(()=>pickerList[pickerCurrent.value].address)
+
 const loadData = async () => {
     const res:any = await apiRecharge()
-    address.value = res.recharge_address
+    pickerList[0].address = res.recharge_address
+    pickerList[1].address = res.bot_recharge_address
 }
 
 onMounted(()=>{

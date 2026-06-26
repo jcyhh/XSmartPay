@@ -12,7 +12,7 @@
                 
 
                 <div class="size28 bold6 mt100 mb30">{{ $t('支付方式') }}</div>
-                <CusPaytype v-model:paytype="paytype" :is-mixin="true"></CusPaytype>
+                <CusPaytype v-model:paytype="paytype" :is-mixin="true" :show-bot="true"></CusPaytype>
 
                 <div class="mainBtn flex jc ac size28 main bold6 btn mt50" @click="submit">确认升级</div>
 
