@@ -30,9 +30,8 @@ const url = computed(()=>{
         userId: String(userInfo.value.id),
         lang: getLang()
     })
-
-    // return `${import.meta.env.PROD ? window.origin : 'https://www.xsmartpay.com'}/chat/#/?${searchParams.toString()}`
-    return `${import.meta.env.PROD ? window.origin : 'http://localhost:8080'}/#/?${searchParams.toString()}`
+    const link = `${window.origin}/chat/#/?${searchParams.toString()}`
+    return link;
 })
 
 const onMessage = (e:any) => {

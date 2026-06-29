@@ -44,25 +44,29 @@
 <script setup lang="ts">
 import { apiRecharge } from '@/api/user';
 import CusNav from '@/components/CusNav/index.vue'
-import { assetBot, assetUSDT } from '@/config';
+import { assetAIX, assetBot, assetNFTC, assetUSDT } from '@/config';
 import { computed, onMounted, ref } from 'vue';
 import usdtLogo from '@/assets/common/usdt.png'
 import botLogo from '@/assets/bot.png'
+import aixLogo from '@/assets/common/aix.png'
 import CusEmpty from '@/components/CusEmpty/index.vue'
 
 const showPicker = ref(false)
 const pickerCurrent = ref(0)
 const pickerList = [
-    {name: assetUSDT, logo:usdtLogo, chain: 'BEP20', address:''},
-    {name: assetBot, logo:botLogo, chain: 'BOT', address:''}
+    {name: assetUSDT, logo:usdtLogo, chain: 'BEP20'},
+    {name: assetNFTC, logo:usdtLogo, chain: 'BEP20'},
+    {name: assetAIX, logo:aixLogo, chain: 'BEP20'},
+    {name: assetBot, logo:botLogo, chain: 'BOT'}
 ]
 
-const address = computed(()=>pickerList[pickerCurrent.value].address)
-
+const recharge_address = ref()
+const bot_recharge_address = ref()
+const address = computed(()=>pickerCurrent.value==3?bot_recharge_address.value:recharge_address.value)
 const loadData = async () => {
     const res:any = await apiRecharge()
-    pickerList[0].address = res.recharge_address
-    pickerList[1].address = res.bot_recharge_address
+    recharge_address.value = res.recharge_address
+    bot_recharge_address.value = res.bot_recharge_address
 }
 
 onMounted(()=>{
