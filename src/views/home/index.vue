@@ -7,22 +7,25 @@
                 <div class="mr20 logo">
                     <img src="@/assets/user/1.png" class="logoImg">
                 </div>
-                <div class="flex1">
-                    <div class="flex jb ac">
-                        <div class="size34 bold6" v-init="stats?.private_equity_amount"></div>
-                        <div class="red size34 bold6">
-                            <span class="mr5">≈ $</span>
-                            <span v-init="stats?.private_equity_price"></span>
+                <div class="flex1 flex jb ac">
+                    <div class="">
+                        <div class="size38 bold opc8">
+                            $<span v-init="stats?.private_equity_amount"></span>
                         </div>
+                        <div class="size30 opc5 mt10">{{ $t('总量') }}</div>
                     </div>
-                    <div class="size24 opc5 mt10">{{ $t('总量') }}</div>
+                    <div class="tr">
+                        <div class="size38 bold opc8">
+                            $<span v-init="stats?.aix_price"></span>
+                        </div>
+                        <div class="size30 opc5 mt10">{{ $t('实时币价') }}</div>
+                    </div>
                 </div>
             </div>
-            <div class="tc mt40">
-                <div class="size68 bold linearTxt">
-                    $<span v-init="stats?.aix_price"></span>
+            <div class="flex jc mt40">
+                <div class="size88 bold">
+                    <span class="size48">≈$</span><span v-init="stats?.private_equity_price"></span>
                 </div>
-                <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
             </div>
         </div>
         <div class="flex mt30">
@@ -147,7 +150,7 @@
 
 <script setup lang="ts">
 import { apiBanner, apiConfig, apiMessage } from '@/api/home';
-import { appName, assetBot, assetNFTC, assetUSDT } from '@/config';
+import { appName, assetAIX, assetBot, assetNFTC, assetUSDT } from '@/config';
 import { onMounted, ref } from 'vue';
 import { routerPush } from '@/router';
 import { useNotice } from '@/hooks/useNotice';
@@ -289,29 +292,30 @@ onMounted(()=>{
     overflow: hidden;
     isolation: isolate;
     padding: 30px 30px 50px 30px;
-    background: linear-gradient(#FFB5001A, #FFB50000);
+    background: linear-gradient(100.27deg, #D3AC61 7.67%, #FFE7AB 28.43%, #D3AC61 92.33%);
     border-radius: 20px;
-    &::before{
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        padding: 2px;
-        border-radius: inherit;
-        background:
-            conic-gradient(from var(--border-angle), transparent 0deg, transparent 38deg, rgba(255, 255, 255, 0.1) 52deg, #EFCD80 72deg, #FFE5A5 92deg, #EFCD80 112deg, rgba(255, 255, 255, 0.1) 132deg, transparent 150deg, transparent 360deg),
-            linear-gradient(52.79deg, rgba(255, 255, 255, 0.1) 21.58%, rgba(239, 205, 128, 0.45) 47.81%, rgba(255, 255, 255, 0.1) 78.42%);
-        animation: borderGradientAngle 4.8s linear infinite;
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-    }
-    > *{
-        position: relative;
-        z-index: 1;
-    }
+    color: #000000;
+    // &::before{
+    //     content: '';
+    //     position: absolute;
+    //     inset: 0;
+    //     z-index: 0;
+    //     pointer-events: none;
+    //     padding: 2px;
+    //     border-radius: inherit;
+    //     background:
+    //         conic-gradient(from var(--border-angle), transparent 0deg, transparent 38deg, rgba(255, 255, 255, 0.1) 52deg, #EFCD80 72deg, #FFE5A5 92deg, #EFCD80 112deg, rgba(255, 255, 255, 0.1) 132deg, transparent 150deg, transparent 360deg),
+    //         linear-gradient(52.79deg, rgba(255, 255, 255, 0.1) 21.58%, rgba(239, 205, 128, 0.45) 47.81%, rgba(255, 255, 255, 0.1) 78.42%);
+    //     animation: borderGradientAngle 4.8s linear infinite;
+    //     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    //     mask-composite: exclude;
+    //     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    //     -webkit-mask-composite: xor;
+    // }
+    // > *{
+    //     position: relative;
+    //     z-index: 1;
+    // }
     .logo{
         width: 88px;
         height: 88px;
