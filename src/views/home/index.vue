@@ -2,50 +2,49 @@
     <img src="@/assets/login/bg.png" class="pagebg animate__animated animate__slideInDown">
 
     <div class="rel pt30 pl30 pr30">
-        <div class="flex">
-            <div class="card flex1 mr20">
-                <div class="flex ac">
-                    <img src="@/assets/common/usdt.png" class="img52 mr12">
-                    <div class="size24 bold6">{{ assetNFTC }}</div>
+        <div class="topcard">
+            <div class="flex ac">
+                <div class="mr20 logo">
+                    <img src="@/assets/user/1.png" class="logoImg">
                 </div>
-                <div class="size40 bold6 main mt30">
-                    $<span v-init="stats?.nftc_price"></span>
+                <div class="flex1">
+                    <div class="flex jb ac">
+                        <div class="size34 bold6" v-init="stats?.private_equity_amount"></div>
+                        <div class="red size34 bold6">
+                            <span class="mr5">≈ $</span>
+                            <span v-init="stats?.private_equity_price"></span>
+                        </div>
+                    </div>
+                    <div class="size24 opc5 mt10">{{ $t('总量') }}</div>
                 </div>
-                <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
             </div>
-            <div class="card flex1">
-                <div class="flex ac">
-                    <img src="@/assets/bot.png" class="img52 mr12">
-                    <div class="size24 bold6">{{ assetBot }}</div>
-                </div>
-                <div class="size40 bold6 main mt30">
-                    $<span v-init="stats?.bot_price"></span>
+            <div class="tc mt40">
+                <div class="size68 bold linearTxt">
+                    $<span v-init="stats?.aix_price"></span>
                 </div>
                 <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
             </div>
         </div>
-        <div class="card mt20">
-            <div class="flex jb ac">
+        <div class="flex mt30">
+            <div class="card card1 flex1 mr20">
                 <div class="flex ac">
-                    <img src="@/assets/common/aix.png" class="img62 mr20">
-                    <div>
-                        <div>
-                            <span class="size24 opc5">{{ $t('总量') }}</span>
-                            <span class="size30 bold6 main ml5" v-init="stats?.private_equity_amount"></span>
-                            <span class="size30 bold5 ml5">{{ assetAIX }}</span>
-                        </div>
-                        <div class="green size24 mt5">
-                            <span>≈$</span>
-                            <span v-init="stats?.private_equity_price"></span>
-                        </div>
-                    </div>
+                    <img src="@/assets/common/usdt.png" class="img32 mr12">
+                    <div class="size24 bold6">{{ assetNFTC }}</div>
                 </div>
-                <div class="tr">
-                    <div class="size30">
-                        $<span v-init="stats?.aix_price"></span>
-                    </div>
-                    <div class="size24 opc5 mt5">{{ $t('实时币价') }}</div>
+                <div class="size30 bold6 main mt10">
+                    $<span v-init="stats?.nftc_price"></span>
                 </div>
+                <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
+            </div>
+            <div class="card card1 flex1">
+                <div class="flex ac">
+                    <img src="@/assets/bot.png" class="img32 mr12">
+                    <div class="size24 bold6">{{ assetBot }}</div>
+                </div>
+                <div class="size30 bold6 main mt10">
+                    $<span v-init="stats?.bot_price"></span>
+                </div>
+                <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
             </div>
         </div>
 
@@ -148,7 +147,7 @@
 
 <script setup lang="ts">
 import { apiBanner, apiConfig, apiMessage } from '@/api/home';
-import { appName, assetAIX, assetBot, assetNFTC, assetUSDT } from '@/config';
+import { appName, assetBot, assetNFTC, assetUSDT } from '@/config';
 import { onMounted, ref } from 'vue';
 import { routerPush } from '@/router';
 import { useNotice } from '@/hooks/useNotice';
@@ -274,6 +273,109 @@ onMounted(()=>{
         }
     }
 }
+@property --border-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes borderGradientAngle {
+    to {
+        --border-angle: 360deg;
+    }
+}
+.topcard{
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding: 30px 30px 50px 30px;
+    background: linear-gradient(#FFB5001A, #FFB50000);
+    border-radius: 20px;
+    &::before{
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        padding: 2px;
+        border-radius: inherit;
+        background:
+            conic-gradient(from var(--border-angle), transparent 0deg, transparent 38deg, rgba(255, 255, 255, 0.1) 52deg, #EFCD80 72deg, #FFE5A5 92deg, #EFCD80 112deg, rgba(255, 255, 255, 0.1) 132deg, transparent 150deg, transparent 360deg),
+            linear-gradient(52.79deg, rgba(255, 255, 255, 0.1) 21.58%, rgba(239, 205, 128, 0.45) 47.81%, rgba(255, 255, 255, 0.1) 78.42%);
+        animation: borderGradientAngle 4.8s linear infinite;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+    }
+    > *{
+        position: relative;
+        z-index: 1;
+    }
+    .logo{
+        width: 88px;
+        height: 88px;
+        flex: 0 0 88px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+        .logoImg{
+            position: relative;
+            z-index: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            border-radius: inherit;
+            background:
+                radial-gradient(circle at 30% 16%, rgba(255, 255, 255, 0.45) 0 13%, rgba(255, 255, 255, 0.18) 24%, transparent 44%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.16) 0%, transparent 46%);
+            mix-blend-mode: screen;
+            opacity: 0.42;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            z-index: 2;
+            top: -28%;
+            bottom: -28%;
+            left: -85%;
+            width: 76%;
+            pointer-events: none;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 14%, rgba(255, 255, 255, 0.62) 50%, rgba(255, 229, 165, 0.22) 66%, transparent 100%);
+            transform: rotate(22deg);
+            filter: blur(1px);
+            opacity: 0;
+            animation: logoShine 5s ease-in-out infinite;
+        }
+    }
+}
+
+@keyframes logoShine {
+    0%, 34% {
+        left: -85%;
+        opacity: 0;
+    }
+    45% {
+        opacity: 0.72;
+    }
+    66% {
+        left: 118%;
+        opacity: 0.48;
+    }
+    67%, 100% {
+        left: 118%;
+        opacity: 0;
+    }
+}
 .news{
     height: 72px;
     border-radius: 36px;
@@ -340,6 +442,13 @@ onMounted(()=>{
         width: 1px;
         height: 80px;
         background-color: #FFFFFF33;
+    }
+}
+.card1{
+    padding: 15px;
+    border-radius: 20px;
+    &::before{
+        border-radius: 20px;
     }
 }
 .otc{
