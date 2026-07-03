@@ -10,7 +10,7 @@
                 <div class="flex1 flex jb ac">
                     <div class="">
                         <div class="size38 bold opc8">
-                            $<span v-init="stats?.private_equity_amount"></span>
+                            <span v-init="stats?.private_equity_amount"></span>
                         </div>
                         <div class="size30 opc5 mt10">{{ $t('总量') }}</div>
                     </div>
