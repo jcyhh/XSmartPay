@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div v-else>
-                    <swiper slidesPerView="auto" :centeredSlides="true" direction="vertical" space-between="10" @swiper="onSwiper" @slide-change="slideChange">
+                    <swiper slidesPerView="auto" :centeredSlides="true" direction="vertical" space-between="10" :class="{ 'empty-current': isCurrentEmpty }" @swiper="onSwiper" @slide-change="slideChange">
                         <swiper-slide v-for="(item, index) in list" :key="index" @click="slideClick(index)">
                             <slot :item="item"></slot>
                         </swiper-slide>
@@ -54,6 +54,10 @@ const props = defineProps({
         type: Number,
         default: 0
     },
+    allowEmpty: { // 是否允许初始无选中项
+        type: Boolean,
+        default: false
+    },
     title: { // 标题
         type: String,
         default: t('请选择')
@@ -80,20 +84,36 @@ const close = () => show.value = false
 
 const current = ref(props.defaultIndex)
 const mySwiper = ref()
+const isCurrentEmpty = computed(() => props.allowEmpty && current.value < 0)
+const getSlideIndex = (index: number) => {
+    if(props.allowEmpty && index < 0)return 0
+    return Math.min(Math.max(index, 0), props.list.length - 1)
+}
+const slideToCurrent = () => {
+    if(!mySwiper.value || props.list.length === 0)return
+    if(isCurrentEmpty.value){
+        mySwiper.value.slideTo(getSlideIndex(current.value), 0, false)
+        return
+    }
+    mySwiper.value.slideTo(getSlideIndex(current.value))
+}
 const onSwiper = (swiper: any) => {
     mySwiper.value = swiper
-    mySwiper.value.slideTo(current.value)
+    slideToCurrent()
 }
 watch(() => props.defaultIndex, (value) => {
     current.value = value
-    if(mySwiper.value)mySwiper.value.slideTo(current.value)
+    slideToCurrent()
 })
 watch(() => props.show, (value) => {
-    if(value && mySwiper.value)mySwiper.value.slideTo(current.value)
+    if(value)slideToCurrent()
 })
 const slideChange = (data: any) => current.value = data.activeIndex
 
-const slideClick = (index:number) => mySwiper.value.slideTo(index)
+const slideClick = (index:number) => {
+    current.value = index
+    mySwiper.value?.slideTo(index)
+}
 
 const submit = ()=> {
     close()
@@ -124,5 +144,10 @@ defineExpose({
 .swiper-slide-active {
     background-color: #FFE5A51F;
     opacity: 1;
+}
+
+.swiper.empty-current .swiper-slide-active {
+    background-color: transparent;
+    opacity: 0.5;
 }
 </style>
