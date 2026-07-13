@@ -43,8 +43,8 @@ import homeIcon from '@/assets/tabbar/home.png'
 import homeActIcon from '@/assets/tabbar/homeAct.png'
 import payIcon from '@/assets/tabbar/pay.png'
 import payActIcon from '@/assets/tabbar/payAct.png'
-import cardIcon from '@/assets/tabbar/card.png'
-import cardActIcon from '@/assets/tabbar/cardAct.png'
+// import cardIcon from '@/assets/tabbar/card.png'
+// import cardActIcon from '@/assets/tabbar/cardAct.png'
 import userIcon from '@/assets/tabbar/user.png'
 import userActIcon from '@/assets/tabbar/userAct.png'
 import newsIcon from '@/assets/tabbar/news.png'
@@ -93,12 +93,12 @@ const tabbar = computed(()=>([
         iconAct: payActIcon,
         path: '/pay/index'
     },
-    {
-        name: tabbarText.value.draw,
-        icon: cardIcon,
-        iconAct: cardActIcon,
-        path: '/draw/index'
-    },
+    // {
+    //     name: tabbarText.value.draw,
+    //     icon: cardIcon,
+    //     iconAct: cardActIcon,
+    //     path: '/draw/index'
+    // },
     {
         name: tabbarText.value.forum,
         icon: newsIcon,

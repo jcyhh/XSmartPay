@@ -145,6 +145,14 @@
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
+        <div class="cell flex jb ac mt20" @click="routerPush('/user/nodeOrder')">
+            <div class="flex ac">
+                <img src="@/assets/user/43.png" class="img64 mr20">
+                <div class="size28">{{ $t('节点订单') }}</div>
+            </div>
+            <van-icon name="arrow" color="#FFFFFF80" />
+        </div>
+
         <div class="cell flex jb ac mt20" @click="routerPush('/user/order')">
             <div class="flex ac">
                 <img src="@/assets/user/11.png" class="img64 mr20">

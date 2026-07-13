@@ -514,5 +514,22 @@
     "交易": "Trade",
     "我的NFT": "My NFT",
     "价值": "Value",
-    "总量": "Total"
+    "总量": "Total",
+    "选择节点认购/质押": "Select node subscription/staking",
+    "购买价格": "Purchase price",
+    "剩余库存": "Remaining inventory",
+    "立即购买": "Buy now",
+    "购买节点": "Buy node",
+    "选择购买方式": "Select purchase method",
+    "购买后永久拥有": "Own permanently after purchase",
+    "质押": "Stake",
+    "天后到期可赎回": "days until maturity and redeemable",
+    "节点订单": "Node orders",
+    "累计分红收益": "Cumulative dividend income",
+    "今日分红收益": "Today's dividend income",
+    "已赎回": "Redeemed",
+    "累计分红": "Cumulative dividends",
+    "今日分红": "Today's dividends",
+    "质押周期": "Staking period",
+    "确定要赎回吗？": "Are you sure you want to redeem?"
 }

@@ -10,12 +10,14 @@
 
 <script setup lang="ts">
 defineProps(['list'])
+const emits = defineEmits(['change'])
 const current = defineModel<number>({ default: 0 })
 
 const onTabClick = (index:any) => {
     const cur = Number(index)
     if(current.value == cur)return
     current.value = cur
+    emits('change')
 }
 </script>
 

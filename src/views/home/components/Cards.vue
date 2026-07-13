@@ -22,10 +22,10 @@
 
     <div class="flex jb ac size24 mt30">
         <div>{{ currentCard?.name }}</div>
-        <div class="opc5">
+        <!-- <div class="opc5">
             <span class="mr10">{{ $t('库存') }}</span>
             <span>{{ currentCard?.stock }}</span>
-        </div>
+        </div> -->
     </div>
 
     <div class="flex mt20">

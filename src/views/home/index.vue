@@ -1,5 +1,5 @@
 <template>
-    <img src="@/assets/login/bg.png" class="pagebg animate__animated animate__slideInDown">
+    <img src="@/assets/login/bg.png" class="pagebg animate__animated animate__slideInDown" style="position: absolute;">
 
     <div class="rel pt30 pl30 pr30">
         <div class="topcard">
@@ -89,6 +89,11 @@
             <div class="title size40 bold">{{ $t('OTC 交易') }}</div>
             <div class="size24 opc5 mt10">{{ $t('安全便捷 自由买卖') }}</div>
         </div> -->
+    </div>
+
+    <Node></Node>
+
+    <div class="pl30 pr30 mt40 rel">
 
         <div class="mainCard mt40 rel">
             <div class="size34 bold5 main">{{ appName }} {{ $t('开卡') }}</div>
@@ -161,6 +166,7 @@ import { apiYuebaoStats } from '@/api/yuebao';
 import Popup from './components/Popup.vue';
 import { storeToRefs } from 'pinia';
 import { apiUserInfo } from '@/api/user';
+import Node from './components/Node.vue';
 
 const show = ref(false)
 

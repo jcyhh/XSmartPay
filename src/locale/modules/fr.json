@@ -57,5 +57,21 @@
     "交易": "Trader",
     "我的NFT": "Mes NFT",
     "价值": "Valeur",
-    "总量": "Total"
+    "总量": "Total",
+    "选择节点认购/质押": "Choisir la souscription/le staking de noeud",
+    "购买价格": "Prix d'achat",
+    "剩余库存": "Stock restant",
+    "立即购买": "Acheter maintenant",
+    "购买节点": "Acheter un noeud",
+    "选择购买方式": "Choisir le mode d'achat",
+    "购买后永久拥有": "Possession permanente apres achat",
+    "天后到期可赎回": "jours avant echeance et rachat",
+    "节点订单": "Ordres de noeud",
+    "累计分红收益": "Revenus de dividendes cumules",
+    "今日分红收益": "Revenus de dividendes du jour",
+    "已赎回": "Rachete",
+    "累计分红": "Dividendes cumules",
+    "今日分红": "Dividendes du jour",
+    "质押周期": "Periode de staking",
+    "确定要赎回吗？": "Confirmer le rachat ?"
 }

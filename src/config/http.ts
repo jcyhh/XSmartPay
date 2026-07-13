@@ -25,3 +25,4 @@ export type Api =
 | '/api/index/claimed_reward_list'
 | '/api/index/queue_list_old'
 | '/api/index/queue_list_old2'
+| '/api/node-product/nodes'
