@@ -33,18 +33,25 @@
                         <img :src="item.logo" class="img100 avatar">
                         <div class="flex1">
                             <div class="flex jb ac">
-                                <div class="size28 bold6 main">{{ item.name }}</div>
-                                <div class="size24 bold6">{{ item.member_count }}/{{ item.community_max_num }}</div>
+                                <div>
+                                    <span class="size28 bold6 main">{{ item.name }}</span>
+                                    
+                                </div>
+                                <div class="size24 bold6" v-init="item.total_kpi"></div>
                             </div>
-                            <div class="size24 opc5 mt10">{{ $t('创建人') }} {{ item.email || item.address }}</div>
+                            <div class="flex jb ac mt10 size24 opc5">
+                                <div class="size24">{{ item.member_count }}/{{ item.community_max_num }}</div>
+                                <div>{{ $t('累计业绩') }}({{ assetUSDT }})</div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="flex ac mt20">
+                        <img src="@/assets/user/21.png" class="img26 mr10">
+                        <div class="size24 opc5 line1">{{ item.desc }}</div>
                     </div>
                     <div class="line mt24 mb20"></div>
                     <div class="flex jb ac">
-                        <div class="flex ac">
-                            <img src="@/assets/user/21.png" class="img26 mr10">
-                            <div class="size24 opc5 line1 desc">{{ item.desc }}</div>
-                        </div>
+                        <div class="size24 opc5">{{ $t('创建人') }} {{ item.email || item.address }}</div>
                         <div class="mainButton btn flex ac main" v-scale @click="openAsk(item)">{{ $t('申请加入') }}</div>
                     </div>
                 </div>
@@ -68,6 +75,7 @@ import { message } from '@/utils/message';
 import { t } from '@/locale';
 import CusTitle from '@/components/CusTitle/index.vue'
 import { routerPush } from '@/router';
+import { assetUSDT } from '@/config';
 
 const { list, props: listProps, loadList } = useLoadList('/api/community', 'list')
 const { props } = usePullRefresh(loadList)
