@@ -39,7 +39,7 @@
                     <div class="size28 main bold6">{{ $t('购买节点') }}</div>
                     <van-icon name="cross" :size="25" @click="showIntro=false" />
                 </div>
-                <div class="noticecontent mt30 size28" v-html="currentPicker?.intro"></div>
+                <div class="noticecontent mt30 size28" v-html="currentIntro"></div>
                 <div class="mt50 flex ac bold5">
                     <div class="mainButton tipbtn flex1 flex jc ac main" @click="showIntro=false">{{ $t('取消') }}</div>
                     <div class="mainBtn tipbtn flex1 flex jc ac ml20" @click="openbuy">{{ $t('确认购买') }}</div>
@@ -116,9 +116,10 @@
 import { assetAIX, assetUSDT } from '@/config';
 import CusPicker from '@/components/CusPicker/index.vue';
 import { computed, onMounted, ref } from 'vue';
-import { t } from '@/locale';
+import { i18n, t } from '@/locale';
 import { apiBuyNode, apiNodes } from '@/api/home';
 import { message } from '@/utils/message';
+import { getNodeIntro } from './nodeIntro';
 
 const show = ref(false)
 const showIntro = ref(false)
@@ -134,6 +135,7 @@ const loadNodes = async () => {
 const pickerCurrent = ref(0)
 const pickerShow = ref(false)
 const currentPicker = computed(() => nodes.value[pickerCurrent.value])
+const currentIntro = computed(() => getNodeIntro(i18n.global.locale.value, pickerCurrent.value))
 
 const openPopup = () => {
     current.value = 0
@@ -226,6 +228,33 @@ onMounted(()=>{
     max-height: 60vh;
     width: 100%;
     overflow-y: scroll;
+    line-height: 1.65;
+
+    :deep(h3),
+    :deep(h4) {
+        margin: 24px 0 12px;
+        line-height: 1.4;
+    }
+
+    :deep(h3:first-child) {
+        margin-top: 0;
+    }
+
+    :deep(p),
+    :deep(ol),
+    :deep(ul) {
+        margin: 12px 0;
+    }
+
+    :deep(ol),
+    :deep(ul) {
+        padding-left: 36px;
+    }
+
+    :deep(li + li) {
+        margin-top: 8px;
+    }
+
     &::-webkit-scrollbar{
         display: none;
     }
