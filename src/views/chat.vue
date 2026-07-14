@@ -11,15 +11,22 @@
 <script setup lang="ts">
 import { getAddress, getLang, getToken } from '@/config/storage';
 import { routerGo } from '@/router';
-import { useUserStore } from '@/store';
+import { useAppStore, useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import CusEmpty from '@/components/CusEmpty/index.vue'
+import { apiUpload } from '@/utils/request';
 
 const userStore = useUserStore()
+const appStore = useAppStore()
 const { userInfo } = storeToRefs(userStore)
+const { isH5 } = storeToRefs(appStore)
 
 const isLoading = ref(true)
+let isUploading = false
+
+const uploadRequestType = 'xsmartpay:uploadImage'
+const uploadResultType = 'xsmartpay:uploadImageResult'
 
 const url = computed(()=>{
     if (!userInfo.value?.id) return ''
@@ -28,15 +35,59 @@ const url = computed(()=>{
         token: getToken(),
         address: getAddress(),
         userId: String(userInfo.value.id),
-        lang: getLang()
+        lang: getLang(),
+        isFlutter: isH5.value ? '0' : '1'
     })
     const link = `${window.origin}/chat/#/?${searchParams.toString()}`
     return link;
 })
 
-const onMessage = (e:any) => {
-  	if(e.data?.type === "back"){
+const postUploadResult = (e: MessageEvent, data: Record<string, any>) => {
+    const source = e.source as Window | null
+    if (!source) return
+
+    source.postMessage({
+        type: uploadResultType,
+        requestId: e.data?.requestId,
+        ...data
+    }, e.origin && e.origin !== 'null' ? e.origin : '*')
+}
+
+const onUploadMessage = async (e: MessageEvent) => {
+    if (isUploading) {
+        postUploadResult(e, {
+            success: false,
+            message: 'uploading'
+        })
+        return
+    }
+
+    isUploading = true
+
+    try {
+        const res = await apiUpload()
+        postUploadResult(e, {
+            success: true,
+            data: res
+        })
+    } catch (err: any) {
+        postUploadResult(e, {
+            success: false,
+            message: err?.message || 'upload failed'
+        })
+    } finally {
+        isUploading = false
+    }
+}
+
+const onMessage = (e: MessageEvent) => {
+    if(e.data?.type === "back"){
         routerGo()
+        return
+    }
+
+    if (e.data?.type === uploadRequestType) {
+        void onUploadMessage(e)
     }
 }
 
