@@ -17,7 +17,10 @@
         <div class="mainCard rel">
             <div class="flex jb ac">
                 <div class="size34 bold5 main">{{ appName }} {{ $t('虚拟卡') }}</div>
-                <img src="@/assets/pay/2.png" class="img40" @click="refresh">
+                <div class="flex ac">
+                    <van-icon name="delete-o" color="#F1463D" :size="23" @click="showWriteOff=true" />
+                    <img src="@/assets/pay/2.png" class="img40 ml20" @click="refresh">
+                </div>
             </div>
             
             <div class="cardSwiperWrap">
@@ -79,13 +82,12 @@
             </div>
 
             <div class="flex ac mt40 size28 bold6 main">
-                <div class="flex1 mainButtonDel btn flex jc ac" v-scale @click="showWriteOff=true">
-                    <div>{{ $t('注销') }}</div>
-                </div>
-                <div class="flex1 mainButton btn flex jc ac ml10 mr10" v-scale @click="rechargeRef?.open()">
+                <div class="flex1 mainButton btn flex jc ac mr20" v-scale @click="rechargeRef?.open()">
+                    <img src="@/assets/user/3.png" class="img40 mr10">
                     <div>{{ $t('充值') }}</div>
                 </div>
                 <div class="flex1 mainButton btn flex jc ac" v-scale @click="transferRef?.open()">
+                    <img src="@/assets/pay/3.png" class="img40 mr10">
                     <div>{{ $t('转账') }}</div>
                 </div>
             </div>

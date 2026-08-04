@@ -19,7 +19,10 @@
         <div class="mainCard rel">
             <div class="flex jb ac">
                 <div class="size34 bold5 main">{{ appName }} {{ $t('实体卡') }}</div>
-                <img src="@/assets/pay/2.png" class="img40" @click="refresh">
+                <div class="flex ac">
+                    <van-icon name="delete-o" color="#F1463D" :size="23" @click="showWriteOff=true" />
+                    <img src="@/assets/pay/2.png" class="img40 ml20" @click="refresh">
+                </div>
             </div>
             
             <div class="cardSwiperWrap">
@@ -137,6 +140,7 @@
     <Transfer ref="transferRef"></Transfer>
     <Password ref="passwordRef"></Password>
     <Active ref="activeRef"></Active>
+    <CusAsk v-model:show="showWriteOff" @submit="writeOff">{{ $t('确定要注销吗？') }}</CusAsk>
 </template>
 
 <script setup lang="ts">
@@ -147,7 +151,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 // @ts-ignore
 import 'swiper/css';
 import { computed, onMounted, ref } from 'vue';
-import { apiGetCardList, apiRefreshCard } from '@/api/card';
+import { apiCardWriteOff, apiGetCardList, apiRefreshCard } from '@/api/card';
 import { useLoadList } from '@/hooks/useLoadList';
 import CusEmpty from '@/components/CusEmpty/index.vue'
 import { message } from '@/utils/message';
@@ -159,6 +163,7 @@ import Transfer from '../components/Transfer.vue';
 import Password from '../components/Password.vue';
 import Active from '../components/Active.vue';
 import { routerPush } from '@/router';
+import CusAsk from '@/components/CusAsk/index.vue'
 
 const dappStore = useDappStore()
 const { dappLoading } = storeToRefs(dappStore)
@@ -207,6 +212,16 @@ const refresh = async () => {
 }
 
 const show = ref(false)
+
+const showWriteOff = ref(false)
+const writeOff = async () => {
+    await apiCardWriteOff({
+        card_id: currentCard.value.id
+    })
+    loadCard()
+    message(t('注销成功'), 'success')
+    showWriteOff.value = false
+}
 
 onMounted(()=>{
     loadCard()
