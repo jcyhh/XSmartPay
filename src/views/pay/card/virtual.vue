@@ -68,7 +68,7 @@
                 <div>
                     <div class="size20 opc5">EXP DATE</div>
                     <div class="size28 ml10">{{ show ? (currentCard.expire_date || '***') : '***' }}</div>
-                    <div class="size20 opc5 ml30">CVV NUM</div>
+                    <div class="size20 opc5">CVV NUM</div>
                     <div class="size28 ml10">{{ show ? (currentCard.cvv || '***') : '***' }}</div>
                 </div>
 
@@ -79,12 +79,13 @@
             </div>
 
             <div class="flex ac mt40 size28 bold6 main">
-                <div class="flex1 mainButton btn flex jc ac" v-scale @click="rechargeRef?.open()">
-                    <img src="@/assets/user/3.png" class="img40 mr10">
+                <div class="flex1 mainButtonDel btn flex jc ac" v-scale @click="showWriteOff=true">
+                    <div>{{ $t('注销') }}</div>
+                </div>
+                <div class="flex1 mainButton btn flex jc ac ml10 mr10" v-scale @click="rechargeRef?.open()">
                     <div>{{ $t('充值') }}</div>
                 </div>
-                <div class="flex1 mainButton btn flex jc ac ml15 mr15" v-scale @click="transferRef?.open()">
-                    <img src="@/assets/pay/3.png" class="img40 mr10">
+                <div class="flex1 mainButton btn flex jc ac" v-scale @click="transferRef?.open()">
                     <div>{{ $t('转账') }}</div>
                 </div>
             </div>
@@ -114,6 +115,8 @@
 
     <Recharge @success="loadCard()" ref="rechargeRef"></Recharge>
     <Transfer ref="transferRef"></Transfer>
+
+    <CusAsk v-model:show="showWriteOff" @submit="writeOff">{{ $t('确定要注销吗？') }}</CusAsk>
 </template>
 
 <script setup lang="ts">
@@ -124,7 +127,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 // @ts-ignore
 import 'swiper/css';
 import { computed, onMounted, ref } from 'vue';
-import { apiGetCardList, apiRefreshCard } from '@/api/card';
+import { apiCardWriteOff, apiGetCardList, apiRefreshCard } from '@/api/card';
 import { useCardIcon } from '@/hooks/useCardIcon';
 import { useLoadList } from '@/hooks/useLoadList';
 import CusEmpty from '@/components/CusEmpty/index.vue'
@@ -135,6 +138,7 @@ import { storeToRefs } from 'pinia';
 import Recharge from '../components/Recharge.vue';
 import Transfer from '../components/Transfer.vue';
 import { routerPush, routerReplace } from '@/router';
+import CusAsk from '@/components/CusAsk/index.vue'
 
 const dappStore = useDappStore()
 const { dappLoading } = storeToRefs(dappStore)
@@ -183,6 +187,16 @@ const refresh = async () => {
 }
 
 const show = ref(false)
+
+const showWriteOff = ref(false)
+const writeOff = async () => {
+    await apiCardWriteOff({
+        card_id: currentCard.value.id
+    })
+    loadCard()
+    message(t('注销成功'), 'success')
+    showWriteOff.value = false
+}
 
 onMounted(()=>{
     loadCard()

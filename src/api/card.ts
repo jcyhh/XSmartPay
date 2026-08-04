@@ -35,3 +35,5 @@ export const apiCardInfo = async (params:any) => await apiGet('/api/card/sensiti
 export const apiCardInfoUpdate = (params:any) => apiPost('/api/card/update-sensitive', params)
 
 export const apiCardConfig = async () => await apiGet('/api/card/config')
+
+export const apiCardWriteOff = (params:any) => apiPost('/api/card/cancel', params)

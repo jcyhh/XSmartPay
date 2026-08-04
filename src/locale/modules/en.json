@@ -532,5 +532,7 @@
     "今日分红": "Today's dividends",
     "质押周期": "Staking period",
     "确定要赎回吗？": "Are you sure you want to redeem?",
-    "累计业绩": "Cumulative performance"
+    "累计业绩": "Cumulative performance",
+    "确定要注销吗？": "Are you sure you want to cancel this card?",
+    "注销成功": "Card canceled successfully"
 }
