@@ -1,15 +1,35 @@
 <template>
-    <div class="cusTab flex ac size28 bold6">
+    <div class="cusTab flex ac size28 bold6" :class="{ cusTabBg: showBg, cusTabSticky: sticky }">
         <div class="cusTabBox" :class="{
             'main cusTabAct': current==index,
             'opc5 cusTabDef': current!=index,
+            cusTabGlass: showGlass,
             'ml20': Number(index) > 0
         }" v-for="(item, index) in list" :key="index" @click="onTabClick(index)">{{ item.name }}</div>
     </div>
 </template>
 
 <script setup lang="ts">
-defineProps(['list'])
+import type { PropType } from 'vue'
+
+defineProps({
+    list: {
+        type: Array as PropType<any[]>,
+        default: () => []
+    },
+    showBg: {
+        type: Boolean,
+        default: true
+    },
+    sticky: {
+        type: Boolean,
+        default: true
+    },
+    showGlass: {
+        type: Boolean,
+        default: false
+    }
+})
 const emits = defineEmits(['change'])
 const current = defineModel<number>({ default: 0 })
 
@@ -26,11 +46,17 @@ const onTabClick = (index:any) => {
     width: 100vw;
     height: 150px;
     padding: 0 30px;
+
+    &.cusTabBg{
     background-color: #040404;
+    }
+
+    &.cusTabSticky{
     position: sticky;
     top: 100px;
     left: 0;
     z-index: 5;
+    }
     .cusTabBox{
         height: 80px;
         flex: 1;
@@ -40,6 +66,11 @@ const onTabClick = (index:any) => {
         border-radius: 10px;
         border: 1px solid transparent;
         position: relative;
+
+        &.cusTabGlass{
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
         &::before{
             content: '';
             position: absolute;

@@ -13,7 +13,7 @@
 
                 <div class="mt50 flex ac bold5">
                     <div class="mainButton btn flex jc ac main" @click="show=false">{{ $t('取消') }}</div>
-                    <div class="mainBtn btn ml20 flex jc ac" @click="emits('submit')">{{ $t('确认') }}</div>
+                    <div class="mainBtn btn ml20 flex jc ac" @click="emits('submit')">{{ submitTxt }}</div>
                 </div>
             </div>
         </div>
@@ -27,6 +27,10 @@ defineProps({
     title: {
         type: String,
         default: t('提示')
+    },
+    submitTxt: {
+        type: String,
+        default: t('确认')
     }
 })
 const emits = defineEmits(['submit'])

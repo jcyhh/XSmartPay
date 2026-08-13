@@ -176,6 +176,10 @@ export default [
         component: () => import('@/views/user/nft.vue')
     },
     {
+        path:'/user/nft/bind-store',
+        component: () => import('@/views/user/nft/bindStore.vue')
+    },
+    {
         path:'/user/bind/bank',
         component: () => import('@/views/user/bind/bank.vue')
     },
