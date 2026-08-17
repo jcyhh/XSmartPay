@@ -1,6 +1,4 @@
 <template>
-    <CusNav :title="$t('绑定店铺')" :show-bg="false"></CusNav>
-
     <img src="@/assets/user/47.png" class="bg">
     <div class="heroText">
         <div class="heroTitle">
@@ -18,42 +16,57 @@
     <div class="gap200"></div>
     
     <CusTab v-model="current" :list="tabs" :show-bg="false" :sticky="false" show-glass></CusTab>
-    <div class="pl30 pr30">
-        <div class="cell storeCard mb20" v-for="item in currentList" :key="item.id">
-            <div class="flex ac">
-                <img :src="mockImage" :alt="item.name" class="storeLogo">
-                <div class="flex1 ml20">
-                    <div class="flex jb ac size28">
-                        <div class="flex ac minw0">
-                            <span class="textEllipsis">{{ item.name }}</span>
-                            <img v-if="current === 0" src="@/assets/user/46.png" class="img24 ml10" @click="openDescription(item)">
-                        </div>
-                        <div class="size28 bold6 main flex0" v-if="current === 1" v-init="item.amount"></div>
-                    </div>
+    <van-pull-refresh class="fullPage rel" v-bind="refreshProps">
+        <van-list class="fullPage" v-bind="listProps">
+            <div class="pl30 pr30">
+                <div class="cell storeCard mb20" v-for="item in currentList" :key="item.id">
+                    <div class="flex ac">
+                        <img :src="item.logo" :alt="item.name" class="storeLogo">
+                        <div class="flex1 ml20">
+                            <div class="flex jb ac size28">
+                                <div class="flex ac minw0">
+                                    <span class="textEllipsis">{{ item.name }}</span>
+                                    <img v-if="current === 0" src="@/assets/user/46.png" class="img24 ml10" @click="openDescription(item)">
+                                </div>
+                                <div class="size28 bold6 main flex0" v-if="current === 1" v-init="item.amount"></div>
+                            </div>
 
-                    <div class="mt20 flex jb ac" v-if="current === 1">
-                        <div class="size24 opc5">NFT：{{ item.nft }}</div>
-                        <div class="size24 main flex0">USDT</div>
+                            <div class="mt20 flex jb ac" v-if="current === 1">
+                                <div class="size24 opc5">NFT：{{ item.nft }}</div>
+                                <div class="size24 main flex0">USDT</div>
+                            </div>
+                        </div>
+                        <div class="flex0 flex col ae ml20" v-if="current === 0">
+                            <div class="size28 bold6 main mb20">
+                                <span v-init="item.amount"></span>
+                                <span class="ml5">USDT</span>
+                            </div>
+                            <div class="mainButton benefitButton flex jc ac size24 main bold5" @click="openBenefitAsk(item)">{{ $t('购买权益') }}</div>
+                        </div>
                     </div>
                 </div>
-                <div class="mainButton benefitButton flex jc ac size24 main bold5 ml20" v-if="current === 0" @click="openBenefitAsk(item)">{{ $t('购买权益') }}</div>
+                <CusEmpty v-if="currentList.length === 0"></CusEmpty>
             </div>
-        </div>
-    </div>
+        </van-list>
+    </van-pull-refresh>
 
     <CusAsk
         v-model:show="benefitAskShow"
         :title="$t('购买权益')"
         :submit-txt="$t('确认购买')"
-        @submit="bindNftToShop"
+        @submit="confirmBenefitPurchase"
     >
         <div class="nftSelect flex jb ac" @click="openNftPicker">
             <div class="flex ac">
-                <img v-if="selectedNft" :src="mockImage" :alt="selectedNft.name" class="img48 mr10">
+                <img v-if="selectedNft" :src="selectedNft.image" :alt="selectedNft.name" class="img48 mr10">
                 <span :class="{ opc5: !selectedNft }">{{ selectedNft?.name || $t('选择绑定的NFT') }}</span>
             </div>
             <van-icon name="arrow" class="opc5" />
         </div>
+    </CusAsk>
+
+    <CusAsk v-model:show="paymentAskShow" :title="$t('购买权益')" @submit="bindNftToShop">
+        {{ $t('确定支付 ≈ {amount} AIX？', { amount: selectedShop?.aixAmount || 0 }) }}
     </CusAsk>
 
     <CusPicker
@@ -66,7 +79,7 @@
     >
         <template #default="{ item }">
             <div class="flex jc ac">
-                <img :src="mockImage" :alt="item.name" class="img48 mr10">
+                <img :src="item.image" :alt="item.name" class="img48 mr10">
                 <span class="size28 bold5">{{ item.name }}</span>
             </div>
         </template>
@@ -87,14 +100,15 @@
 </template>
 
 <script setup lang="ts">
-import CusNav from '@/components/CusNav/index.vue'
 import CusTab from '@/components/CusTab/index.vue'
 import CusPicker from '@/components/CusPicker/index.vue'
 import CusAsk from '@/components/CusAsk/index.vue'
+import CusEmpty from '@/components/CusEmpty/index.vue'
+import { useLoadList } from '@/hooks/useLoadList'
+import { usePullRefresh } from '@/hooks/usePullRefresh'
 import { t } from '@/locale'
-import { computed, onMounted, ref } from 'vue'
-import mockImage from '@/assets/mock.png'
-import { apiBindNftShop, apiNftBindings, apiNftOrders, apiNftShops } from '@/api/nft'
+import { computed, ref, watch } from 'vue'
+import { apiBindNftShop, apiNftOrders } from '@/api/nft'
 import { message } from '@/utils/message'
 
 const current = ref(0)
@@ -108,6 +122,7 @@ interface StoreItem {
     name: string
     logo: string
     amount: number | string
+    aixAmount?: number | string
     nft?: string
     description?: string
 }
@@ -118,39 +133,41 @@ interface NftOrder {
     image: string
 }
 
-const pendingStores = ref<StoreItem[]>([])
-const bindings = ref<StoreItem[]>([])
-const currentList = computed(() => current.value === 0 ? pendingStores.value : bindings.value)
+const { list: pendingStores, props: pendingListProps, loadList: loadPendingStores } = useLoadList('/api/shop', 'shops')
+const { list: bindings, props: bindingListProps, loadList: loadBindings } = useLoadList('/api/shop/bindings', 'bindings')
+const { props: pendingRefreshProps } = usePullRefresh(loadPendingStores)
+const { props: bindingRefreshProps } = usePullRefresh(loadBindings)
+const currentList = computed<StoreItem[]>(() => {
+    if (current.value === 0) {
+        return (pendingStores.value ?? []).map((item: any) => ({
+            id: item.id,
+            name: item.name,
+            logo: item.logo,
+            amount: item.amount,
+            aixAmount: item.aix_amount,
+            description: item.description
+        }))
+    }
+
+    return (bindings.value ?? []).map((item: any) => ({
+        id: item.id,
+        name: item.shop_name,
+        logo: item.shop_logo,
+        amount: item.amount,
+        nft: item.nft_name
+    }))
+})
+const listProps = computed(() => current.value === 0 ? pendingListProps.value : bindingListProps.value)
+const refreshProps = computed(() => current.value === 0 ? pendingRefreshProps.value : bindingRefreshProps.value)
 const selectedShop = ref<StoreItem>()
 const unboundNfts = ref<NftOrder[]>([])
 const nftPickerShow = ref(false)
 const nftPickerCurrent = ref(-1)
 const benefitAskShow = ref(false)
+const paymentAskShow = ref(false)
 const descriptionShow = ref(false)
 const descriptionStore = ref<StoreItem>()
 const selectedNft = computed(() => nftPickerCurrent.value >= 0 ? unboundNfts.value[nftPickerCurrent.value] : undefined)
-
-const loadPendingStores = async () => {
-    const res: any = await apiNftShops({ page_no: 1, page_size: 20 })
-    pendingStores.value = (res.shops ?? []).map((item: any) => ({
-        id: item.id,
-        name: item.name,
-        logo: item.logo,
-        amount: item.amount,
-        description: item.description
-    }))
-}
-
-const loadBindings = async () => {
-    const res: any = await apiNftBindings({ page_no: 1, page_size: 20 })
-    bindings.value = (res.bindings ?? []).map((item: any) => ({
-        id: item.id,
-        name: item.shop_name,
-        logo: item.shop_logo,
-        amount: item.aix_amount,
-        nft: item.nft_name
-    }))
-}
 
 const loadData = () => Promise.all([loadPendingStores(), loadBindings()])
 
@@ -169,12 +186,22 @@ const openDescription = (shop: StoreItem) => {
 const openNftPicker = async () => {
     const res: any = await apiNftOrders({ page_no: 1, page_size: 999, is_bind: 0 })
     unboundNfts.value = res.node_orders ?? []
+    if (unboundNfts.value.length === 0) return message(t('暂无可绑 NFT'))
     nftPickerCurrent.value = -1
     nftPickerShow.value = true
 }
 
 const onNftChange = (index: number) => {
     nftPickerCurrent.value = index
+}
+
+const confirmBenefitPurchase = () => {
+    const shop = selectedShop.value
+    const nft = selectedNft.value
+    if (!shop || !nft) return message(t('请选择'))
+
+    benefitAskShow.value = false
+    paymentAskShow.value = true
 }
 
 const bindNftToShop = async () => {
@@ -184,11 +211,13 @@ const bindNftToShop = async () => {
 
     await apiBindNftShop({ shop_id: shop.id, node_order_id: nft.id })
     message(t('购买成功'), 'success')
-    benefitAskShow.value = false
+    paymentAskShow.value = false
     loadData()
 }
 
-onMounted(loadData)
+watch(current, () => {
+    current.value === 0 ? loadPendingStores() : loadBindings()
+}, { immediate: true })
 </script>
 
 <style lang="scss" scoped>

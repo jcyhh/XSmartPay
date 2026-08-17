@@ -43,6 +43,8 @@ import homeIcon from '@/assets/tabbar/home.png'
 import homeActIcon from '@/assets/tabbar/homeAct.png'
 import payIcon from '@/assets/tabbar/pay.png'
 import payActIcon from '@/assets/tabbar/payAct.png'
+import benefitIcon from '@/assets/tabbar/benefit.png'
+import benefitActIcon from '@/assets/tabbar/benefitAct.png'
 // import cardIcon from '@/assets/tabbar/card.png'
 // import cardActIcon from '@/assets/tabbar/cardAct.png'
 import userIcon from '@/assets/tabbar/user.png'
@@ -59,22 +61,23 @@ const { userInfo } = storeToRefs(userStore)
 const appStore = useAppStore()
 const { lang } = storeToRefs(appStore)
 
-const tabbarLocaleMap: Record<string, { home: string; pay: string; draw: string; forum: string; mine: string }> = {
-    zh: { home: '首页', pay: '支付', draw: '抢卡', forum: '论坛', mine: '我的' },
-    hk: { home: '首頁', pay: '支付', draw: '搶卡', forum: '論壇', mine: '我的' },
-    en: { home: 'Home', pay: 'Pay', draw: 'Card', forum: 'Forum', mine: 'Me' },
-    ko: { home: '홈', pay: '결제', draw: '카드', forum: '포럼', mine: '내정보' },
-    ja: { home: 'ホーム', pay: '決済', draw: 'カード', forum: '掲示板', mine: 'マイ' },
-    ru: { home: 'Дом', pay: 'Оплата', draw: 'Карта', forum: 'Форум', mine: 'Мой' },
-    ma: { home: 'Utama', pay: 'Bayar', draw: 'Kad', forum: 'Forum', mine: 'Saya' },
-    id: { home: 'Home', pay: 'Bayar', draw: 'Kartu', forum: 'Forum', mine: 'Saya' },
-    vi: { home: 'Home', pay: 'Pay', draw: 'Thẻ', forum: 'Forum', mine: 'Tôi' },
-    hi: { home: 'होम', pay: 'पे', draw: 'कार्ड', forum: 'फोरम', mine: 'मेरी' }
+const tabbarLocaleMap: Record<string, { home: string; pay: string; benefit: string; draw: string; forum: string; mine: string }> = {
+    zh: { home: '首页', pay: '支付', benefit: '权益', draw: '抢卡', forum: '论坛', mine: '我的' },
+    hk: { home: '首頁', pay: '支付', benefit: '權益', draw: '搶卡', forum: '論壇', mine: '我的' },
+    en: { home: 'Home', pay: 'Pay', benefit: 'Benefits', draw: 'Card', forum: 'Forum', mine: 'Me' },
+    ko: { home: '홈', pay: '결제', benefit: '혜택', draw: '카드', forum: '포럼', mine: '내정보' },
+    ja: { home: 'ホーム', pay: '決済', benefit: '特典', draw: 'カード', forum: '掲示板', mine: 'マイ' },
+    ru: { home: 'Дом', pay: 'Оплата', benefit: 'Преимущества', draw: 'Карта', forum: 'Форум', mine: 'Мой' },
+    ma: { home: 'Utama', pay: 'Bayar', benefit: 'Manfaat', draw: 'Kad', forum: 'Forum', mine: 'Saya' },
+    id: { home: 'Home', pay: 'Bayar', benefit: 'Manfaat', draw: 'Kartu', forum: 'Forum', mine: 'Saya' },
+    vi: { home: 'Home', pay: 'Pay', benefit: 'Quyền lợi', draw: 'Thẻ', forum: 'Forum', mine: 'Tôi' },
+    hi: { home: 'होम', pay: 'पे', benefit: 'लाभ', draw: 'कार्ड', forum: 'फोरम', mine: 'मेरी' }
 }
 
 const tabbarText = computed(() => tabbarLocaleMap[lang.value] || {
     home: t('首页'),
     pay: t('全球付'),
+    benefit: t('权益'),
     draw: t('抢卡'),
     forum: t('论坛'),
     mine: t('我的')
@@ -92,6 +95,12 @@ const tabbar = computed(()=>([
         icon: payIcon,
         iconAct: payActIcon,
         path: '/pay/index'
+    },
+    {
+        name: tabbarText.value.benefit,
+        icon: benefitIcon,
+        iconAct: benefitActIcon,
+        path: '/benefit/index'
     },
     // {
     //     name: tabbarText.value.draw,

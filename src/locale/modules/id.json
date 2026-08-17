@@ -427,5 +427,7 @@
     "兑换": "Tukar",
     "确认兑换 {name} 吗？": "Konfirmasi penukaran {name}?",
     "选择绑定的NFT": "Pilih NFT untuk dihubungkan",
-    "店铺介绍": "Pengenalan Toko"
+    "店铺介绍": "Pengenalan Toko",
+    "确定支付 ≈ {amount} AIX？": "Konfirmasi pembayaran ≈ {amount} AIX?",
+    "暂无可绑 NFT": "Tidak ada NFT yang dapat dihubungkan"
 }

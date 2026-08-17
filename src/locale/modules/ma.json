@@ -427,5 +427,7 @@
     "兑换": "Tebus",
     "确认兑换 {name} 吗？": "Sahkan penebusan {name}?",
     "选择绑定的NFT": "Pilih NFT untuk dipautkan",
-    "店铺介绍": "Pengenalan Kedai"
+    "店铺介绍": "Pengenalan Kedai",
+    "确定支付 ≈ {amount} AIX？": "Sahkan pembayaran ≈ {amount} AIX?",
+    "暂无可绑 NFT": "Tiada NFT tersedia untuk dipautkan"
 }

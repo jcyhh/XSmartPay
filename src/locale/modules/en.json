@@ -549,5 +549,7 @@
     "兑换": "Redeem",
     "确认兑换 {name} 吗？": "Confirm redeeming {name}?",
     "选择绑定的NFT": "Select NFT to bind",
-    "店铺介绍": "Store Introduction"
+    "店铺介绍": "Store Introduction",
+    "确定支付 ≈ {amount} AIX？": "Confirm payment of ≈ {amount} AIX?",
+    "暂无可绑 NFT": "No NFT available to bind"
 }

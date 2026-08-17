@@ -427,5 +427,7 @@
     "兑换": "Đổi",
     "确认兑换 {name} 吗？": "Xác nhận đổi {name}?",
     "选择绑定的NFT": "Chọn NFT để liên kết",
-    "店铺介绍": "Giới thiệu cửa hàng"
+    "店铺介绍": "Giới thiệu cửa hàng",
+    "确定支付 ≈ {amount} AIX？": "Xác nhận thanh toán ≈ {amount} AIX?",
+    "暂无可绑 NFT": "Không có NFT để liên kết"
 }

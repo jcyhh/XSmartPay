@@ -1,7 +1,5 @@
 <template>
-    <CusNav :show-bg="false" :title="$t('NFT市场')">
-        <div class="tr size24 main" @click="routerPush('/user/nft/bind-store')">{{ $t('绑定店铺') }}</div>
-    </CusNav>
+    <CusNav :show-bg="false" :title="$t('NFT市场')"></CusNav>
 
     <div class="pl30 pr30 mt30">
         <section class="market mainCard">
@@ -31,7 +29,7 @@
                     @slide-change="onMarketSlideChange"
                 >
                     <swiper-slide v-for="item in marketCards" :key="item.id" class="marketSlide">
-                        <img :src="mockImage" :alt="item.name" class="marketImage">
+                        <img :src="item.image" :alt="item.name" class="marketImage">
                     </swiper-slide>
                 </swiper>
             </div>
@@ -56,7 +54,7 @@
             <div class="pl30 pr30 rel">
                 <div class="cell card mb20" v-for="(item, index) in list" :key="index">
                     <div class="flex ac">
-                        <img :src="mockImage" class="img100 avatar">
+                        <img :src="item.image" class="img100 avatar">
                         <div class="flex1">
                             <div class="flex jb ac">
                                 <div class="size28 bold6 main">{{ item.name }}</div>
@@ -96,10 +94,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 // @ts-ignore
 import 'swiper/css';
 import { getAdaptPx } from '@/utils';
-import { routerPush } from '@/router';
 import { apiBuyNft, apiNftCards } from '@/api/nft';
 import { assetNFTC } from '@/config';
-import mockImage from '@/assets/mock.png'
 import { message } from '@/utils/message';
 
 const current = ref(0)

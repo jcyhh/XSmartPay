@@ -30,6 +30,15 @@ export default [
         }]
     },
     {
+        path:'/benefit',
+        component: Layout,
+        redirect: '/benefit/index',
+        children:[{
+            path:'index',
+            component: () => import('@/views/user/nft/bindStore.vue')
+        }]
+    },
+    {
         path:'/draw',
         component: Layout,
         redirect: '/draw/index',
