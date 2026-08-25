@@ -35,6 +35,11 @@
                     <div class="size20 ml6">{{ assetUSD }}</div>
                 </div>
 
+                <div class="size28 bold5 mt30">{{ $t('支付密码') }}</div>
+                <div class="inp flex jb ac mt20 size28">
+                    <input type="password" v-model="payPassword" :placeholder="$t('请输入支付密码')" class="flex1">
+                </div>
+
                 <div class="size28 bold6 mt30 mb30">{{ $t('支付方式') }}</div>
                 <CusPaytype v-model:paytype="paytype" :show-bot="true"></CusPaytype>
 
@@ -74,10 +79,12 @@ const paytype = ref('balance_usdt')
 const show = ref(false)
 
 const inputAmount = ref()
+const payPassword = ref()
 
 const open = () => {
     userStore.loadUserInfo()
     inputAmount.value = ''
+    payPassword.value = ''
     show.value = true
     loadPickerList()
 }
@@ -85,10 +92,12 @@ const open = () => {
 const submit = async () => {
     if(!currentPicker.value)return message(t('请选择卡'))
     if(!inputAmount.value)return message(t('请输入充值金额'))
+    if(!payPassword.value)return message(t('请输入支付密码'))
     await apiRecharge({
         amount: inputAmount.value,
         card_id: currentPicker.value.id,
-        ccy: paytype.value
+        ccy: paytype.value,
+        pay_password: payPassword.value
     })
     userStore.loadUserInfo()
     message(t('充值成功'), 'success')

@@ -48,6 +48,11 @@
                     <div class="size20 ml6">{{ assetUSD }}</div>
                 </div>
 
+                <div class="size28 bold5 mt30">{{ $t('支付密码') }}</div>
+                <div class="inp flex jb ac mt20 size28">
+                    <input type="password" v-model="payPassword" :placeholder="$t('请输入支付密码')" class="flex1">
+                </div>
+
                 <div class="mainBtn mt100 flex jc ac size28 main bold6 btn" @click="submit">{{ $t('确认') }}</div>
 
                 <div class="safeArea"></div>
@@ -77,12 +82,14 @@ const { pickerShow, pickerList, currentPicker, pickerCurrent, loadPickerList } =
 
 const inputAmount = ref()
 const toCardNumber = ref()
+const payPassword = ref()
 
 const show = ref(false)
 
 const open = () => {
     inputAmount.value = ''
     toCardNumber.value = ''
+    payPassword.value = ''
     show.value = true
     loadPickerList()
 }
@@ -91,10 +98,12 @@ const submit = async () => {
     if(!currentPicker.value)return message(t('请选择卡'))
     if(!toCardNumber.value)return message(t('请输入转入卡号'))
     if(!inputAmount.value)return message(t('请输入转入金额'))
+    if(!payPassword.value)return message(t('请输入支付密码'))
     await apiTransfer({
         amount: inputAmount.value,
         from_card_id: currentPicker.value.id,
-        to_card_id: toCardNumber.value
+        to_card_id: toCardNumber.value,
+        pay_password: payPassword.value
     })
     message(t('转账成功'), 'success')
     show.value = false
