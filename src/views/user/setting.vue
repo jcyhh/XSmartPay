@@ -12,6 +12,15 @@
             <van-icon name="arrow" color="#FFFFFF80" />
         </div>
 
+        <div class="cell card flex jb ac mt20" @click="routerPush('/googleAuthenticator')" v-if="userInfo?.email">
+            <div class="size28">{{ $t('谷歌验证码') }}</div>
+            <div class="flex ac">
+                <div class="bind binded flex ac" v-if="Number(userInfo?.google_enabled) === 1">{{ $t('已绑定') }}</div>
+                <div class="bind unbind flex ac" v-else-if="userInfo">{{ $t('未绑定') }}</div>
+                <van-icon name="arrow" color="#FFFFFF80" />
+            </div>
+        </div>
+
         <div class="cell card flex jb ac mt20" @click="routerPush('/user/bind/bank')">
             <div class="size28">{{ $t('银行卡') }}</div>
             <div class="flex ac">
@@ -60,7 +69,7 @@
 import CusNav from '@/components/CusNav/index.vue'
 import { delAccount, delToken, getAccount, removeAccountItem } from '@/config/storage';
 import { routerPush, routerReplace } from '@/router';
-import { useAppStore, useDappStore } from '@/store';
+import { useAppStore, useDappStore, useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import CusAsk from '@/components/CusAsk/index.vue'
 import { onActivated, onMounted, ref } from 'vue';
@@ -76,6 +85,9 @@ const { isH5 } = storeToRefs(appStore)
 
 const dappStore = useDappStore()
 const { providerStatus } = storeToRefs(dappStore)
+
+const userStore = useUserStore()
+const { userInfo } = storeToRefs(userStore)
 
 const show = ref(false)
 const bindedPayTypes = ref<string[]>([])
@@ -108,10 +120,12 @@ const logout = () => {
 }
 
 onMounted(() => {
+    userStore.loadUserInfo()
     loadPaymentStatus()
 })
 
 onActivated(() => {
+    userStore.loadUserInfo()
     loadPaymentStatus()
 })
 </script>

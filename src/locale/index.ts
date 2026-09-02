@@ -30,22 +30,23 @@ import ru from './modules/ru.json';
 import fr from './modules/fr.json';
 import ma from './modules/ma.json';
 import hi from './modules/hi.json';
+import googleAuth from './googleAuth';
 
 const messages = {
-    en: {...en, ...enCommon},
-    ko: {...ko, ...koCommon},
-    ja: {...ja, ...jaCommon},
-    hk: {...hk, ...hkCommon},
-    zh: {...zh, ...zhCommon},
-    id: {...id, ...idCommon},
-    es: {...es, ...esCommon},
-    tr: {...tr, ...trCommon},
-    vi: {...vi, ...viCommon},
-    th: {...th, ...thCommon},
-    ru: {...ru, ...ruCommon},
-    fr: {...fr, ...frCommon},
-    ma: {...ma, ...maCommon},
-    hi: {...hi, ...hiCommon}
+    en: {...en, ...enCommon, ...googleAuth.en},
+    ko: {...ko, ...koCommon, ...googleAuth.ko},
+    ja: {...ja, ...jaCommon, ...googleAuth.ja},
+    hk: {...hk, ...hkCommon, ...googleAuth.hk},
+    zh: {...zh, ...zhCommon, ...googleAuth.zh},
+    id: {...id, ...idCommon, ...googleAuth.id},
+    es: {...es, ...esCommon, ...googleAuth.es},
+    tr: {...tr, ...trCommon, ...googleAuth.tr},
+    vi: {...vi, ...viCommon, ...googleAuth.vi},
+    th: {...th, ...thCommon, ...googleAuth.th},
+    ru: {...ru, ...ruCommon, ...googleAuth.ru},
+    fr: {...fr, ...frCommon, ...googleAuth.fr},
+    ma: {...ma, ...maCommon, ...googleAuth.ma},
+    hi: {...hi, ...hiCommon, ...googleAuth.hi}
 }
 
 

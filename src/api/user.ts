@@ -1,8 +1,23 @@
 import { apiGet, apiPost } from "@/utils/request";
 
+export interface GoogleBindResponse {
+    secret: string
+}
+
+export interface GoogleConfirmBindParams {
+    email_code: string
+    code: string
+}
+
 export const apiUserInfo = async () => await apiGet('/api/users/my')
 
 export const apiUpdateUserInfo = async (params:any) => await apiPost('/api/users/my', params)
+
+export const apiGoogleBind = async ():Promise<GoogleBindResponse> => {
+    return await apiPost('/api/auth/google/bind') as unknown as GoogleBindResponse
+}
+
+export const apiGoogleConfirmBind = async (params:GoogleConfirmBindParams) => await apiPost('/api/auth/google/confirm_bind', params)
 
 export const apiVersion = async (params:any) => await apiGet('/api/version', params)
 

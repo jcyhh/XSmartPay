@@ -175,6 +175,10 @@ const { userInfo } = storeToRefs(userStore)
 
 const loadUserInfo = async () => {
     userInfo.value = await apiUserInfo()
+    if(userInfo.value?.email && Number(userInfo.value.google_enabled) === 0){
+        routerPush('/googleAuthenticator')
+        return
+    }
     if(!userInfo.value?.finance_level){
         show.value = true
     }

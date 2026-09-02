@@ -31,14 +31,19 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => response.data,
     error => {
-        const code = error.status
+        const code = error.response?.status || error.status
+        const responseData = error.response?.data
+        const errorMessage = typeof responseData === 'string' ? responseData : responseData?.message
         if (code == 401) {
             // 登录失效
             logout()
-            return Promise.reject(new Error(error.response.data || 'Error'))
+            return Promise.reject(new Error(errorMessage || 'Error'))
         } else {
-            if (error.response.data) message(error.response.data)
-            return Promise.reject(new Error(error.response.data || 'Error'))
+            if(errorMessage === '请先绑定Google验证器' && router.currentRoute.value.path !== '/googleAuthenticator'){
+                routerPush('/googleAuthenticator')
+            }
+            if(responseData) message(errorMessage || responseData)
+            return Promise.reject(new Error(errorMessage || 'Error'))
         }
     }
 )

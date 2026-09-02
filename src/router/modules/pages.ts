@@ -132,6 +132,10 @@ export default [
         component: () => import('@/views/user/setting.vue')
     },
     {
+        path:'/googleAuthenticator',
+        component: () => import('@/views/user/googleAuthenticator.vue')
+    },
+    {
         path:'/draw/record',
         component: () => import('@/views/draw/record.vue')
     },
