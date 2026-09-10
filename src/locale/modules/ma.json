@@ -429,5 +429,10 @@
     "选择绑定的NFT": "Pilih NFT untuk dipautkan",
     "店铺介绍": "Pengenalan Kedai",
     "确定支付 ≈ {amount} AIX？": "Sahkan pembayaran ≈ {amount} AIX?",
-    "暂无可绑 NFT": "Tiada NFT tersedia untuk dipautkan"
+    "暂无可绑 NFT": "Tiada NFT tersedia untuk dipautkan",
+    "转账记录": "Sejarah pindahan",
+    "转出": "Keluar",
+    "转入": "Masuk",
+    "转给": "Kepada",
+    "加载失败，点击重试": "Gagal memuatkan. Ketik untuk mencuba lagi"
 }

@@ -76,5 +76,10 @@
     "确定要赎回吗？": "Confirmer le rachat ?",
     "累计业绩": "Performance cumulée",
     "确定要注销吗？": "Confirmer l'annulation de cette carte ?",
-    "注销成功": "Carte annulée avec succès"
+    "注销成功": "Carte annulée avec succès",
+    "转账记录": "Historique des transferts",
+    "转出": "Envoyés",
+    "转入": "Reçus",
+    "转给": "À",
+    "加载失败，点击重试": "Échec du chargement. Appuyez pour réessayer"
 }

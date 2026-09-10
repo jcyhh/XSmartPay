@@ -31,5 +31,10 @@
     "确定要赎回吗？": "İtfa etmek istediğinizden emin misiniz?",
     "累计业绩": "Kümülatif performans",
     "确定要注销吗？": "Bu kartı iptal etmek istediğinizden emin misiniz?",
-    "注销成功": "Kart başarıyla iptal edildi"
+    "注销成功": "Kart başarıyla iptal edildi",
+    "转账记录": "Transfer geçmişi",
+    "转出": "Giden",
+    "转入": "Gelen",
+    "转给": "Alıcı",
+    "加载失败，点击重试": "Yüklenemedi. Yeniden denemek için dokunun"
 }

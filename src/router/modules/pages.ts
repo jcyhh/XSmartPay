@@ -160,6 +160,10 @@ export default [
         component: () => import('@/views/user/transfer.vue')
     },
     {
+        path:'/user/transfer/record',
+        component: () => import('@/views/user/transferRecord.vue')
+    },
+    {
         path:'/user/order',
         component: () => import('@/views/user/order.vue')
     },

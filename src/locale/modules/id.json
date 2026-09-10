@@ -429,5 +429,10 @@
     "选择绑定的NFT": "Pilih NFT untuk dihubungkan",
     "店铺介绍": "Pengenalan Toko",
     "确定支付 ≈ {amount} AIX？": "Konfirmasi pembayaran ≈ {amount} AIX?",
-    "暂无可绑 NFT": "Tidak ada NFT yang dapat dihubungkan"
+    "暂无可绑 NFT": "Tidak ada NFT yang dapat dihubungkan",
+    "转账记录": "Riwayat transfer",
+    "转出": "Keluar",
+    "转入": "Masuk",
+    "转给": "Kepada",
+    "加载失败，点击重试": "Gagal memuat. Ketuk untuk mencoba lagi"
 }

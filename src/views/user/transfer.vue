@@ -1,5 +1,7 @@
 <template>
-    <CusNav :title="$t('转账')"></CusNav>
+    <CusNav :title="$t('转账')">
+        <div class="tr size26" @click="routerPush('/user/transfer/record')">{{ $t('记录') }}</div>
+    </CusNav>
     <div class="pl30 pr30 pt30 rel">
         
         <div class="cell card mb20 flex jb ac" @click="pickerShow=true">
@@ -75,6 +77,7 @@
 
 <script setup lang="ts">
 import CusNav from '@/components/CusNav/index.vue'
+import { routerPush } from '@/router'
 import { assetAIX, assetNFTC, assetUSDT } from '@/config'
 import { computed, onMounted, ref } from 'vue'
 import CusPicker from '@/components/CusPicker/index.vue';
