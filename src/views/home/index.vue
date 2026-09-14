@@ -89,6 +89,12 @@
             <div class="title size40 bold">{{ $t('OTC 交易') }}</div>
             <div class="size24 opc5 mt10">{{ $t('安全便捷 自由买卖') }}</div>
         </div> -->
+        <div class="otc mt30 flex col jc" @click="goToAix">
+            <div class="flex">
+                <div class="title size40 bold">AIX-Quant</div>
+            </div>
+            <div class="size24 mt20">{{ $t('双系统互联·点击进入系统') }}</div>
+        </div>
     </div>
 
     <Node></Node>
@@ -161,7 +167,7 @@ import { routerPush } from '@/router';
 import { useNotice } from '@/hooks/useNotice';
 import Cards from './components/Cards.vue';
 import CusNumber from '@/components/CusNumber/index.vue'
-import { useUserStore } from '@/store';
+import { useUserStore, useAppStore } from '@/store';
 import { apiYuebaoStats } from '@/api/yuebao';
 import Popup from './components/Popup.vue';
 import { storeToRefs } from 'pinia';
@@ -172,6 +178,24 @@ const show = ref(false)
 
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
+
+const appStore = useAppStore()
+const { isH5 } = storeToRefs(appStore)
+
+
+const goToAix = () => {
+    if (!isH5.value) {
+        const flutterWindow = window as Window & {
+            sendMessageToFlutter?: (message: string) => void
+        }
+        if (typeof flutterWindow.sendMessageToFlutter === 'function') {
+            flutterWindow.sendMessageToFlutter(JSON.stringify({ type: 'openAix' }))
+        }
+        return
+    }
+
+    window.location.href = 'https://www.aixquant.net/aix'
+}
 
 const loadUserInfo = async () => {
     userInfo.value = await apiUserInfo()

@@ -111,13 +111,6 @@
             </div>
         </div>
 
-        <div class="otc mt30 flex col jc" @click="goToAix">
-            <div class="flex">
-                <div class="title size40 bold">AIX-Quant</div>
-            </div>
-            <div class="size24 mt20">{{ $t('双系统互联·点击进入系统') }}</div>
-        </div>
-
         <div class="mt40 size34 bold6 main">{{ $t('常用功能') }}</div>
 
         <div class="cell flex jb ac mt30" @click="routerPush('/community/my')">
@@ -210,20 +203,6 @@ import { ref } from 'vue';
 
 const appStore = useAppStore()
 const { isH5 } = storeToRefs(appStore)
-
-const goToAix = () => {
-    if (!isH5.value) {
-        const flutterWindow = window as Window & {
-            sendMessageToFlutter?: (message: string) => void
-        }
-        if (typeof flutterWindow.sendMessageToFlutter === 'function') {
-            flutterWindow.sendMessageToFlutter(JSON.stringify({ type: 'openAix' }))
-        }
-        return
-    }
-
-    window.location.href = 'https://www.aixquant.net/aix'
-}
 
 const dappStore = useDappStore()
 const { providerStatus } = storeToRefs(dappStore)
