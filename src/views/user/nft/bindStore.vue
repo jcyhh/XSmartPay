@@ -1,5 +1,5 @@
 <template>
-    <img src="@/assets/user/47.png" class="bg">
+    <img src="@/assets/user/47.webp" class="bg">
     <div class="heroText">
         <div class="heroTitle">
             <div>{{ $t('绑定优质店铺') }}</div>

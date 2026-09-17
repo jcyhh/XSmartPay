@@ -32,8 +32,8 @@
     </div>
     <div class="flex jc">
         <div class="draw">
-            <img src="@/assets/draw/2.png" class="pic2">
-            <img src="@/assets/draw/3.png" class="pic3">
+            <img src="@/assets/draw/2.webp" class="pic2">
+            <img src="@/assets/draw/3.webp" class="pic3">
             <div
                 class="drawRotateBox"
                 :style="{
@@ -42,7 +42,7 @@
                     transitionTimingFunction: drawTiming
                 }"
             >
-                <img src="@/assets/draw/4.png" class="pic4">
+                <img src="@/assets/draw/4.webp" class="pic4">
                 <div class="drawBox">
                     <div
                         v-for="(item, index) in drawItems"
@@ -282,7 +282,7 @@ onMounted(() => {
 .btn{
     width: 400px;
     height: 100px;
-    background-image: url("@/assets/draw/5.png");
+    background-image: url("@/assets/draw/5.webp");
     background-size: 100% 100%;
     color: #4E1F0B;
     font-size: 40px;

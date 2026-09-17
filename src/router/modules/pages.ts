@@ -164,6 +164,14 @@ export default [
         component: () => import('@/views/user/transferRecord.vue')
     },
     {
+        path:'/user/crossTransfer',
+        component: () => import('@/views/user/crossTransfer.vue')
+    },
+    {
+        path:'/user/crossTransfer/record',
+        component: () => import('@/views/user/crossTransferRecord.vue')
+    },
+    {
         path:'/user/order',
         component: () => import('@/views/user/order.vue')
     },

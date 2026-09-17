@@ -1,5 +1,5 @@
 <template>
-    <img src="@/assets/draw/bg.png" class="bg">
+    <img src="@/assets/draw/bg.webp" class="bg">
 
     <div class="rule rule1 flex ac animate__animated animate__slideInRight" @click="routerPush('/draw/rule')">
         <img src="@/assets/draw/6.png" class="img30 mr6">

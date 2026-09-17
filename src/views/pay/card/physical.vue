@@ -35,7 +35,7 @@
                 >
                     <swiper-slide v-for="item in cardList" :key="item.id" class="cardSlide">
                         <div class="cardBlock">
-                            <img src="@/assets/card/physicalCard.png" class="cardImg">
+                            <img src="@/assets/card/physicalCard.webp" class="cardImg">
                             <div class="active" v-if="item.card_status == 'PENDING'" @click="activeRef?.open(currentCard?.id)">{{ $t('点击激活') }}</div>
                             <div v-else>
                                 <div class="tag" :class="item.card_status=='ACTIVE'?'':'tagfail'" v-if="item.card_status">{{ item.card_status }}</div>

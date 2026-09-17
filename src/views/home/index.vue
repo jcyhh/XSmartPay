@@ -1,5 +1,5 @@
 <template>
-    <img src="@/assets/login/bg.png" class="pagebg animate__animated animate__slideInDown" style="position: absolute;">
+    <img src="@/assets/login/bg.webp" class="pagebg animate__animated animate__slideInDown" style="position: absolute;">
 
     <div class="rel pt30 pl30 pr30">
         <div class="topcard">
@@ -491,7 +491,7 @@ onMounted(()=>{
 }
 .otc{
     height: 190px;
-    background-image: url("@/assets/user/41.png");
+    background-image: url("@/assets/user/41.webp");
     background-size: 100% 100%;
     padding-left: 210px;
     position: relative;

@@ -22,13 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import card1 from '@/assets/card/1.png'
-import card2 from '@/assets/card/2.png'
-import card3 from '@/assets/card/3.png'
-import card4 from '@/assets/card/4.png'
-import card5 from '@/assets/card/5.png'
-import card6 from '@/assets/card/6.png'
-import card7 from '@/assets/card/7.png'
+import card1 from '@/assets/card/1.webp'
+import card2 from '@/assets/card/2.webp'
+import card3 from '@/assets/card/3.webp'
+import card4 from '@/assets/card/4.webp'
+import card5 from '@/assets/card/5.webp'
+import card6 from '@/assets/card/6.webp'
+import card7 from '@/assets/card/7.webp'
 
 const cardRows = [
     [card1, card2, card3, card4, card5],

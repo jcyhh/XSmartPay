@@ -39,7 +39,7 @@ service.interceptors.response.use(
             logout()
             return Promise.reject(new Error(errorMessage || 'Error'))
         } else {
-            if(errorMessage === '请先绑定Google验证器' && router.currentRoute.value.path !== '/googleAuthenticator'){
+            if(errorMessage === '请先绑定Google验证器' && !error.config?.url?.startsWith('/api/cross_transfers') && router.currentRoute.value.path !== '/googleAuthenticator'){
                 routerPush('/googleAuthenticator')
             }
             if(responseData) message(errorMessage || responseData)

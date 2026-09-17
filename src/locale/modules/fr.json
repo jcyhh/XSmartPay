@@ -77,10 +77,13 @@
     "累计业绩": "Performance cumulée",
     "确定要注销吗？": "Confirmer l'annulation de cette carte ?",
     "注销成功": "Carte annulée avec succès",
+    "划转": "Transfert interprojets",
+    "划转记录": "Historique des transferts interprojets",
     "转账记录": "Historique des transferts",
     "转出": "Envoyés",
     "转入": "Reçus",
     "转给": "À",
     "加载失败，点击重试": "Échec du chargement. Appuyez pour réessayer",
-    "双系统互联·点击进入系统": "Deux systèmes connectés · Appuyez pour accéder"
+    "双系统互联·点击进入系统": "Deux systèmes connectés · Appuyez pour accéder",
+    "来自": "De"
 }

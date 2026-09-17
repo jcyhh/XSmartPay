@@ -1,5 +1,5 @@
 <template>
-    <img src="@/assets/login/bg.png" class="pagebg animate__animated animate__slideInDown">
+    <img src="@/assets/login/bg.webp" class="pagebg animate__animated animate__slideInDown">
     
     <Banner></Banner>
 

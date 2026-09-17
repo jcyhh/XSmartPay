@@ -10,7 +10,7 @@
                 <div class="flex jc mt80">
                     <div @click="upload">
                         <img :src="logo" class="upload" v-if="logo">
-                        <img src="@/assets/user/22.png" class="upload" v-else>
+                        <img src="@/assets/user/22.webp" class="upload" v-else>
                     </div>
                 </div>
                 <div class="tc size28 bold6 mt30">{{ $t('社团头像') }}</div>

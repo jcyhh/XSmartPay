@@ -32,10 +32,13 @@
     "累计业绩": "Rendimiento acumulado",
     "确定要注销吗？": "¿Seguro que desea cancelar esta tarjeta?",
     "注销成功": "Tarjeta cancelada correctamente",
+    "划转": "Transferencia entre proyectos",
+    "划转记录": "Historial de transferencias entre proyectos",
     "转账记录": "Historial de transferencias",
     "转出": "Enviadas",
     "转入": "Recibidas",
     "转给": "Para",
     "加载失败，点击重试": "Error al cargar. Toca para reintentar",
-    "双系统互联·点击进入系统": "Dos sistemas conectados · Toca para entrar"
+    "双系统互联·点击进入系统": "Dos sistemas conectados · Toca para entrar",
+    "来自": "De"
 }

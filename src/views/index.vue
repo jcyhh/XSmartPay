@@ -1,5 +1,5 @@
 <template>
-    <img src="@/assets/start/1.png" class="pic1" />
+    <img src="@/assets/start/1.webp" class="pic1" />
     <img src="@/assets/start/2.png" class="pic2 animate__animated animate__zoomIn delay3">
     <div class="grey size20 tips animate__animated animate__slideInUp delay3 flex jc ac">
         <span class="mr10">Welcome to X SmartPay</span>

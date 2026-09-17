@@ -1,5 +1,5 @@
 <template>
-    <img src="@/assets/login/bg.png" class="pagebg animate__animated animate__slideInDown">
+    <img src="@/assets/login/bg.webp" class="pagebg animate__animated animate__slideInDown">
     <div class="pl30 pr30 pt60 rel">
         
         <div class="flex jb ac">
@@ -101,13 +101,17 @@
                 <img src="@/assets/user/3.png" class="img40">
                 <div class="mt20">{{ $t('充值') }}</div>
             </div>
-            <div class="item flex col jc ac ml20 mr20" @click="routerPush('/user/withdraw')">
+            <div class="item flex col jc ac ml10" @click="routerPush('/user/withdraw')">
                 <img src="@/assets/user/4.png" class="img40">
                 <div class="mt20">{{ $t('提现') }}</div>
             </div>
-            <div class="item flex col jc ac" @click="routerPush('/user/transfer')">
+            <div class="item flex col jc ac ml10" @click="routerPush('/user/transfer')">
                 <img src="@/assets/user/5.png" class="img40">
                 <div class="mt20">{{ $t('转账') }}</div>
+            </div>
+            <div class="item flex col jc ac ml10" @click="routerPush('/user/crossTransfer')">
+                <img src="@/assets/user/49.png" class="img35">
+                <div class="mt25">{{ $t('划转') }}</div>
             </div>
         </div>
 
@@ -243,7 +247,7 @@ const show = ref(false)
 }
 .otc{
     height: 190px;
-    background-image: url("@/assets/user/41.png");
+    background-image: url("@/assets/user/41.webp");
     background-size: 100% 100%;
     padding-left: 210px;
     position: relative;

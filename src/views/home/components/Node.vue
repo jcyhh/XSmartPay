@@ -1,6 +1,6 @@
 <template>
     <div class="rel mt40">
-        <img src="@/assets/home/5.png" class="pic5">
+        <img src="@/assets/home/5.webp" class="pic5">
         <div class="rel pt40 pb20">
             <div class="size24 opc5 tc">{{ $t('选择节点认购/质押') }}</div>
             <div class="flex jc ac mt18">

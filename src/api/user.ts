@@ -39,6 +39,10 @@ export const apiWithdraw = async (params:any) => await apiPost('/api/withdraws',
 
 export const apiTransfer = async (params:any) => await apiPost('/api/transfer', params)
 
+export const apiCrossTransferConfig = async () => await apiGet('/api/cross_transfers/config')
+
+export const apiCrossTransfer = async (params:any) => await apiPost('/api/cross_transfers', params)
+
 export const apiHelpDetail = async (params:any) => await apiGet(`/api/help_center/${params}`)
 
 export const apiLeves = async () => await apiGet('/api/config/finance_levels')

@@ -42,7 +42,7 @@
         <div class="scan-tip">{{ $t('使用谷歌验证器扫描此二维码') }}</div>
 
         <div class="qr-shell">
-            <img src="@/assets/user/48.png" class="qr-frame" alt="">
+            <img src="@/assets/user/48.webp" class="qr-frame" alt="">
             <div class="qr-panel flex jc ac">
                 <QRCode
                     class="generated-qr"

@@ -1,5 +1,5 @@
 <template>
-    <img src="@/assets/start/1.png" class="pic1" />
+    <img src="@/assets/start/1.webp" class="pic1" />
 </template>
 
 <script setup lang="ts">

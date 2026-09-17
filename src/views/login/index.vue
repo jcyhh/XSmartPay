@@ -3,7 +3,7 @@
 
     <div class="gap200 mb50"></div>
 
-    <img src="@/assets/login/bg.png" class="bg animate__animated animate__slideInDown">
+    <img src="@/assets/login/bg.webp" class="bg animate__animated animate__slideInDown">
 
     <div class="pl30 pr30 rel">
 
