@@ -7,13 +7,13 @@
                     <van-icon size="20" name="cross" color="#8D9094" @click="close" />
                 </div>
 
-                <div class="mt40 size48 bold" v-init="cardInfo?.price"></div>
-                <div class="size24 mt20 opc5">{{ $t('开卡金额') }}({{ assetUSDT }})</div>
+                <div class="mt40 size48 bold" v-init="totalPaymentAmount"></div>
+                <div class="size24 mt20 opc5">{{ $t('开卡金额') }}({{ paymentAsset }})</div>
                 <div class="flex jb ac mt30">
                     <div class="size24">
                         <span class="opc5">{{ $t('可用余额') }}</span>
-                        <span class="main ml10" v-init="userInfo?.balance_usdt"></span>
-                        <span class="main ml5">{{ assetUSDT }}</span>
+                        <span class="main ml10" v-init="availableBalance"></span>
+                        <span class="main ml5">{{ paymentAsset }}</span>
                     </div>
                     <div class="flex ac">
                         <div class="size24 opc5">{{ $t('卡币种') }}</div>
@@ -34,22 +34,22 @@
 
                 <div class="size28 bold5 mt30">{{ $t('首充金额') }}</div>
                 <div class="inp flex jb ac mt20 size28">
-                    <div class="flex1" v-init="1"></div>
+                    <div class="flex1" v-init="firstChargeAmount"></div>
                     <div class="line"></div>
-                    <img src="@/assets/common/usdt.png" class="img36 ml20">
-                    <div class="size20 ml6">{{ assetUSDT }}</div>
+                    <img :src="paymentLogo" class="img36 ml20">
+                    <div class="size20 ml6">{{ paymentAsset }}</div>
                 </div>
 
                 <div class="size28 bold5 mt30">{{ $t('到账金额') }}</div>
                 <div class="inp flex jb ac mt20 size28">
-                    <div class="flex1" v-init="1"></div>
+                    <div class="flex1" v-init="firstCardAmount"></div>
                     <div class="line"></div>
                     <img src="@/assets/common/usd.png" class="img36 ml20">
                     <div class="size20 ml6">{{ assetUSD }}</div>
                 </div>
 
                 <div class="size28 bold6 mt30 mb30">{{ $t('支付方式') }}</div>
-                <CusPaytype v-model:paytype="paytype" :is-mixin="true" :show-bot="true"></CusPaytype>
+                <CusPaytype v-model:paytype="paytype" :is-mixin="true" :show-axe="true"></CusPaytype>
 
                 <div class="mainBtn mt50 flex jc ac size28 main bold6 btn" @click="submit">{{ $t('确认开卡') }}</div>
 
@@ -70,8 +70,8 @@
 </template>
 
 <script setup lang="ts">
-import { assetUSD, assetUSDT } from '@/config';
-import { ref } from 'vue';
+import { assetAXE, assetUSD, assetUSDT } from '@/config';
+import { computed, ref } from 'vue';
 import CusPicker from '@/components/CusPicker/index.vue';
 import { useCardholder } from '@/hooks/useCardholder';
 import { useUserStore } from '@/store';
@@ -79,8 +79,12 @@ import { storeToRefs } from 'pinia';
 import { message } from '@/utils/message';
 import { t } from '@/locale';
 import { apiOpenVirtualCard } from '@/api/card';
+import { apiConfig } from '@/api/home';
 import { routerPush } from '@/router';
+import { computedAdd, computedDiv } from '@/utils';
 import CusPaytype from '@/components/CusPaytype/pay.vue'
+import axeLogo from '@/assets/common/axe.webp'
+import usdtLogo from '@/assets/common/usdt.png'
 
 const emits = defineEmits(['success'])
 
@@ -94,14 +98,33 @@ const paytype = ref('balance_usdt')
 const show = ref(false)
 
 const cardInfo = ref()
+const config = ref()
+const axePrice = computed(() => Number(config.value?.axe_price || 0))
+const firstCardAmount = computed(() => Number(config.value?.first_card_amount || 1))
+const paymentAsset = computed(() => paytype.value === 'balance_axe' ? assetAXE : assetUSDT)
+const paymentLogo = computed(() => paytype.value === 'balance_axe' ? axeLogo : usdtLogo)
+const availableBalance = computed(() => paytype.value === 'balance_axe' ? userInfo.value?.balance_axe : userInfo.value?.balance_usdt)
+const firstChargeAmount = computed(() => {
+    if (paytype.value !== 'balance_axe') return firstCardAmount.value
+    return axePrice.value > 0 ? computedDiv(firstCardAmount.value, axePrice.value) : 0
+})
+const totalPaymentAmount = computed(() => {
+    const cardAmount = cardInfo.value?.price || 0
+    if (paytype.value !== 'balance_axe') return computedAdd(cardAmount, firstCardAmount.value)
+    return axePrice.value > 0 ? computedDiv(computedAdd(cardAmount, firstCardAmount.value), axePrice.value) : 0
+})
 
 const open = (data:any) => {
+    userStore.loadUserInfo()
+    loadConfig()
     cardInfo.value = data
     show.value = true
     loadPickerList()
 }
 
 const close = () => show.value = false
+
+const loadConfig = async () => config.value = await apiConfig()
 
 const submit = async () => {
     if(!currentPicker.value)return message(t('请选择持卡人'))

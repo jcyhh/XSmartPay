@@ -7,12 +7,12 @@
                     <van-icon size="20" name="cross" color="#8D9094" @click="close" />
                 </div>
 
-                <div class="mt100 size48 bold tc" v-init="diff"></div>
-                <div class="size24 mt20 opc5 tc">升级补差金额({{ assetUSDT }})</div>
+                <div class="mt100 size48 bold tc" v-init="paymentAmount"></div>
+                <div class="size24 mt20 opc5 tc">升级补差金额({{ paymentAsset }})</div>
                 
 
                 <div class="size28 bold6 mt100 mb30">{{ $t('支付方式') }}</div>
-                <CusPaytype v-model:paytype="paytype" :is-mixin="true" :show-bot="true"></CusPaytype>
+                <CusPaytype v-model:paytype="paytype" :is-mixin="true" :show-axe="true"></CusPaytype>
 
                 <div class="mainBtn flex jc ac size28 main bold6 btn mt50" @click="submit">确认升级</div>
 
@@ -24,12 +24,13 @@
 </template>
 
 <script setup lang="ts">
-import { assetUSDT } from '@/config';
+import { assetAXE, assetUSDT } from '@/config';
 import { computed, ref } from 'vue';
 import { useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
-import { computedSub } from '@/utils';
+import { computedDiv, computedSub } from '@/utils';
 import { apiUpgradeVirtualCard } from '@/api/card';
+import { apiConfig } from '@/api/home';
 import { message } from '@/utils/message';
 import { t } from '@/locale';
 import CusPaytype from '@/components/CusPaytype/pay.vue'
@@ -44,16 +45,26 @@ const paytype = ref('balance_usdt')
 const show = ref(false)
 
 const cardInfo = ref()
+const config = ref()
 
 const diff = computed(()=>computedSub(cardInfo.value?.price, userInfo.value.card_amount))
+const axePrice = computed(() => Number(config.value?.axe_price || 0))
+const paymentAsset = computed(() => paytype.value === 'balance_axe' ? assetAXE : assetUSDT)
+const paymentAmount = computed(() => {
+    if (paytype.value !== 'balance_axe') return diff.value
+    return axePrice.value > 0 ? computedDiv(diff.value, axePrice.value) : 0
+})
 
 const open = (data:any) => {
     userStore.loadUserInfo()
+    loadConfig()
     cardInfo.value = data
     show.value = true
 }
 
 const close = () => show.value = false
+
+const loadConfig = async () => config.value = await apiConfig()
 
 const submit = async () => {
     await apiUpgradeVirtualCard({

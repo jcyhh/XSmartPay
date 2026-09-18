@@ -41,11 +41,11 @@
             </div>
             <div class="card card1 flex1">
                 <div class="flex ac">
-                    <img src="@/assets/bot.png" class="img32 mr12">
-                    <div class="size24 bold6">{{ assetBot }}</div>
+                    <img src="@/assets/common/axe.webp" class="img32 mr12">
+                    <div class="size24 bold6">{{ assetAXE }}</div>
                 </div>
                 <div class="size30 bold6 main mt10">
-                    $<span v-init="stats?.bot_price"></span>
+                    $<span v-init="stats?.axe_price"></span>
                 </div>
                 <div class="size24 opc5 mt10">{{ $t('实时币价') }}</div>
             </div>
@@ -161,7 +161,7 @@
 
 <script setup lang="ts">
 import { apiBanner, apiConfig, apiMessage } from '@/api/home';
-import { appName, assetBot, assetNFTC, assetUSDT } from '@/config';
+import { appName, assetAXE, assetNFTC, assetUSDT } from '@/config';
 import { onMounted, ref } from 'vue';
 import { routerPush } from '@/router';
 import { useNotice } from '@/hooks/useNotice';

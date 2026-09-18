@@ -19,9 +19,7 @@
                     <div class="flex jb ac opc6 size24 mt20">
                         <div>{{ item.created_at }}</div>
                         <div>
-                            <span v-if="current==0">{{ assetUSDT }}</span>
-                            <span v-else-if="current==1">{{ assetAIX }}</span>
-                            <span v-else>{{ assetNFTC }}</span>
+                            <span>{{ currencyNames[item.ccy] || item.ccy }}</span>
                         </div>
                     </div>
                 </div>
@@ -37,7 +35,7 @@
 <script setup lang="ts">
 import CusNav from '@/components/CusNav/index.vue'
 import CusTab from '@/components/CusTab/index.vue'
-import { assetAIX, assetNFTC, assetUSDT } from '@/config';
+import { assetAIX, assetAXE, assetNFTC, assetUSDT } from '@/config';
 import { t } from '@/locale';
 import { computed, ref, watch } from 'vue';
 import { useLoadList } from '@/hooks/useLoadList';
@@ -45,6 +43,13 @@ import { usePullRefresh } from '@/hooks/usePullRefresh';
 import CusEmpty from '@/components/CusEmpty/index.vue'
 
 const current = ref(0)
+
+const currencyNames: Record<string, string> = {
+    balance_usdt: assetUSDT,
+    balance_aix: assetAIX,
+    balance_nftc: assetNFTC,
+    balance_axe: assetAXE,
+}
 
 const tabs = computed(()=>([
     {name: t('审核中'),value: 1},

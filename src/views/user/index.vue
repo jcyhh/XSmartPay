@@ -82,8 +82,8 @@
             </div>
             <div class="flex mt30">
                 <div class="flex1">
-                    <div class="size28" v-init="userInfo?.balance_bot"></div>
-                    <div class="size24 opc5 mt10">{{ assetBot }} {{ $t('余额') }}</div>
+                    <div class="size28" v-init="userInfo?.balance_axe"></div>
+                    <div class="size24 opc5 mt10">{{ assetAXE }} {{ $t('余额') }}</div>
                 </div>
                 <div class="flex1 ml30">
                     <div class="size28" v-init="userInfo?.balance_year"></div>
@@ -197,7 +197,7 @@
 </template>
 
 <script setup lang="ts">
-import { assetAIX, assetBot, assetNFTC, assetUSDT } from '@/config';
+import { assetAIX, assetAXE, assetNFTC, assetUSDT } from '@/config';
 import Banner from './components/Banner.vue';
 import { routerPush } from '@/router';
 import { useAppStore, useDappStore, useUserStore } from '@/store';

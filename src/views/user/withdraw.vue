@@ -97,12 +97,12 @@
 
 <script setup lang="ts">
 import CusNav from '@/components/CusNav/index.vue'
-import { assetAIX, assetBot, assetNFTC, assetUSDT } from '@/config'
+import { assetAIX, assetAXE, assetNFTC, assetUSDT } from '@/config'
 import { computed, onMounted, ref } from 'vue'
 import CusPicker from '@/components/CusPicker/index.vue';
 import iconUsdt from '@/assets/common/usdt.png'
 import iconAix from '@/assets/common/aix.png'
-import iconBot from '@/assets/bot.png'
+import iconAxe from '@/assets/common/axe.webp'
 import { useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import { apiWithdraw, apiWithdrawConfig } from '@/api/user';
@@ -119,7 +119,7 @@ const fee = computed(()=>{
     if(currentPicker.value?.value === 'balance_usdt')return config.value?.withdraw_usdt_fee || 0
     else if(currentPicker.value?.value === 'balance_aix')return config.value?.withdraw_aix_fee || 0
     else if(currentPicker.value?.value === 'balance_nftc') return config.value?.withdraw_nftc_fee || 0
-    else if(currentPicker.value?.value === 'balance_bot') return config.value?.withdraw_bot_fee || 0
+    else if(currentPicker.value?.value === 'balance_axe') return config.value?.withdraw_axe_fee || 0
     return 0
 })
 const loadData = async () => config.value = await apiWithdrawConfig()
@@ -127,8 +127,7 @@ const loadData = async () => config.value = await apiWithdrawConfig()
 const showPickerClain = ref(false)
 const pickerClainCurrent = ref(-1)
 const pickerClainList = [
-    {name:'BEP20'},
-    {name:'BOT'}
+    {name:'BEP20'}
 ]
 const currentChain = computed(() => pickerClainCurrent.value >= 0 ? pickerClainList[pickerClainCurrent.value] : null)
 const onChainChange = (index: number) => {
@@ -142,7 +141,7 @@ const assetList = [
     {name:assetUSDT, icon: iconUsdt, value:'balance_usdt', chain: 'BEP20'},
     {name:assetAIX, icon: iconAix, value:'balance_aix', chain: 'BEP20'},
     {name:assetNFTC, icon: iconUsdt, value:'balance_nftc', chain: 'BEP20'},
-    {name:assetBot, icon: iconBot, value:'balance_bot', chain: 'BOT'}
+    {name:assetAXE, icon: iconAxe, value:'balance_axe', chain: 'BEP20'}
 ]
 const pickerList = computed(()=>currentChain.value ? assetList.filter(item => item.chain === currentChain.value?.name) : [])
 const currentPicker = computed(()=>pickerCurrent.value >= 0 ? pickerList.value[pickerCurrent.value] : null)

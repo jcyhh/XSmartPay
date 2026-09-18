@@ -57,11 +57,11 @@
 <script setup lang="ts">
 import { apiRecharge } from '@/api/user';
 import CusNav from '@/components/CusNav/index.vue'
-import { assetAIX, assetBot, assetNFTC, assetUSDT } from '@/config';
+import { assetAIX, assetAXE, assetNFTC, assetUSDT } from '@/config';
 import { computed, onMounted, ref } from 'vue';
 import usdtLogo from '@/assets/common/usdt.png'
-import botLogo from '@/assets/bot.png'
 import aixLogo from '@/assets/common/aix.png'
+import axeLogo from '@/assets/common/axe.webp'
 import CusEmpty from '@/components/CusEmpty/index.vue'
 import { t } from '@/locale';
 import CusPicker from '@/components/CusPicker/index.vue'
@@ -69,8 +69,7 @@ import CusPicker from '@/components/CusPicker/index.vue'
 const showPickerClain = ref(false)
 const pickerClainCurrent = ref(-1)
 const pickerClainList = [
-    {name:'BEP20'},
-    {name:'BOT'}
+    {name:'BEP20'}
 ]
 const currentChain = computed(() => pickerClainCurrent.value >= 0 ? pickerClainList[pickerClainCurrent.value] : null)
 const onChainChange = (index: number) => {
@@ -84,7 +83,7 @@ const assetList = [
     {name: assetUSDT, logo:usdtLogo, chain: 'BEP20'},
     {name: assetNFTC, logo:usdtLogo, chain: 'BEP20'},
     {name: assetAIX, logo:aixLogo, chain: 'BEP20'},
-    {name: assetBot, logo:botLogo, chain: 'BOT'}
+    {name: assetAXE, logo:axeLogo, chain: 'BEP20'}
 ]
 const pickerList = computed(()=>currentChain.value ? assetList.filter(item => item.chain === currentChain.value?.name) : [])
 const currentCoin = computed(() => pickerCurrent.value >= 0 ? pickerList.value[pickerCurrent.value] : null)
@@ -97,16 +96,14 @@ const onPickerChange = (index: number) => {
 }
 
 const recharge_address = ref()
-const bot_recharge_address = ref()
 const address = computed(()=>{
     if(!currentCoin.value || !currentChain.value)return ''
     if(currentCoin.value.chain !== currentChain.value.name)return ''
-    return currentCoin.value.chain === 'BOT' ? bot_recharge_address.value : recharge_address.value
+    return recharge_address.value
 })
 const loadData = async () => {
     const res:any = await apiRecharge()
     recharge_address.value = res.recharge_address
-    bot_recharge_address.value = res.bot_recharge_address
 }
 
 onMounted(()=>{

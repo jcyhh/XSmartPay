@@ -8,13 +8,14 @@ export const assetUSD: string = 'USD'; // 资产名称
 
 export const assetAIX: string = 'AIX'; // 资产名称
 
-export const assetNFTC: string = 'NFTC'; // 资产名称
+export const assetAXE: string = 'AXE'; // 资产名称
 
-export const assetBot: string = 'BOT'; // 资产名称
+export const assetNFTC: string = 'NFTC'; // 资产名称
 
 const assetMap:Record<string, string> = {
     balance_usdt: assetUSDT,
     balance_aix: assetAIX,
+    balance_axe: assetAXE,
     balance_nftc: assetNFTC
 }
 

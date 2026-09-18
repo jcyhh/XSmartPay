@@ -12,15 +12,15 @@
         </div>
     </div>
 
-    <div class="paytype flex jb ac mt20" @click="paytype = 'balance_bot'" v-if="showBot">
+    <div class="paytype flex jb ac mt20" @click="paytype = 'balance_axe'" v-if="showAxe">
         <div class="flex ac">
-            <img src="@/assets/bot.png" class="img42 mr10">
-            <div class="size28 bold6">{{ assetBot }}</div>
+            <img src="@/assets/common/axe.webp" class="img42 mr10">
+            <div class="size28 bold6">{{ assetAXE }}</div>
         </div>
         <div class="flex ac">
             <div class="size28 opc5 mr10">{{ $t('余额') }}</div>
-            <div class="size28 main mr10 bold5" v-init="userInfo?.balance_bot"></div>
-            <img src="@/assets/user/30.png" class="img32 animate__animated animate__zoomIn ani3" v-if="paytype == 'balance_bot'">
+            <div class="size28 main mr10 bold5" v-init="userInfo?.balance_axe"></div>
+            <img src="@/assets/user/30.png" class="img32 animate__animated animate__zoomIn ani3" v-if="paytype == 'balance_axe'">
             <img src="@/assets/user/31.png" class="img32" v-else>
         </div>
     </div>
@@ -70,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { assetAIX, assetBot, assetUSDT } from '@/config';
+import { assetAIX, assetAXE, assetUSDT } from '@/config';
 import { useUserStore } from '@/store';
 import { storeToRefs } from 'pinia';
 
@@ -79,7 +79,7 @@ defineProps({
         type: Boolean,
         default: false
     },
-    showBot:{
+    showAxe:{
         type: Boolean,
         default: false
     }
