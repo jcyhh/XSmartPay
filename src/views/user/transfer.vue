@@ -18,7 +18,7 @@
         <div class="mt30">
             <div class="size28 bold6">{{ $t('转账账号') }}</div>
             <div class="cell card mb20 flex jb ac mt20">
-                <input type="text" v-model="address" :placeholder="$t('请输入转账邮箱或地址')" class="flex1 size28">
+                <input type="text" v-model="address" :placeholder="$t('请输入转账账号')" class="flex1 size28">
             </div>
         </div>
 

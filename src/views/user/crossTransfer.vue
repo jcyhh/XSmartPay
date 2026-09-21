@@ -13,9 +13,9 @@
         </div>
 
         <div class="mt30">
-            <div class="size28 bold6">{{ $t('转账账号') }}</div>
+            <div class="size28 bold6">{{ $t('账号') }}</div>
             <div class="cell card mb20 flex jb ac mt20">
-                <input v-model="to_account" type="text" autocomplete="off" :placeholder="$t('请输入转账邮箱或地址')" class="flex1 size28">
+                <input v-model="to_account" type="text" autocomplete="off" :placeholder="$t('请输入账号')" class="flex1 size28">
             </div>
         </div>
 
@@ -110,7 +110,7 @@ const loadData = async () => {
     pickerList[1].fee = res.cross_transfer_aix_fee || 0
 }
 const submit = async () => {
-    if (!to_account.value) return message(t('请输入转账账号'))
+    if (!to_account.value) return message(t('请输入账号'))
     if (!inputAmount.value) return message(t('请输入转账金额'))
     if (!pay_password.value) return message(t('请输入支付密码'))
     await apiCrossTransfer({
