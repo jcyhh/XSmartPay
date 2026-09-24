@@ -16,12 +16,12 @@
                 </div>
                 <div v-else>
                     <swiper slidesPerView="auto" :centeredSlides="true" direction="vertical" space-between="10" :class="{ 'empty-current': isCurrentEmpty }" @swiper="onSwiper" @slide-change="slideChange">
-                        <swiper-slide v-for="(item, index) in list" :key="index" @click="slideClick(index)">
+                        <swiper-slide v-for="(item, index) in list" :key="index" :class="{ 'is-disabled': isDisabled(index) }" @click="slideClick(index)">
                             <slot :item="item"></slot>
                         </swiper-slide>
                     </swiper>
                     <div class="mt60">
-                        <div class="mainBtn flex jc ac bold5 size30" @click="submit">{{ submitTxt }}</div>
+                        <div class="mainBtn flex jc ac bold5 size30" :class="{ 'is-disabled': !canSubmit }" :aria-disabled="!canSubmit" @click="submit">{{ submitTxt }}</div>
                     </div>
                 </div>
                 
@@ -69,6 +69,10 @@ const props = defineProps({
     submitTxt: { // 确认按钮文字
         type: String,
         default: t('确定')
+    },
+    isItemDisabled: { // 可选：禁用部分列表项
+        type: Function as PropType<(item: any, index: number) => boolean>,
+        default: undefined
     }
 })
 
@@ -84,6 +88,12 @@ const close = () => show.value = false
 
 const current = ref(props.defaultIndex)
 const mySwiper = ref()
+const isDisabled = (index: number) => {
+    if (!props.isItemDisabled) return false
+    if (index < 0 || index >= props.list.length) return true
+    return props.isItemDisabled(props.list[index], index)
+}
+const canSubmit = computed(() => !props.isItemDisabled || (current.value >= 0 && !isDisabled(current.value)))
 const isCurrentEmpty = computed(() => props.allowEmpty && current.value < 0)
 const getSlideIndex = (index: number) => {
     if(props.allowEmpty && index < 0)return 0
@@ -106,16 +116,21 @@ watch(() => props.defaultIndex, (value) => {
     slideToCurrent()
 })
 watch(() => props.show, (value) => {
-    if(value)slideToCurrent()
+    if(value){
+        if(props.isItemDisabled && isDisabled(current.value))current.value = props.defaultIndex
+        slideToCurrent()
+    }
 })
 const slideChange = (data: any) => current.value = data.activeIndex
 
 const slideClick = (index:number) => {
+    if(isDisabled(index))return
     current.value = index
     mySwiper.value?.slideTo(index)
 }
 
 const submit = ()=> {
+    if(!canSubmit.value)return
     close()
     emit('change', current.value)
 }
@@ -144,6 +159,17 @@ defineExpose({
 .swiper-slide-active {
     background-color: #FFE5A51F;
     opacity: 1;
+}
+
+.swiper-slide.is-disabled,
+.swiper-slide-active.is-disabled {
+    background-color: transparent;
+    opacity: 0.3;
+}
+
+.mainBtn.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .swiper.empty-current .swiper-slide-active {

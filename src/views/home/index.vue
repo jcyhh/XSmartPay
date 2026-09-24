@@ -97,7 +97,8 @@
         </div>
     </div>
 
-    <Node></Node>
+    <!-- 购买节点入口暂时隐藏。
+    <Node></Node> -->
 
     <div class="pl30 pr30 mt40 rel">
 
@@ -106,6 +107,7 @@
             <Cards></Cards>
         </div>
 
+        <!-- 赚币宝入口暂时隐藏。
         <div class="flex ac mt40">
             <img src="@/assets/home/4.png" class="img48 mr10">
             <div class="main size28 bold6">{{ $t('赚币宝') }}</div>
@@ -137,7 +139,7 @@
                     <div class="size24 opc5 mt10">{{ $t('昨日收益') }}</div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div class="gap40"></div>
@@ -161,18 +163,15 @@
 
 <script setup lang="ts">
 import { apiBanner, apiConfig, apiMessage } from '@/api/home';
-import { appName, assetAXE, assetNFTC, assetUSDT } from '@/config';
+import { appName, assetAXE, assetNFTC } from '@/config';
 import { onMounted, ref } from 'vue';
 import { routerPush } from '@/router';
 import { useNotice } from '@/hooks/useNotice';
 import Cards from './components/Cards.vue';
-import CusNumber from '@/components/CusNumber/index.vue'
 import { useUserStore, useAppStore } from '@/store';
-import { apiYuebaoStats } from '@/api/yuebao';
 import Popup from './components/Popup.vue';
 import { storeToRefs } from 'pinia';
 import { apiUserInfo } from '@/api/user';
-import Node from './components/Node.vue';
 
 const show = ref(false)
 
@@ -211,10 +210,8 @@ loadUserInfo()
 
 // 统计
 const stats = ref()
-const yuebao = ref()
 const loadStats = async () => {
     stats.value = await apiConfig()
-    yuebao.value = await apiYuebaoStats()
 }
 
 // 轮博图

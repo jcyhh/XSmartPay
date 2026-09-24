@@ -5,4 +5,6 @@ export const apiBuyNft = async (params: { node_id: number }) => await apiPost('/
 export const apiNftOrders = async (params: { page_no: number; page_size: number; is_bind?: number }) => await apiGet('/api/node', params)
 export const apiNftShops = async (params: { page_no: number; page_size: number }) => await apiGet('/api/shop', params)
 export const apiNftBindings = async (params: { page_no: number; page_size: number }) => await apiGet('/api/shop/bindings', params)
+/** @deprecated 仅供已废弃的旧权益页备份使用。 */
 export const apiBindNftShop = async (params: { shop_id: number; node_order_id: number }) => await apiPost('/api/shop/bind', params)
+export const apiBindCountry = async (params: { shop_id: number; node_order_id: number; amount: number; pay_password: string }) => await apiPost('/api/shop/bind', params)

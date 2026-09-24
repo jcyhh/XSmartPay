@@ -31,22 +31,23 @@ import fr from './modules/fr.json';
 import ma from './modules/ma.json';
 import hi from './modules/hi.json';
 import googleAuth from './googleAuth';
+import benefit from './benefit';
 
 const messages = {
-    en: {...en, ...enCommon, ...googleAuth.en},
-    ko: {...ko, ...koCommon, ...googleAuth.ko},
-    ja: {...ja, ...jaCommon, ...googleAuth.ja},
-    hk: {...hk, ...hkCommon, ...googleAuth.hk},
-    zh: {...zh, ...zhCommon, ...googleAuth.zh},
-    id: {...id, ...idCommon, ...googleAuth.id},
-    es: {...es, ...esCommon, ...googleAuth.es},
-    tr: {...tr, ...trCommon, ...googleAuth.tr},
-    vi: {...vi, ...viCommon, ...googleAuth.vi},
-    th: {...th, ...thCommon, ...googleAuth.th},
-    ru: {...ru, ...ruCommon, ...googleAuth.ru},
-    fr: {...fr, ...frCommon, ...googleAuth.fr},
-    ma: {...ma, ...maCommon, ...googleAuth.ma},
-    hi: {...hi, ...hiCommon, ...googleAuth.hi}
+    en: {...en, ...enCommon, ...googleAuth.en, ...benefit.en},
+    ko: {...ko, ...koCommon, ...googleAuth.ko, ...benefit.ko},
+    ja: {...ja, ...jaCommon, ...googleAuth.ja, ...benefit.ja},
+    hk: {...hk, ...hkCommon, ...googleAuth.hk, ...benefit.hk},
+    zh: {...zh, ...zhCommon, ...googleAuth.zh, ...benefit.zh},
+    id: {...id, ...idCommon, ...googleAuth.id, ...benefit.id},
+    es: {...es, ...esCommon, ...googleAuth.es, ...benefit.es},
+    tr: {...tr, ...trCommon, ...googleAuth.tr, ...benefit.tr},
+    vi: {...vi, ...viCommon, ...googleAuth.vi, ...benefit.vi},
+    th: {...th, ...thCommon, ...googleAuth.th, ...benefit.th},
+    ru: {...ru, ...ruCommon, ...googleAuth.ru, ...benefit.ru},
+    fr: {...fr, ...frCommon, ...googleAuth.fr, ...benefit.fr},
+    ma: {...ma, ...maCommon, ...googleAuth.ma, ...benefit.ma},
+    hi: {...hi, ...hiCommon, ...googleAuth.hi, ...benefit.hi}
 }
 
 

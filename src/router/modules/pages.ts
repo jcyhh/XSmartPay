@@ -192,6 +192,10 @@ export default [
         component: () => import('@/views/user/nft.vue')
     },
     {
+        path:'/benefit/bindings',
+        component: () => import('@/views/user/nft/bindings.vue')
+    },
+    {
         path:'/user/bind/bank',
         component: () => import('@/views/user/bind/bank.vue')
     },
